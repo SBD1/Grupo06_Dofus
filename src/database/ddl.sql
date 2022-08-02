@@ -28,7 +28,7 @@ CREATE TABLE classe (
 );
 
 CREATE TABLE magias (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     classe_id INT,
     nome VARCHAR(50) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE instancia_item (
 );
 
 CREATE TABLE armadura (
-  id INT PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   id_item INT NOT NULL,
   vida INT NOT NULL,
 
@@ -63,7 +63,7 @@ CREATE TABLE armadura (
 );
 
 CREATE TABLE arma (
-  id int PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   id_item INT NOT NULL,
   dano INT NOT NULL,
 
@@ -86,7 +86,7 @@ CREATE TABLE personagens (
 );
 
 CREATE TABLE mochila (
-  id int PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   id_personagem INT,
   id_instancia_item INT,
 
@@ -95,7 +95,7 @@ CREATE TABLE mochila (
 );
 
 CREATE TABLE mercador (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(50),
     tipo_npc TIPO_NPC NOT NULL,
     descricao VARCHAR(255),
@@ -105,7 +105,7 @@ CREATE TABLE mercador (
 );
 
 CREATE TABLE mercador_itens (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     id_mercador INT NOT NULL,
     id_instancia_item INT NOT NULL,
 
@@ -114,7 +114,7 @@ CREATE TABLE mercador_itens (
 );
 
 CREATE TABLE npc_missao (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(50),
     tipo_npc TIPO_NPC NOT NULL,
     descricao VARCHAR(255) NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE npc_missao (
 );
 
 CREATE TABLE missao (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     id_npc_missao INT NOT NULL,
     descricao VARCHAR(255),
     moedas INT NOT NULL DEFAULT 0,
@@ -137,7 +137,7 @@ CREATE TABLE missao (
 );
 
 CREATE TABLE monstro (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(50),
     tipo_npc TIPO_NPC NOT NULL,
     descricao VARCHAR(255),

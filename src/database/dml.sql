@@ -88,4 +88,14 @@ INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_re
 (1, 'Encontre um pouco de lã de papatudo, geralmente eles gostam de ficar nos campos.', 200, 14, NULL),
 (1, 'Encontre pedregulho do rochedo.', 5000, 15, NULL);
 
+INSERT INTO mercador (nome, tipo_npc, descricao, id_mapa)
+('Afonso', 'M', 'O maior varegista de Astrub', 2)
+
+INSERT INTO mercador_itens(id_mercador, id_instancia_item)
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4), 
+(1, 5)
+
 COMMIT;

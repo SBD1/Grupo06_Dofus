@@ -92,9 +92,9 @@ CREATE TABLE mochila (
   id int PRIMARY KEY,
   id_personagem INT,
   id_instancia_item INT,
-  
+
   CONSTRAINT mochila_instancia_item_fk FOREIGN KEY(id) REFERENCES instancia_item(id),
-  CONSTRAINT mochila_personagem_fk FOREIGN KEY(id) REFERENCES personagem(id)
+  CONSTRAINT mochila_personagem_fk FOREIGN KEY(id) REFERENCES personagens(id)
 );
 
 CREATE TABLE mercador (
@@ -114,7 +114,16 @@ CREATE TABLE mercador_itens (
 
     CONSTRAINT mercador_item_fk FOREIGN KEY(id_mercador) REFERENCES mapa(id),
     CONSTRAINT instancia_item_mercador_fk FOREIGN KEY(id_instancia_item) REFERENCES mapa(id)
+);
 
+CREATE TABLE npc_missao (
+    id INT PRIMARY KEY,
+    nome VARCHAR(50),
+    tipo_npc TIPO_NPC NOT NULL,
+    descricao VARCHAR(140) NOT NULL,
+    id_mapa INT NOT NULL,
+
+    CONSTRAINT npc_missao_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );
 
 CREATE TABLE missao (
@@ -143,16 +152,6 @@ CREATE TABLE monstro (
 
     CONSTRAINT item_recompensa_monstro_fk FOREIGN KEY(id_item_recompensa) REFERENCES item(id),
     CONSTRAINT mosntro_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
-);
-
-CREATE TABLE npc_missao (
-    id INT PRIMARY KEY,
-    nome VARCHAR(50),
-    tipo_npc TIPO_NPC NOT NULL,
-    descricao VARCHAR(140) NOT NULL,
-    id_mapa INT NOT NULL,
-
-    CONSTRAINT npc_missao_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );
 
 COMMIT;

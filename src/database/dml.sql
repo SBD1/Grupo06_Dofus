@@ -45,9 +45,10 @@ INSERT INTO item (nome, descricao, valor_moedas) VALUES
 ('Semente de Gergelim', 'Esta semente extremamente rica em proteína é um ingrediente seleto para a fabricação de pão saboroso, mas o cultivo de gergelim é especialmente delicado em nosso clima dofusiano. Como resultado, uma semente muito rara e cara.', 9),
 ('Pelo de Rato', 'Restos de pelo coletados dos esgotos de Astrub, cuidado com o odor.', 14),
 ('Testiculo de Lobo', 'Esferas de carne removidas de grandes lobos selvagens das planices de Incarnan', 40),
+('Lã de papatudo', 'Papatudo são criaturas que tem uma lã platinada fofinha.', 80),
 ('Pedregulho de Rochedo', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 25);
 
-INSERT INTO armadura(id_item, dano) VALUES
+INSERT INTO armadura(id_item, vida) VALUES
 (1, 200),
 (2, 41),
 (3, 120),
@@ -69,12 +70,22 @@ INSERT INTO instancia_item(id_item) VALUES
 (13),
 (14);
 
-INSERT INTO personagens (id_class, moedas, id_arma, id_armadura, id_mapa)
+INSERT INTO personagens (id_class, moedas, id_arma, id_armadura, id_mapa) VALUES
 (1, 40, NULL, NULL, 1);
 
-INSERT INTO mochila (id_personagem, id_instancia_item)
+INSERT INTO mochila (id_personagem, id_instancia_item) VALUES
 (1, 4),
 (1, 5),
 (1, 6);
+
+INSERT INTO npc_missao (nome, tipo_npc, descricao, id_mapa) VALUES
+('Maurí Sioserrano', 'npc_missao', 'Maurí é um guerreiro experiente, que possui várias cicatrizes de batalha, você sente que ele pode te ensinar sobre magia.', 6);
+
+INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_recompensa) VALUES
+(1, 'Encontre uma semente de gergelim para completar essa missão, geralmente os Piwis gostam muito dessas sementes.', 40, 11, NULL),
+(1, 'Encontre um pelo de rato, esse animais gostam de lugares escuros.', 200, 12, 3),
+(1, 'Encontre o testículo de um lobo raivoso.', 500, 13, NULL),
+(1, 'Encontre um pouco de lã de papatudo, geralmente eles gostam de ficar nos campos.', 200, 14, NULL),
+(1, 'Encontre pedregulho do rochedo.', 5000, 15, NULL);
 
 COMMIT;

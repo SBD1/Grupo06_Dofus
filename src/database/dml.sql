@@ -73,8 +73,18 @@ INSERT INTO personagens (id_class, moedas, id_arma, id_armadura, id_mapa)
 (1, 40, NULL, NULL, 1);
 
 INSERT INTO mochila (id_personagem, id_instancia_item)
-(1, 6)
-(1, 7)
+(1, 6),
+(1, 7),
 (1, 8)
+
+INSERT INTO mercador (nome, tipo_npc, descricao, id_mapa)
+('Afonso', 'M', 'O maior varegista de Astrub', 2)
+
+INSERT INTO mercador_itens(id_mercador, id_instancia_item)
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4), 
+(1, 5)
 
 COMMIT;

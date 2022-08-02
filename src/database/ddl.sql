@@ -43,7 +43,8 @@ CREATE TABLE item (
   nome VARCHAR(25) NOT NULL,
   descricao VARCHAR(140) NOT NULL DEFAULT '',
   valor_moedas INTEGER NOT NULL,
-  CONSTRAINT item_pk PRIMARY KEY (id),
+  
+  CONSTRAINT item_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE instancia_item (

@@ -73,7 +73,6 @@ CREATE TABLE arma (
 CREATE TABLE personagens (
     id SERIAL PRIMARY KEY,
     id_classe INT,
-    vida_maxima INT NOT NULL,
     moedas INT NOT NULL DEFAULT 0,
     CHECK(moedas >= 0),
     id_arma INT,

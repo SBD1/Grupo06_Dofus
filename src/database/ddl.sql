@@ -1,11 +1,13 @@
-CREATE TYPE tipo_npc AS ENUM (
+BEGIN;
+
+CREATE TYPE TIPO_NPC AS ENUM (
     'monstro', 'npc_missao', 'mercador'
 );
 
 CREATE TABLE personagens (
     id SERIAL PRIMARY KEY,
     id_classe INT,
-    vida_maxima INT NOT NULL DEFAULT 50,
+    vida_maxima INT NOT NULL,
     moedas INT NOT NULL DEFAULT 0,
     CHECK(moedas >= 0)
     id_arma INT NOT NULL,
@@ -19,30 +21,37 @@ CREATE TABLE personagens (
 );
 
 CREATE TABLE mapa (
-  id INT PRIMARY KEY,
-  coord_x INT,
-  coord_y INT,
-  descricao VARCHAR(140),
-  mapa_norte INT,
-  mapa_sul INT,
-  mapa_leste INT,
-  mapa_oeste INT
+    id SERIAL PRIMARY KEY,
+    coord_x INT NOT NULL,
+    coord_y INT NOT NULL,
+    descricao VARCHAR(140) NOT NULL,
+    mapa_norte INT,
+    mapa_sul INT,
+    mapa_leste INT,
+    mapa_oeste INT,
+
+    CONSTRAINT mapa_norte_fk FOREIGN KEY(mapa_norte) REFERENCES mapa(id)
+    CONSTRAINT mapa_sul_fk FOREIGN KEY(mapa_sul) REFERENCES mapa(id)
+    CONSTRAINT mapa_leste_fk FOREIGN KEY(mapa_leste) REFERENCES mapa(id)
+    CONSTRAINT mapa_oeste_fk FOREIGN KEY(mapa_oeste) REFERENCES mapa(id)
 );
 
 CREATE TABLE magias (
-  id INT PRIMARY KEY,
-  classe_id INT,
-  nome VARCHAR,
-  descricao VARCHAR,
-  dano INT,
-  cura INT
+    id INT PRIMARY KEY,
+    classe_id INT,
+    nome VARCHAR(50) NOT NULL,
+    descricao VARCHAR(140) NOT NULL,
+    dano INT,
+    cura INT,
+
+    CONSTRAINT classe_id_fk FOREIGN KEY(classe_id) REFERENCES classe(id)
 );
 
 CREATE TABLE classe (
-  id INT PRIMARY KEY,
-  nome VARCHAR,
-  descricao VARCHAR,
-  vida_inicial INT
+    id INT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    descricao VARCHAR(50) NOT NULL,
+    vida_inicial INT NOT NULL,
 );
 
 CREATE TABLE item (
@@ -78,90 +87,61 @@ CREATE TABLE arma (
 );
 
 CREATE TABLE missao (
-  id INT PRIMARY KEY,
-  id_npc_missao INT,
-  descricao VARCHAR,
-  moedas INT,
-  id_item_missao INT,
-  id_item_reconpensa INT
+    id INT PRIMARY KEY,
+    id_npc_missao INT NOT NULL,
+    descricao VARCHAR(50),
+    moedas INT NOT NULL DEFAULT 0,
+    id_item_missao INT NOT NULL,
+    id_item_recompensa INT,
+
+    CONSTRAINT id_npc_missao_fk FOREIGN KEY(id_npc_missao) REFERENCES npc_missao(id)
+    CONSTRAINT id_item_missao_fk FOREIGN KEY(id_item_missao) REFERENCES item(id)
+    CONSTRAINT id_item_recompensa_missao_fk FOREIGN KEY(id_item_recompensa) REFERENCES item(id)
 );
 
 CREATE TABLE monstro (
-  id INT PRIMARY KEY,
-  nome VARCHAR,
-  tipo_npc enum,
-  descricao VARCHAR,
-  moedas INT,
-  vida_maxima INT,
-  dano INT,
-  id_item_reconpensa INT,
-  id_mapa INT
+    id INT PRIMARY KEY,
+    nome VARCHAR(50),
+    tipo_npc TIPO_NPC NOT NULL,
+    descricao VARCHAR(50),
+    moedas INT NOT NULL DEFAULT 0,
+    vida_maxima INT NOT NULL,
+    dano INT NOT NULL,
+    id_item_recompensa INT,
+    id_mapa INT NOT NULL,
+
+    CONSTRAINT id_item_recompensa_monstro_fk FOREIGN KEY(id_item_recompensa) REFERENCES item(id)
+    CONSTRAINT id_mosntro_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );
 
 CREATE TABLE mercador (
-  id INT PRIMARY KEY,
-  nome VARCHAR,
-  tipo_npc enum,
-  descricao VARCHAR,
-  id_mapa INT
+    id INT PRIMARY KEY,
+    nome VARCHAR(50),
+    tipo_npc TIPO_NPC NOT NULL,
+    descricao VARCHAR(50),
+    id_mapa INT NOT NULL,
+
+    CONSTRAINT id_mercador_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id) 
 );
 
 CREATE TABLE mercador_itens (
-  id INT PRIMARY KEY,
-  id_mercador INT,
-  id_instancia_item INT
+    id INT PRIMARY KEY,
+    id_mercador INT NOT NULL,
+    id_instancia_item INT NOT NULL,
+
+    CONSTRAINT id_mercador_item_fk FOREIGN KEY(id_mercador) REFERENCES mapa(id) 
+    CONSTRAINT id_instancia_item_mercador_fk FOREIGN KEY(id_instancia_item) REFERENCES mapa(id) 
+
 );
 
 CREATE TABLE npc_missao (
-  id INT PRIMARY KEY,
-  nome VARCHAR,
-  tipo_npc enum,
-  descricao VARCHAR,
-  id_mapa INT
+    id INT PRIMARY KEY,
+    nome VARCHAR(50),
+    tipo_npc TIPO_NPC NOT NULL,
+    descricao VARCHAR(50),
+    id_mapa INT NOT NULL,
+
+    CONSTRAINT id_npc_missao_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id) 
 );
 
-ALTER TABLE personagens ADD FOREIGN KEY (id_classe) REFERENCES classe (id);
-
-ALTER TABLE personagens ADD FOREIGN KEY (id_arma) REFERENCES arma (id);
-
-ALTER TABLE personagens ADD FOREIGN KEY (id_armadura) REFERENCES armadura (id);
-
-ALTER TABLE personagens ADD FOREIGN KEY (id_mapa) REFERENCES mapa (id);
-
-ALTER TABLE mapa ADD FOREIGN KEY (mapa_norte) REFERENCES mapa (id);
-
-ALTER TABLE mapa ADD FOREIGN KEY (mapa_sul) REFERENCES mapa (id);
-
-ALTER TABLE mapa ADD FOREIGN KEY (mapa_leste) REFERENCES mapa (id);
-
-ALTER TABLE mapa ADD FOREIGN KEY (mapa_oeste) REFERENCES mapa (id);
-
-ALTER TABLE magias ADD FOREIGN KEY (classe_id) REFERENCES classe (id);
-
-ALTER TABLE instancia_item ADD FOREIGN KEY (id_item) REFERENCES item (id);
-
-ALTER TABLE mochila ADD FOREIGN KEY (id_personagem) REFERENCES personagens (id);
-
-ALTER TABLE mochila ADD FOREIGN KEY (id_instancia_item) REFERENCES instancia_item (id);
-
-ALTER TABLE armadura ADD FOREIGN KEY (id_item) REFERENCES item (id);
-
-ALTER TABLE arma ADD FOREIGN KEY (id_item) REFERENCES item (id);
-
-ALTER TABLE missao ADD FOREIGN KEY (id_npc_missao) REFERENCES npc_missao (id);
-
-ALTER TABLE missao ADD FOREIGN KEY (id_item_missao) REFERENCES item (id);
-
-ALTER TABLE missao ADD FOREIGN KEY (id_item_reconpensa) REFERENCES item (id);
-
-ALTER TABLE monstro ADD FOREIGN KEY (id_item_reconpensa) REFERENCES item (id);
-
-ALTER TABLE monstro ADD FOREIGN KEY (id_mapa) REFERENCES mapa (id);
-
-ALTER TABLE mercador ADD FOREIGN KEY (id_mapa) REFERENCES mapa (id);
-
-ALTER TABLE mercador_itens ADD FOREIGN KEY (id_mercador) REFERENCES mercador (id);
-
-ALTER TABLE mercador_itens ADD FOREIGN KEY (id_instancia_item) REFERENCES instancia_item (id);
-
-ALTER TABLE npc_missao ADD FOREIGN KEY (id_mapa) REFERENCES mapa (id);
+COMMIT;

@@ -15,6 +15,22 @@ INSERT INTO classe (nome, descricao, vida_inicial) VALUES
 ('Ecaflip', 'Os Ecaflips são guerreiros apostadores que vivem enfiados em lugares onde é possível ganhar uma grana preta e perder tudo... Um bom Ecaflip joga sem parar e sempre aposta no tudo ou nada.', 1500),
 ('Feca', 'Os Fecas são protetores leais e ficam sempre na defensiva. Eles são muito apreciados pelos grupos de aventureiros graças às suas armaduras elementares capazes de suportar até mesmo os golpes mais fortes.', 8000);
 
+INSERT INTO magias (classe_id, nome, descricao, dano, cura) VALUES
+(1, 'Palavra que fere', 200, 0),
+(1, 'Palavra de regeneração', 0, 500),
+
+(2, 'Concentração', 250, 100),
+(2, 'Ira de Iop', 500, 0),
+
+(3, 'Absorção', 150, 100),
+(3, 'Punição', 300, 0),
+
+(4, 'Moeda do Ecaflip', 0, 400),
+(4, 'Rekop', 750, 0),
+
+(5, 'Ataque natural', 200, 50),
+(5, 'Ataque tempestuoso', 250, 0);
+
 -- ITEM
 INSERT INTO item (nome, descricao, valor_moedas) VALUES  
 ('Armadura de Papatudo Real', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 288)

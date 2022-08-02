@@ -16,20 +16,20 @@ INSERT INTO classe (nome, descricao, vida_inicial) VALUES
 ('Feca', 'Os Fecas são protetores leais e ficam sempre na defensiva. Eles são muito apreciados pelos grupos de aventureiros graças às suas armaduras elementares capazes de suportar até mesmo os golpes mais fortes.', 8000);
 
 INSERT INTO magias (classe_id, nome, descricao, dano, cura) VALUES
-(1, 'Palavra que fere', 200, 0),
-(1, 'Palavra de regeneração', 0, 500),
+(1, 'Palavra que fere', 'Uma magia que causa danos em seus inimigos através da palavra.', 200, 0),
+(1, 'Palavra de regeneração', 'Uma magia que cura até os ferimentos mais profundos.', 0, 500),
 
-(2, 'Concentração', 250, 100),
-(2, 'Ira de Iop', 500, 0),
+(2, 'Concentração', 'Um golpe com as proprias mãos cheias de fúria.',250, 100),
+(2, 'Ira de Iop', 'Uma magia de ataque poderosa, criada pelo próprio Deus Iop.', 500, 0),
 
-(3, 'Absorção', 150, 100),
-(3, 'Punição', 300, 0),
+(3, 'Absorção', 'Uma magia que absorve o sangue dos inimigos.', 150, 100),
+(3, 'Punição','Um golpe ultimato do sacrier.', 300, 0),
 
-(4, 'Moeda do Ecaflip', 0, 400),
-(4, 'Rekop', 750, 0),
+(4, 'Moeda do Ecaflip', 'Às vezes apostas podem curar.',0, 400),
+(4, 'Rekop', 'Uma magia ancestral dos Ecaflip', 750, 0),
 
-(5, 'Ataque natural', 200, 50),
-(5, 'Ataque tempestuoso', 250, 0);
+(5, 'Ataque natural', 'Um ataque das forças da terra.', 200, 50),
+(5, 'Ataque tempestuoso', 'Um ataque das forças das núvens.',250, 0);
 
 INSERT INTO item (nome, descricao, valor_moedas) VALUES  
 ('Armadura de Papatudo Real', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 288),

@@ -1,3 +1,7 @@
+CREATE TYPE tipo_npc AS ENUM (
+    'monstro', 'npc_missao', 'mercador'
+);
+
 CREATE TABLE "personagens" (
   "id" SERIAL PRIMARY KEY,
   "id_classe" int,

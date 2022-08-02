@@ -54,36 +54,65 @@ CREATE TABLE classe (
     vida_inicial INT NOT NULL,
 );
 
+-- ITENS
 CREATE TABLE item (
-  id INT PRIMARY KEY,
-  nome VARCHAR,
-  descricao VARCHAR,
-  valor_moedas INT
+  id SERIAL,
+  nome VARCHAR(25) NOT NULL,
+  descricao TEXT NOT NULL DEFAULT '',
+  valor_moedas INTEGER NOT NULL,
 );
 
 CREATE TABLE instancia_item (
-  id INT PRIMARY KEY,
-  id_item INT
+  id SERIAL,
+  id_item INT NOT NULL,
+  CONSTRAINT instancia_item_pk PRIMARY KEY(id),
+  CONSTRAINT id_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
 CREATE TABLE mochila (
-  id INT PRIMARY KEY,
+  id int PRIMARY KEY,
   id_personagem INT,
-  id_instancia_item INT
+  id_instancia_item INT,
+  CONSTRAINT mochila_pk PRIMARY KEY(id),
+  CONSTRAINT mochila_instancia_item_fk FOREIGN KEY(id) REFERENCES instancia_item(id)
+  CONSTRAINT mochila_personagem_fk FOREIGN KEY(id) REFERENCES personagem(id)
 );
 
 CREATE TABLE armadura (
-  id INT PRIMARY KEY,
-  id_item INT,
-  nome VARCHAR,
-  vida INT
+  id int PRIMARY KEY,
+  id_item int,
+  nome varchar,
+  vida int
+  CONSTRAINT armadura_pk PRIMARY KEY(id),
+  CONSTRAINT armadura_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
 CREATE TABLE arma (
-  id INT PRIMARY KEY,
-  id_item INT,
-  nome VARCHAR,
-  dano INT
+  id int PRIMARY KEY,
+  id_item int,
+  nome varchar,
+  dano int
+  CONSTRAINT arma_pk PRIMARY KEY(id),
+  CONSTRAINT arma_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
+);
+
+CREATE TABLE mercador (
+  id int PRIMARY KEY,
+  nome varchar,
+  tipo_npc enum,
+  descricao varchar,
+  id_mapa int
+  CONSTRAINT mercador_pk PRIMARY KEY(id),
+  CONSTRAINT id_mapa_pk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
+);
+
+CREATE TABLE mercador_itens (
+  id int PRIMARY KEY,
+  id_mercador int,
+  id_instancia_item int
+  CONSTRAINT mercador_itens_pk PRIMARY KEY(id),
+  CONSTRAINT mercador_fk FOREIGN KEY(id_mercador) REFERENCES mercador(id)
+  CONSTRAINT instancia_item_fk FOREIGN KEY(id_instancia_item) REFERENCES instancia_item(id)
 );
 
 CREATE TABLE missao (

@@ -73,4 +73,9 @@ INSERT INTO instancia_item(id_item) VALUES
 INSERT INTO personagens (id_class, vida_maxima, moedas, id_arma, id_armadura, id_mapa)
 (1, 2000, 40, null, null, 1)
 
+INSERT INTO mochila (id_personagem, id_instancia_item)
+(1, 11)
+(1, 12)
+(1, 13)
+
 COMMIT;

@@ -8,7 +8,7 @@ CREATE TABLE mapa (
     id SERIAL PRIMARY KEY,
     coord_x INT NOT NULL,
     coord_y INT NOT NULL,
-    descricao VARCHAR(140) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
     mapa_norte INT,
     mapa_sul INT,
     mapa_leste INT,
@@ -23,7 +23,7 @@ CREATE TABLE mapa (
 CREATE TABLE classe (
     id INT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    descricao VARCHAR(140) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
     vida_inicial INT NOT NULL
 );
 
@@ -31,7 +31,7 @@ CREATE TABLE magias (
     id INT PRIMARY KEY,
     classe_id INT,
     nome VARCHAR(50) NOT NULL,
-    descricao VARCHAR(140) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
     dano INT,
     cura INT,
 
@@ -41,7 +41,7 @@ CREATE TABLE magias (
 CREATE TABLE item (
   id SERIAL,
   nome VARCHAR(25) NOT NULL,
-  descricao VARCHAR(140) NOT NULL DEFAULT '',
+  descricao VARCHAR(255) NOT NULL DEFAULT '',
   valor_moedas INTEGER NOT NULL,
 
   CONSTRAINT item_pk PRIMARY KEY (id)
@@ -101,7 +101,7 @@ CREATE TABLE mercador (
     id INT PRIMARY KEY,
     nome VARCHAR(50),
     tipo_npc TIPO_NPC NOT NULL,
-    descricao VARCHAR(140),
+    descricao VARCHAR(255),
     id_mapa INT NOT NULL,
 
     CONSTRAINT mercador_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
@@ -120,7 +120,7 @@ CREATE TABLE npc_missao (
     id INT PRIMARY KEY,
     nome VARCHAR(50),
     tipo_npc TIPO_NPC NOT NULL,
-    descricao VARCHAR(140) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
     id_mapa INT NOT NULL,
 
     CONSTRAINT npc_missao_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
@@ -129,7 +129,7 @@ CREATE TABLE npc_missao (
 CREATE TABLE missao (
     id INT PRIMARY KEY,
     id_npc_missao INT NOT NULL,
-    descricao VARCHAR(140),
+    descricao VARCHAR(255),
     moedas INT NOT NULL DEFAULT 0,
     id_item_missao INT NOT NULL,
     id_item_recompensa INT,
@@ -143,7 +143,7 @@ CREATE TABLE monstro (
     id INT PRIMARY KEY,
     nome VARCHAR(50),
     tipo_npc TIPO_NPC NOT NULL,
-    descricao VARCHAR(140),
+    descricao VARCHAR(255),
     moedas INT NOT NULL DEFAULT 0,
     vida_maxima INT NOT NULL,
     dano INT NOT NULL,

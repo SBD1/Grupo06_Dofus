@@ -43,7 +43,7 @@ CREATE TABLE item (
   nome VARCHAR(25) NOT NULL,
   descricao VARCHAR(140) NOT NULL DEFAULT '',
   valor_moedas INTEGER NOT NULL,
-  
+
   CONSTRAINT item_pk PRIMARY KEY (id)
 );
 
@@ -92,7 +92,7 @@ CREATE TABLE mochila (
   id int PRIMARY KEY,
   id_personagem INT,
   id_instancia_item INT,
-  CONSTRAINT mochila_pk PRIMARY KEY(id),
+  
   CONSTRAINT mochila_instancia_item_fk FOREIGN KEY(id) REFERENCES instancia_item(id),
   CONSTRAINT mochila_personagem_fk FOREIGN KEY(id) REFERENCES personagem(id)
 );

@@ -21,7 +21,7 @@ CREATE TABLE mapa (
 );
 
 CREATE TABLE classe (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
     vida_inicial INT NOT NULL

@@ -59,7 +59,7 @@ CREATE TABLE armadura (
   id_item int,
   nome VARCHAR(40),
   vida int
-  CONSTRAINT armadura_pk PRIMARY KEY(id),
+
   CONSTRAINT armadura_item_fk FOREIGN KEY(id_item) REFERENCES item(id),
 );
 
@@ -68,7 +68,7 @@ CREATE TABLE arma (
   id_item int,
   nome VARCHAR(40),
   dano int
-  CONSTRAINT arma_pk PRIMARY KEY(id),
+  
   CONSTRAINT arma_item_fk FOREIGN KEY(id_item) REFERENCES item(id),
 );
 

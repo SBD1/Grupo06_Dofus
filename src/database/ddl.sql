@@ -9,7 +9,7 @@ CREATE TABLE personagens (
     id_classe INT,
     vida_maxima INT NOT NULL,
     moedas INT NOT NULL DEFAULT 0,
-    CHECK(moedas >= 0)
+    CHECK(moedas >= 0),
     id_arma INT NOT NULL,
     id_armadura INT NOT NULL,
     id_mapa INT,

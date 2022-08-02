@@ -3,115 +3,121 @@ CREATE TYPE tipo_npc AS ENUM (
 );
 
 CREATE TABLE personagens (
-  id SERIAL PRIMARY KEY,
-  id_classe int,
-  vida_maxia int,
-  moedas int,
-  id_arma int,
-  id_armadura int,
-  id_mapa int
+    id SERIAL PRIMARY KEY,
+    id_classe INT,
+    vida_maxima INT NOT NULL DEFAULT 50,
+    moedas INT NOT NULL DEFAULT 0,
+    CHECK(moedas >= 0)
+    id_arma INT NOT NULL,
+    id_armadura INT NOT NULL,
+    id_mapa INT,
+
+    CONSTRAINT id_classe_fk FOREIGN KEY(id_classe) REFERENCES classe(id)
+    CONSTRAINT id_arma_fk FOREIGN KEY(id_arma) REFERENCES arma(id)
+    CONSTRAINT id_armadura_fk FOREIGN KEY(id_armadura) REFERENCES armadura(id)
+    CONSTRAINT id_mapa FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );
 
 CREATE TABLE mapa (
-  id int PRIMARY KEY,
-  coord_x int,
-  coord_y int,
-  descricao varchar,
-  mapa_norte int,
-  mapa_sul int,
-  mapa_leste int,
-  mapa_oeste int
+  id INT PRIMARY KEY,
+  coord_x INT,
+  coord_y INT,
+  descricao VARCHAR(140),
+  mapa_norte INT,
+  mapa_sul INT,
+  mapa_leste INT,
+  mapa_oeste INT
 );
 
 CREATE TABLE magias (
-  id int PRIMARY KEY,
-  classe_id int,
-  nome varchar,
-  descricao varchar,
-  dano int,
-  cura int
+  id INT PRIMARY KEY,
+  classe_id INT,
+  nome VARCHAR,
+  descricao VARCHAR,
+  dano INT,
+  cura INT
 );
 
 CREATE TABLE classe (
-  id int PRIMARY KEY,
-  nome varchar,
-  descricao varchar,
-  vida_inicial int
+  id INT PRIMARY KEY,
+  nome VARCHAR,
+  descricao VARCHAR,
+  vida_inicial INT
 );
 
 CREATE TABLE item (
-  id int PRIMARY KEY,
-  nome varchar,
-  descricao varchar,
-  valor_moedas int
+  id INT PRIMARY KEY,
+  nome VARCHAR,
+  descricao VARCHAR,
+  valor_moedas INT
 );
 
 CREATE TABLE instancia_item (
-  id int PRIMARY KEY,
-  id_item int
+  id INT PRIMARY KEY,
+  id_item INT
 );
 
 CREATE TABLE mochila (
-  id int PRIMARY KEY,
-  id_personagem int,
-  id_instancia_item int
+  id INT PRIMARY KEY,
+  id_personagem INT,
+  id_instancia_item INT
 );
 
 CREATE TABLE armadura (
-  id int PRIMARY KEY,
-  id_item int,
-  nome varchar,
-  vida int
+  id INT PRIMARY KEY,
+  id_item INT,
+  nome VARCHAR,
+  vida INT
 );
 
 CREATE TABLE arma (
-  id int PRIMARY KEY,
-  id_item int,
-  nome varchar,
-  dano int
+  id INT PRIMARY KEY,
+  id_item INT,
+  nome VARCHAR,
+  dano INT
 );
 
 CREATE TABLE missao (
-  id int PRIMARY KEY,
-  id_npc_missao int,
-  descricao varchar,
-  moedas int,
-  id_item_missao int,
-  id_item_reconpensa int
+  id INT PRIMARY KEY,
+  id_npc_missao INT,
+  descricao VARCHAR,
+  moedas INT,
+  id_item_missao INT,
+  id_item_reconpensa INT
 );
 
 CREATE TABLE monstro (
-  id int PRIMARY KEY,
-  nome varchar,
+  id INT PRIMARY KEY,
+  nome VARCHAR,
   tipo_npc enum,
-  descricao varchar,
-  moedas int,
-  vida_maxima int,
-  dano int,
-  id_item_reconpensa int,
-  id_mapa int
+  descricao VARCHAR,
+  moedas INT,
+  vida_maxima INT,
+  dano INT,
+  id_item_reconpensa INT,
+  id_mapa INT
 );
 
 CREATE TABLE mercador (
-  id int PRIMARY KEY,
-  nome varchar,
+  id INT PRIMARY KEY,
+  nome VARCHAR,
   tipo_npc enum,
-  descricao varchar,
-  id_mapa int
+  descricao VARCHAR,
+  id_mapa INT
 );
 
 CREATE TABLE mercador_itens (
-  id int PRIMARY KEY,
-  id_mercador int,
-  id_instancia_item int
+  id INT PRIMARY KEY,
+  id_mercador INT,
+  id_instancia_item INT
 );
 
 CREATE TABLE npc_missao (
-  id int PRIMARY KEY,
-  nome varchar,
+  id INT PRIMARY KEY,
+  nome VARCHAR,
   tipo_npc enum,
-  descricao varchar,
-  id_mapa int
+  descricao VARCHAR,
+  id_mapa INT
 );
 
 ALTER TABLE personagens ADD FOREIGN KEY (id_classe) REFERENCES classe (id);

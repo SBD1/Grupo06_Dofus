@@ -88,17 +88,17 @@ INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_re
 (1, 'Encontre um pouco de lã de papatudo, geralmente eles gostam de ficar nos campos.', 200, 14, NULL),
 (1, 'Encontre pedregulho do rochedo.', 5000, 15, NULL);
 
-INSERT INTO mercador (nome, tipo_npc, descricao, id_mapa)
-('Afonso', 'mercador', 'O maior varegista de Astrub', 2)
+INSERT INTO mercador (nome, tipo_npc, descricao, id_mapa) VALUES
+('Afonso', 'mercador', 'O maior varegista de Astrub', 2);
 
-INSERT INTO mercador_itens(id_mercador, id_instancia_item)
+INSERT INTO mercador_itens(id_mercador, id_instancia_item) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
 (1, 4), 
 (1, 5);
 
-INSERT INTO monstro (nome, tipo_npc, descricao, moedas, vida_maxima, dano, id_item_recompensa, id_mapa)
+INSERT INTO monstro (nome, tipo_npc, descricao, moedas, vida_maxima, dano, id_item_recompensa, id_mapa) VALUES
 ('Chupa Cabra', 'monstro', 'Criatura sanguinaria destruidora de vilas', 23, 599, 59, 1, 3),
 ('Papatudo', 'monstro', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 28, 455, 24, 2, 3),
 ('Piwi', 'monstro', 'Pequenina ave colorida, porem poderosa', 30, 504, 30, 3, 3),

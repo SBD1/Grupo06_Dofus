@@ -57,7 +57,6 @@ CREATE TABLE instancia_item (
 CREATE TABLE armadura (
   id INT PRIMARY KEY,
   id_item INT NOT NULL,
-  nome VARCHAR(40),
   vida INT NOT NULL,
 
   CONSTRAINT armadura_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
@@ -66,7 +65,6 @@ CREATE TABLE armadura (
 CREATE TABLE arma (
   id int PRIMARY KEY,
   id_item INT NOT NULL,
-  nome VARCHAR(40),
   dano INT NOT NULL,
 
   CONSTRAINT arma_item_fk FOREIGN KEY(id_item) REFERENCES item(id)

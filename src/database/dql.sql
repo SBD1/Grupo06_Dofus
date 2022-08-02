@@ -8,3 +8,12 @@ WHERE classe.id =
 
 -- query para pegar o monstro de um mapa
 SELECT * FROM monstro WHERE monstro.id_mapa = 3;
+
+-- List all items
+SELECT * FROM item
+
+-- Lista armas
+SELECT * FROM armas
+
+-- Lista armadura
+SELECT * FROM armaduras

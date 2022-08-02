@@ -5,3 +5,6 @@ WHERE classe.id =
 	(SELECT id_classe FROM personagens 
 	INNER JOIN classe ON personagens.id_classe = classe.id
 	WHERE personagens.id = 1);
+
+-- query para pegar o monstro de um mapa
+SELECT * FROM monstro WHERE monstro.id_mapa = 3;

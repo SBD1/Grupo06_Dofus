@@ -22,6 +22,8 @@ INSERT INTO item (nome, descricao, valor_moedas) VALUES
 ('Espatula Corta Guloso', 'Esta espátula gigante é uma ferramenta de trabalho muito completa. Com ela, é possível preparar quantidades enormes de doces de chocolate deliciosos e, depois, fatiar sem dó nem piedade os gulosos que tentarem comer o seu bolo sem a sua permissão.', 333)
 ('Semente de Gergilim', 'Esta semente extremamente rica em proteína é um ingrediente seleto para a fabricação de pão saboroso, mas o cultivo de gergelim é especialmente delicado em nosso clima dofusiano. Como resultado, uma semente muito rara e cara.', 9)
 ('Pelo de Rato', 'Restos de pelo coletados dos esgotos de Astrub, cuidado com o odor.', 14)
+('Testiculo de Lobo', 'Esferas de carne removidas de grandes lobos selvagens das planices de Incarnan', 40)
+('Pedregulho de Rochedo', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 25)
 
 INSERT INTO armadura(id_item, dano) VALUES
 (1, 200)
@@ -36,5 +38,13 @@ INSERT INTO arma(id_item, dano) VALUES
 (8, 228)
 (9, 250)
 (10,149)
+
+INSERT INTO instancia_item(id_item) VALUES
+(1)
+(6)
+(11)
+(12)
+(13)
+(14)
 
 COMMIT;

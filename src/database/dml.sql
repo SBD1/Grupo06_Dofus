@@ -70,7 +70,7 @@ INSERT INTO instancia_item(id_item) VALUES
 (13),
 (14);
 
-INSERT INTO personagens (id_class, moedas, id_arma, id_armadura, id_mapa) VALUES
+INSERT INTO personagens (id_classe, moedas, id_arma, id_armadura, id_mapa) VALUES
 (1, 40, NULL, NULL, 1);
 
 INSERT INTO mochila (id_personagem, id_instancia_item) VALUES

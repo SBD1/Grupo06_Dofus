@@ -60,13 +60,14 @@ CREATE TABLE item (
   nome VARCHAR(25) NOT NULL,
   descricao TEXT NOT NULL DEFAULT '',
   valor_moedas INTEGER NOT NULL,
+  CONSTRAINT item_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE instancia_item (
   id SERIAL,
   id_item INT NOT NULL,
   CONSTRAINT instancia_item_pk PRIMARY KEY(id),
-  CONSTRAINT id_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
+  CONSTRAINT item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
 CREATE TABLE mochila (
@@ -103,7 +104,7 @@ CREATE TABLE mercador (
   descricao varchar,
   id_mapa int
   CONSTRAINT mercador_pk PRIMARY KEY(id),
-  CONSTRAINT id_mapa_pk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
+  CONSTRAINT imapa_pk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );
 
 CREATE TABLE mercador_itens (

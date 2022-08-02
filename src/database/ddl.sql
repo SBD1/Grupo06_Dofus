@@ -76,8 +76,8 @@ CREATE TABLE personagens (
     vida_maxima INT NOT NULL,
     moedas INT NOT NULL DEFAULT 0,
     CHECK(moedas >= 0),
-    id_arma INT NOT NULL,
-    id_armadura INT NOT NULL,
+    id_arma INT,
+    id_armadura INT,
     id_mapa INT,
 
     CONSTRAINT classe_fk FOREIGN KEY(id_classe) REFERENCES classe(id),

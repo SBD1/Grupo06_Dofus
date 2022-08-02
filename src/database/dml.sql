@@ -89,7 +89,7 @@ INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_re
 (1, 'Encontre pedregulho do rochedo.', 5000, 15, NULL);
 
 INSERT INTO mercador (nome, tipo_npc, descricao, id_mapa)
-('Afonso', 'M', 'O maior varegista de Astrub', 2)
+('Afonso', 'mercador', 'O maior varegista de Astrub', 2)
 
 INSERT INTO mercador_itens(id_mercador, id_instancia_item)
 (1, 1),
@@ -97,5 +97,12 @@ INSERT INTO mercador_itens(id_mercador, id_instancia_item)
 (1, 3),
 (1, 4), 
 (1, 5);
+
+INSERT INTO monstro (nome, tipo_npc, descricao, moedas, vida_maxima, dano, id_item_recompensa, id_mapa)
+('Chupa Cabra', 'monstro', 'Criatura sanguinaria destruidora de vilas', 23, 599, 59, 1, 3),
+('Papatudo', 'monstro', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 28, 455, 24, 2, 3),
+('Piwi', 'monstro', 'Pequenina ave colorida, porem poderosa', 30, 504, 30, 3, 3),
+('Lobo', 'monstro', 'Criatura uivante maluca e assassina', 30, 444, 40, 4, 3),
+('Prespic', 'monstro', 'Espinhoso monstro venenoso', 30, 401, 20, 5, 3)
 
 COMMIT;

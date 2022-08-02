@@ -90,8 +90,8 @@ CREATE TABLE mochila (
   id_personagem INT,
   id_instancia_item INT,
 
-  CONSTRAINT mochila_personagem_fk FOREIGN KEY(id_personagem) REFERENCES personagens(id)
-  CONSTRAINT mochila_instancia_item_fk FOREIGN KEY(id_instancia_item) REFERENCES instancia_item(id),
+  CONSTRAINT mochila_personagem_fk FOREIGN KEY(id_personagem) REFERENCES personagens(id),
+  CONSTRAINT mochila_instancia_item_fk FOREIGN KEY(id_instancia_item) REFERENCES instancia_item(id)
 );
 
 CREATE TABLE mercador (

@@ -103,6 +103,6 @@ INSERT INTO monstro (nome, tipo_npc, descricao, moedas, vida_maxima, dano, id_it
 ('Papatudo', 'monstro', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 28, 455, 24, 2, 3),
 ('Piwi', 'monstro', 'Pequenina ave colorida, porem poderosa', 30, 504, 30, 3, 3),
 ('Lobo', 'monstro', 'Criatura uivante maluca e assassina', 30, 444, 40, 4, 3),
-('Prespic', 'monstro', 'Espinhoso monstro venenoso', 30, 401, 20, 5, 3)
+('Prespic', 'monstro', 'Espinhoso monstro venenoso', 30, 401, 20, 5, 3);
 
 COMMIT;

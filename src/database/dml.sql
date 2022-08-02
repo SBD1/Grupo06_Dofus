@@ -73,8 +73,8 @@ INSERT INTO personagens (id_class, moedas, id_arma, id_armadura, id_mapa)
 (1, 40, NULL, NULL, 1);
 
 INSERT INTO mochila (id_personagem, id_instancia_item)
-(1, 6)
-(1, 7)
-(1, 8)
+(1, 4),
+(1, 5),
+(1, 6);
 
 COMMIT;

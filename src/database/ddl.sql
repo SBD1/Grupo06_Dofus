@@ -84,9 +84,11 @@ CREATE TABLE personagens (
     CHECK(moedas >= 0),
     id_arma INT,
     id_armadura INT,
-    id_mapa INT,
+    id_mapa INT NOT NULL,
+    id_ultima_missao INT,
 
     CONSTRAINT classe_fk FOREIGN KEY(id_classe) REFERENCES classe(id),
+    CONSTRAINT ultima_missao_fk FOREIGN KEY(id_ultima_missao) REFERENCES missao(id),
     CONSTRAINT arma_fk FOREIGN KEY(id_arma) REFERENCES arma(id),
     CONSTRAINT armadura_fk FOREIGN KEY(id_armadura) REFERENCES armadura(id),
     CONSTRAINT mapa FOREIGN KEY(id_mapa) REFERENCES mapa(id)

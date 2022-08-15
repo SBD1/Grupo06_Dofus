@@ -144,8 +144,7 @@ CREATE TABLE monstro (
     id_item_recompensa INT,
 
     CONSTRAINT npc_monstro_fk FOREIGN KEY(id_npc_monstro) REFERENCES npc(id),
-    CONSTRAINT item_recompensa_monstro_fk FOREIGN KEY(id_item_recompensa) REFERENCES item(id),
-    CONSTRAINT mosntro_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
+    CONSTRAINT item_recompensa_monstro_fk FOREIGN KEY(id_item_recompensa) REFERENCES item(id)
 );
 
 COMMIT;

@@ -130,15 +130,13 @@ CREATE TABLE missao (
 
 CREATE TABLE monstro (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(50),
-    tipo_npc TIPO_NPC NOT NULL,
-    descricao VARCHAR(255),
+    id_npc_monstro INT NOT NULL,
     moedas INT NOT NULL DEFAULT 0,
     vida_maxima INT NOT NULL,
     dano INT NOT NULL,
     id_item_recompensa INT,
-    id_mapa INT NOT NULL,
 
+    CONSTRAINT npc_monstro_fk FOREIGN KEY(id_npc_monstro) REFERENCES npc(id),
     CONSTRAINT item_recompensa_monstro_fk FOREIGN KEY(id_item_recompensa) REFERENCES item(id),
     CONSTRAINT mosntro_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );

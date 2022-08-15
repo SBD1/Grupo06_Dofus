@@ -27,6 +27,7 @@ INSERT INTO magias (classe_id, nome, descricao, dano, cura) VALUES
 
 (4, 'Moeda do Ecaflip', 'Às vezes apostas podem curar.',0, 400),
 (4, 'Rekop', 'Uma magia ancestral dos Ecaflip', 750, 0),
+(4, 'Percepção', 'Ataque felino balanceado', 300, 100),
 
 (5, 'Ataque natural', 'Um ataque das forças da terra.', 200, 50),
 (5, 'Ataque tempestuoso', 'Um ataque das forças das núvens.',250, 0);

@@ -29,6 +29,7 @@ CREATE TABLE classe (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
+    sorte INT NOT NULL,
     vida_inicial INT NOT NULL
 );
 

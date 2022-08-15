@@ -78,8 +78,14 @@ INSERT INTO mochila (id_personagem, id_instancia_item) VALUES
 (1, 5),
 (1, 6);
 
-INSERT INTO npc_missao (nome, tipo_npc, descricao, id_mapa) VALUES
-('Maurí Sioserrano', 'npc_missao', 'Maurí é um guerreiro experiente, que possui várias cicatrizes de batalha, você sente que ele pode te ensinar sobre magia.', 6);
+INSERT INTO npc (nome, tipo_npc, descricao, id_mapa) VALUES
+('Maurí Sioserrano', 'npc_missao', 'Maurí é um guerreiro experiente, que possui várias cicatrizes de batalha, você sente que ele pode te ensinar sobre magia.', 6),
+('Afonso', 'mercador', 'O maior varegista de Astrub', 2),
+('Chupa Cabra', 'monstro', 'Criatura sanguinaria destruidora de vilas', 3),
+('Papatudo', 'monstro', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 3),
+('Piwi', 'monstro', 'Pequenina ave colorida, porem poderosa', 3),
+('Lobo', 'monstro', 'Criatura uivante maluca e assassina', 3),
+('Prespic', 'monstro', 'Espinhoso monstro venenoso', 3);
 
 INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_recompensa) VALUES
 (1, 'Encontre uma semente de gergelim para completar essa missão, geralmente os Piwis gostam muito dessas sementes.', 40, 11, NULL),
@@ -88,21 +94,19 @@ INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_re
 (1, 'Encontre um pouco de lã de papatudo, geralmente eles gostam de ficar nos campos.', 200, 14, NULL),
 (1, 'Encontre pedregulho do rochedo.', 5000, 15, NULL);
 
-INSERT INTO mercador (nome, tipo_npc, descricao, id_mapa) VALUES
-('Afonso', 'mercador', 'O maior varegista de Astrub', 2);
-
 INSERT INTO mercador_itens(id_mercador, id_instancia_item) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4), 
-(1, 5);
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4), 
+(2, 5);
 
-INSERT INTO monstro (nome, tipo_npc, descricao, moedas, vida_maxima, dano, id_item_recompensa, id_mapa) VALUES
-('Chupa Cabra', 'monstro', 'Criatura sanguinaria destruidora de vilas', 23, 599, 59, 1, 3),
-('Papatudo', 'monstro', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 28, 455, 24, 2, 3),
-('Piwi', 'monstro', 'Pequenina ave colorida, porem poderosa', 30, 504, 30, 3, 3),
-('Lobo', 'monstro', 'Criatura uivante maluca e assassina', 30, 444, 40, 4, 3),
-('Prespic', 'monstro', 'Espinhoso monstro venenoso', 30, 401, 20, 5, 3);
+TODO 
+INSERT INTO monstro (id_npc_monstro, moedas, vida_maxima, dano, id_item_recompensa) VALUES
+(3, 23, 599, 59, 1),
+(4, 28, 455, 24, 2),
+(5, 30, 504, 30, 3),
+(6, 30, 444, 40, 4),
+(7, 30, 401, 20, 5);
 
 COMMIT;

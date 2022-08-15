@@ -94,7 +94,7 @@ CREATE TABLE mochila (
   CONSTRAINT mochila_instancia_item_fk FOREIGN KEY(id_instancia_item) REFERENCES instancia_item(id)
 );
 
-CREATE TABLE mercador (
+CREATE TABLE npc (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(50),
     tipo_npc TIPO_NPC NOT NULL,
@@ -104,23 +104,13 @@ CREATE TABLE mercador (
     CONSTRAINT mercador_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );
 
-CREATE TABLE mercador_itens (
+CREATE TABLE npc_mercador_itens (
     id SERIAL PRIMARY KEY,
-    id_mercador INT NOT NULL,
+    id_npc_mercador INT NOT NULL,
     id_instancia_item INT NOT NULL,
 
-    CONSTRAINT mercador_item_fk FOREIGN KEY(id_mercador) REFERENCES mapa(id),
+    CONSTRAINT mercador_item_fk FOREIGN KEY(id_npc_mercador) REFERENCES npc(id),
     CONSTRAINT instancia_item_mercador_fk FOREIGN KEY(id_instancia_item) REFERENCES mapa(id)
-);
-
-CREATE TABLE npc_missao (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(50),
-    tipo_npc TIPO_NPC NOT NULL,
-    descricao VARCHAR(255) NOT NULL,
-    id_mapa INT NOT NULL,
-
-    CONSTRAINT npc_missao_mapa_fk FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );
 
 CREATE TABLE missao (
@@ -130,8 +120,10 @@ CREATE TABLE missao (
     moedas INT NOT NULL DEFAULT 0,
     id_item_missao INT NOT NULL,
     id_item_recompensa INT,
+    id_missao_desbloqueada INT,
 
-    CONSTRAINT npc_missao_fk FOREIGN KEY(id_npc_missao) REFERENCES npc_missao(id),
+    CONSTRAINT npc_missao_fk FOREIGN KEY(id_npc_missao) REFERENCES npc(id),
+    CONSTRAINT missao_desbloqueada_fk FOREIGN KEY(id_missao_desbloqueada) REFERENCES missao(id),
     CONSTRAINT item_missao_fk FOREIGN KEY(id_item_missao) REFERENCES item(id),
     CONSTRAINT item_recompensa_missao_fk FOREIGN KEY(id_item_recompensa) REFERENCES item(id)
 );

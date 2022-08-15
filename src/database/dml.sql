@@ -54,7 +54,7 @@ INSERT INTO armadura(id_item, vida) VALUES
 (2, 41),
 (3, 120),
 (4, 63),
-(5,160);
+(5, 160);
 
 INSERT INTO arma(id_item, dano) VALUES
 (6, 202),
@@ -71,8 +71,8 @@ INSERT INTO instancia_item(id_item) VALUES
 (13),
 (14);
 
-INSERT INTO personagens (id_classe, moedas, id_arma, id_armadura, id_mapa) VALUES
-(1, 40, NULL, NULL, 1);
+INSERT INTO personagens (id_classe, moedas, id_arma, id_armadura, id_mapa, id_ultima_missao) VALUES
+(1, 40, NULL, NULL, 1, NULL);
 
 INSERT INTO mochila (id_personagem, id_instancia_item) VALUES
 (1, 4),

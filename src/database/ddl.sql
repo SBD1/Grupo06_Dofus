@@ -4,6 +4,11 @@ CREATE TYPE TIPO_NPC AS ENUM (
     'monstro', 'npc_missao', 'mercador'
 );
 
+CREATE TYPE TIPO_ITEM AS ENUM (
+    'arma', 'armadura', 'nao_equipavel'
+);
+
+
 CREATE TABLE mapa (
     id SERIAL PRIMARY KEY,
     coord_x INT NOT NULL,
@@ -41,6 +46,7 @@ CREATE TABLE magias (
 CREATE TABLE item (
   id SERIAL,
   nome VARCHAR(25) NOT NULL,
+  tipo_item TIPO_ITEM NOT NULL,
   descricao VARCHAR(255) NOT NULL DEFAULT '',
   valor_moedas INTEGER NOT NULL,
 

@@ -123,7 +123,7 @@ CREATE TABLE personagens (
     id_mapa INT NOT NULL,
     id_ultima_missao INT,
     sorte_total INT NOT NULL DEFAULT 0,
-    vida_maxima INT NOT NULL,
+    vida_maxima INT,
 
     CONSTRAINT classe_fk FOREIGN KEY(id_classe) REFERENCES classe(id),
     CONSTRAINT ultima_missao_fk FOREIGN KEY(id_ultima_missao) REFERENCES missao(id),

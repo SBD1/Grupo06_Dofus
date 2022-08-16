@@ -116,4 +116,29 @@ INSERT INTO monstro (id_npc_monstro, moedas, vida_maxima, dano, id_item_recompen
 (6, 30, 444, 40, 4),
 (7, 30, 401, 20, 5);
 
+INSERT INTO conquistas (nome, tipo_conquista, descricao) VALUES  
+('Encarnação!', 'geral', 'Escolha uma classe para seu personagem.'),
+('Faliceu.', 'geral', 'Morra em combate.'),
+('Consumista.', 'exploração', 'Descubra o mapa da feira.'),
+('Mundo sombrio.', 'exploração', 'Entre na floresta sombria.'),
+('Invasão domiciliar.', 'exploração', 'Descubra o mapa toca do dragão.'),
+('Cabra macho.', 'combate', 'Mate um chupa cabra.'),
+('Matador de dragões.', 'combate', 'Mate um dragão branco.'),
+('Pombo frito!', 'combate', 'Mate um piwi.');
+
+INSERT INTO armadura(id_item, vida) VALUES
+(1, 200),
+(2, 41),
+(3, 120),
+(4, 63),
+(5, 160);
+
+INSERT INTO arma(id_item, dano) VALUES
+(6, 202),
+(7, 350),
+(8, 228),
+(9, 250),
+(10,149);
+
+
 COMMIT;

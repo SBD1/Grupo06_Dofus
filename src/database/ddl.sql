@@ -90,6 +90,14 @@ CREATE TABLE arma (
   CONSTRAINT arma_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
+CREATE TABLE amuleto (
+  id SERIAL PRIMARY KEY,
+  id_item INT NOT NULL,
+  sorte INT NOT NULL,
+
+  CONSTRAINT amuleto_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
+);
+
 CREATE TABLE missao (
     id SERIAL PRIMARY KEY,
     id_npc_missao INT NOT NULL,
@@ -114,6 +122,8 @@ CREATE TABLE personagens (
     id_armadura INT,
     id_mapa INT NOT NULL,
     id_ultima_missao INT,
+    sorte_total INT NOT NULL DEFAULT 0,
+    vida_maxima INT NOT NULL,
 
     CONSTRAINT classe_fk FOREIGN KEY(id_classe) REFERENCES classe(id),
     CONSTRAINT ultima_missao_fk FOREIGN KEY(id_ultima_missao) REFERENCES missao(id),
@@ -155,8 +165,6 @@ CREATE TABLE npc_mercador_itens (
     CONSTRAINT mercador_item_fk FOREIGN KEY(id_npc_mercador) REFERENCES npc(id),
     CONSTRAINT instancia_item_mercador_fk FOREIGN KEY(id_instancia_item) REFERENCES mapa(id)
 );
-
-
 
 CREATE TABLE monstro (
     id SERIAL PRIMARY KEY,

@@ -130,6 +130,7 @@ CREATE TABLE personagens (
     CONSTRAINT ultima_missao_fk FOREIGN KEY(id_ultima_missao) REFERENCES missao(id),
     CONSTRAINT arma_fk FOREIGN KEY(id_arma) REFERENCES arma(id),
     CONSTRAINT armadura_fk FOREIGN KEY(id_armadura) REFERENCES armadura(id),
+    CONSTRAINT amuleto_fk FOREIGN KEY(id_amuleto) REFERENCES amuleto(id),
     CONSTRAINT mapa FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );
 

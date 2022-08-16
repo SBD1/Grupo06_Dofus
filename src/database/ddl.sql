@@ -136,7 +136,7 @@ CREATE TABLE conquistas (
   id SERIAL PRIMARY KEY,
   nome VARCHAR(25) NOT NULL,
   tipo_conquista TIPO_CONQUISTA NOT NULL,
-  descricao VARCHAR(255) NOT NULL,
+  descricao VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE conquistas_personagem (

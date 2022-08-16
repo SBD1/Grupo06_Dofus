@@ -8,6 +8,9 @@ CREATE TYPE TIPO_ITEM AS ENUM (
     'arma', 'armadura', 'nao_equipavel'
 );
 
+CREATE TYPE TIPO_CONQUISTA AS ENUM (
+    'combate', 'exploração', 'geral'
+);
 
 CREATE TABLE mapa (
     id SERIAL PRIMARY KEY,

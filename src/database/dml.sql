@@ -112,6 +112,11 @@ INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_re
 (1, 'Encontre um pouco de lã de papatudo, geralmente eles gostam de ficar nos campos.', 200, 14, NULL),
 (1, 'Encontre pedregulho do rochedo.', 5000, 15, NULL);
 
+UPDATE missao SET id_missao_desbloqueada = 2 WHERE id=1;
+UPDATE missao SET id_missao_desbloqueada = 3 WHERE id=2;
+UPDATE missao SET id_missao_desbloqueada = 4 WHERE id=3;
+UPDATE missao SET id_missao_desbloqueada = 5 WHERE id=4;
+
 INSERT INTO npc_mercador_itens(id_mercador, id_instancia_item) VALUES
 (2, 1),
 (2, 2),

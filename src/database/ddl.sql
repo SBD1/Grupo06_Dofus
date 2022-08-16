@@ -45,7 +45,7 @@ CREATE TABLE classe (
 
 CREATE TABLE magias (
     id SERIAL PRIMARY KEY,
-    classe_id INT,
+    classe_id INT NOT NULL,
     nome VARCHAR(50) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
     dano INT,

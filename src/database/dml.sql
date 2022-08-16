@@ -54,7 +54,11 @@ INSERT INTO item (nome, tipo_item, descricao, valor_moedas) VALUES
 ('Pelo de Rato', 'nao_equipavel', 'Restos de pelo coletados dos esgotos de Astrub, cuidado com o odor.', 14),
 ('Testiculo de Lobo', 'nao_equipavel', 'Esferas de carne removidas de grandes lobos selvagens das planices de Incarnan', 40),
 ('Lã de papatudo', 'nao_equipavel', 'Papatudo são criaturas que tem uma lã platinada fofinha.', 80),
-('Pedregulho de Rochedo', 'nao_equipavel', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 25);
+('Pedregulho de Rochedo', 'nao_equipavel', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 25),
+('Amuleto do Pow Uatisson', 'amuleto', 'O capitão do Chafer Marítimo sempre carrega este amuleto, símbolo da sua embarcação', 500),
+('Amuleto de Cristal', 'amuleto', 'Amuleto feito de cristais de quartzo rosa.', 200),
+('Amuleto de Conchinha', 'amuleto', 'Amuleto de conchas de seres acestrais.', 350),
+('Corujamuleto', 'amuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 700);
 
 INSERT INTO armadura(id_item, vida) VALUES
 (1, 200),
@@ -69,6 +73,12 @@ INSERT INTO arma(id_item, dano) VALUES
 (8, 228),
 (9, 250),
 (10,149);
+
+INSERT INTO amuleto(id_item, sorte) VALUES
+(11, 20),
+(12, 5),
+(13, 15),
+(14, 30);
 
 INSERT INTO instancia_item(id_item) VALUES
 (1),

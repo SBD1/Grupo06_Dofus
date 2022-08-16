@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img width="150" src="./logo.jpg">
+  <img width="150" src="./logo.png">
 </p>
 
 Esse é o repositório do grupo 6, que está desenvolvendo um MUD baseado em dofus.

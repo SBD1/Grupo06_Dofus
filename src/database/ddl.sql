@@ -120,6 +120,7 @@ CREATE TABLE personagens (
     CHECK(moedas >= 0),
     id_arma INT,
     id_armadura INT,
+    id_amuleto INT,
     id_mapa INT NOT NULL,
     id_ultima_missao INT,
     sorte_total INT NOT NULL DEFAULT 0,

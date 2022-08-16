@@ -122,6 +122,22 @@ CREATE TABLE personagens (
     CONSTRAINT mapa FOREIGN KEY(id_mapa) REFERENCES mapa(id)
 );
 
+CREATE TABLE conquistas (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(25) NOT NULL,
+  tipo_conquista TIPO_CONQUISTA NOT NULL,
+  descricao VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE conquistas_personagem (
+    id SERIAL PRIMARY KEY,
+    id_personagem INT NOT NULL,
+    id_conquista INT NOT NULL,
+
+    CONSTRAINT personagem_fk FOREIGN KEY(id_personagem) REFERENCES personagens(id),
+    CONSTRAINT conquista_fk FOREIGN KEY(id_conquista) REFERENCES conquistas(id)
+);
+
 CREATE TABLE mochila (
   id SERIAL PRIMARY KEY,
   id_personagem INT,

@@ -5,7 +5,8 @@
   <img width="150" src="./logo.png">
 </p>
 
-Esse é o repositório do grupo 6, que está desenvolvendo um MUD baseado em dofus.
+Esse é o repositório do grupo 6, que está desenvolvendo um MUD baseado no MMORPG dofus.]
+https://www.dofus.com/en/prehome
 
 ## Integrantes
 * Christian Fleury Alencar Siqueira - 190011602

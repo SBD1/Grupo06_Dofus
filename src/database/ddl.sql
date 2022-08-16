@@ -5,7 +5,7 @@ CREATE TYPE TIPO_NPC AS ENUM (
 );
 
 CREATE TYPE TIPO_ITEM AS ENUM (
-    'arma', 'armadura', 'nao_equipavel'
+    'arma', 'armadura', 'nao_equipavel', 'amuleto'
 );
 
 CREATE TYPE TIPO_CONQUISTA AS ENUM (

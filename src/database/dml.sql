@@ -80,13 +80,13 @@ INSERT INTO amuleto(id_item, sorte) VALUES
 (18, 15),
 (19, 30);
 
-INSERT INTO instancia_item(id_item) VALUES
-(1),
-(6),
-(11),
-(12),
-(13),
-(14);
+INSERT INTO instancia_item(id, id_item) VALUES
+(1, 1),
+(2, 6),
+(3, 11),
+(4, 12),
+(5, 13),
+(6, 14);
 
 INSERT INTO personagens (id, id_classe, moedas, id_mapa, id_ultima_missao) VALUES
 (1, 1, 40, 1);

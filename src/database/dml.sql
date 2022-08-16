@@ -117,7 +117,7 @@ UPDATE missao SET id_missao_desbloqueada = 3 WHERE id=2;
 UPDATE missao SET id_missao_desbloqueada = 4 WHERE id=3;
 UPDATE missao SET id_missao_desbloqueada = 5 WHERE id=4;
 
-INSERT INTO npc_mercador_itens(id_mercador, id_instancia_item) VALUES
+INSERT INTO npc_mercador_itens(id_npc_mercador, id_instancia_item) VALUES
 (2, 1),
 (2, 2),
 (2, 3),

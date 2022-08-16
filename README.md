@@ -5,7 +5,8 @@
   <img width="150" src="./logo.png">
 </p>
 
-Esse é o repositório do grupo 6, que está desenvolvendo um MUD baseado no MMORPG dofus.]
+Esse é o repositório do grupo 6, que está desenvolvendo um MUD baseado no MMORPG dofus.
+<br>
 https://www.dofus.com/en/prehome
 
 ## Integrantes

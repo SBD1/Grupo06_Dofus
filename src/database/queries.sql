@@ -24,8 +24,8 @@ WHERE mochila.id =
 -- query para pegar o monstro de um mapa
 SELECT * FROM monstro WHERE monstro.id_mapa = 3;
 
--- List all items
-SELECT * FROM item
+-- List intens dos mais caros aos mais baratos
+SELECT * FROM item ORDER BY valor_moedas
 
 -- Lista armas
 SELECT * FROM armas

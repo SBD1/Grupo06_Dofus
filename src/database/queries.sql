@@ -27,17 +27,14 @@ SELECT * FROM monstro WHERE monstro.id_mapa = 3;
 -- List intens dos mais caros aos mais baratos
 SELECT * FROM item ORDER BY valor_moedas
 
--- Lista armas
-SELECT * FROM armas
-
 -- Lista armas ordenando da mais poderosa para mais fraca
 SELECT * FROM arma ORDER BY dano DESC
 
--- Lista armadura
-SELECT * FROM armaduras
-
 -- Lista armadura ordenando da mais poderosa para mais fraca
 SELECT * FROM armadura ORDER BY vida DESC
+
+-- Lista amuletos ordenando do com mais sorte para menos sorte
+SELECT * FROM amuleto ORDER BY sorte DESC
 
 -- query para listar todos os itens de um personagem
 SELECT * FROM instancia_item

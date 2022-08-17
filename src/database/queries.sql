@@ -52,19 +52,16 @@ SELECT I.id, I.nome, I.tipo_item, I.descricao, I.valor_moedas, count(I.id) as qn
 WHERE P.id = 1 
 GROUP BY I.id
 
-<<<<<<< HEAD
 -- equipar item no personagem
-BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE
+BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ
 	SELECT I.id FROM instancia_item I 
 		JOIN mochila M on I.id = M.id_instancia_item 
 		WHERE I.id_item = 1 
  		AND M.id_personagem = 1 
+		AND I.tipo_item = 'arma'
  	LIMIT 1;
 
 	DELETE FROM mochila  WHERE id_instancia_item = I.id and id_personagem = 1;
 
 	UPDATE personagem SET id_arma = I.id WHERE id_personagem = 1;
 COMMIT;
-=======
-
->>>>>>> 6d626cb05c1d2c2f007fa1f0ab10609d941b47ed

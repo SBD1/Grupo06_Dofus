@@ -49,7 +49,7 @@ SELECT I.id, I.nome, I.tipo_item, I.descricao, I.valor_moedas, count(I.id) as qn
 WHERE P.id = 1 
 GROUP BY I.id
 
--- equipar item no personagem
+-- equipar arma no personagem
 BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	SELECT I.id FROM instancia_item I 
 		JOIN mochila M on I.id = M.id_instancia_item 
@@ -63,6 +63,7 @@ BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	UPDATE personagem SET id_arma = I.id WHERE id_personagem = 1;
 COMMIT;
 
+
 -- vender item para mercador
 BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	SELECT I.id, J.valor_moedas FROM instancia_item I 
@@ -75,4 +76,32 @@ BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	DELETE FROM mochila  WHERE id_instancia_item = I.id and id_personagem = 1;
 
 	UPDATE personagem SET moedas = J.valor_moedas WHERE id_personagem = 1;
+COMMIT;
+
+-- equipar amuleto no personagem
+BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+	SELECT I.id FROM instancia_item I 
+		JOIN mochila M on I.id = M.id_instancia_item 
+		WHERE I.id_item = 1 
+ 		AND M.id_personagem = 1 
+		AND I.tipo_item = 'amuleto'
+ 	LIMIT 1;
+
+	DELETE FROM mochila  WHERE id_instancia_item = I.id and id_personagem = 1;
+
+	UPDATE personagem SET id_arma = I.id WHERE id_personagem = 1;
+COMMIT;
+
+-- equipar armadura no personagem
+BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+	SELECT I.id FROM instancia_item I 
+		JOIN mochila M on I.id = M.id_instancia_item 
+		WHERE I.id_item = 1 
+ 		AND M.id_personagem = 1 
+		AND I.tipo_item = 'armadura'
+ 	LIMIT 1;
+
+	DELETE FROM mochila  WHERE id_instancia_item = I.id and id_personagem = 1;
+
+	UPDATE personagem SET id_arma = I.id WHERE id_personagem = 1;
 COMMIT;

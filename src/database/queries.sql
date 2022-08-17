@@ -44,7 +44,7 @@ SELECT * FROM instancia_item
 	INNER JOIN mochila ON instancia_item.id = mochila.id_instancia_item
 WHERE mochila.id_personagem = 1;
 
--- query para listar todos os itens de um personagem e suas quantidade
+-- query para listar todos os itens de um personagem e suas quantidade e suas informacoes
 SELECT I.id, I.nome, I.tipo_item, I.descricao, I.valor_moedas, count(I.id) as qnt FROM item I
 	INNER JOIN instancia_item J ON I.id = J.id_item
  	INNER JOIN mochila M ON M.id_instancia_item = J.id

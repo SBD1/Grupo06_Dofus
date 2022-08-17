@@ -36,6 +36,9 @@ SELECT * FROM arma ORDER BY dano DESC
 -- Lista armadura
 SELECT * FROM armaduras
 
+-- Lista armadura ordenando da mais poderosa para mais fraca
+SELECT * FROM armadura ORDER BY vida DESC
+
 -- query para listar todos os itens de um personagem
 SELECT * FROM instancia_item
 	INNER JOIN mochila ON instancia_item.id = mochila.id_instancia_item

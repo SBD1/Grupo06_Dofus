@@ -14,6 +14,13 @@ WHERE C.id =
 	INNER JOIN classe C ON P.id_classe = C.id
 	WHERE P.id = 1);
 
+SELECT * FROM instancia_item
+	INNER JOIN mochila ON instancia_item.id = mochila.id_instancia_item
+WHERE mochila.id = 
+	(SELECT id_personagem FROM mochila
+	INNER JOIN personagens ON personagens.id = mochila.id_personagem
+	WHERE personagens.id = 1);
+
 -- query para pegar o monstro de um mapa
 SELECT * FROM monstro WHERE monstro.id_mapa = 3;
 
@@ -26,6 +33,11 @@ SELECT * FROM armas
 -- Lista armadura
 SELECT * FROM armaduras
 
+-- query para listar todos os itens de um personagem
+SELECT * FROM instancia_item
+	INNER JOIN mochila ON instancia_item.id = mochila.id_instancia_item
+WHERE mochila.id_personagem = 1;
+
 -- query para listar todos os itens de um personagem e suas quantidade
 SELECT I.nome, I.tipo_item, I.descricao, I.valor_moedas, count(I.id) as qnt FROM item I
 	INNER JOIN instancia_item J ON I.id = J.id_item
@@ -33,3 +45,5 @@ SELECT I.nome, I.tipo_item, I.descricao, I.valor_moedas, count(I.id) as qnt FROM
   INNER JOIN personagens P ON p.id = M.id_personagem
 WHERE P.id = 1 
 GROUP BY I.id
+
+

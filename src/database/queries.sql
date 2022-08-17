@@ -65,3 +65,17 @@ BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ
 
 	UPDATE personagem SET id_arma = I.id WHERE id_personagem = 1;
 COMMIT;
+
+-- vender item para mercador
+BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ
+	SELECT I.id FROM instancia_item I 
+		JOIN mochila M on I.id = M.id_instancia_item 
+		JOIN item J On I.id_item = J.id
+		WHERE I.id_item = 1 
+ 		AND M.id_personagem = 1 
+ 	LIMIT 1;
+
+	DELETE FROM mochila  WHERE id_instancia_item = I.id and id_personagem = 1;
+
+	UPDATE personagem SET moedas = J.valor_moedas WHERE id_personagem = 1;
+COMMIT;

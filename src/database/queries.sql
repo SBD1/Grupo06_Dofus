@@ -30,6 +30,9 @@ SELECT * FROM item
 -- Lista armas
 SELECT * FROM armas
 
+-- Lista armas ordenando da mais poderosa para mais fraca
+SELECT * FROM arma ORDER BY dano DESC
+
 -- Lista armadura
 SELECT * FROM armaduras
 

@@ -65,7 +65,7 @@ COMMIT;
 
 -- vender item para mercador
 BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
-	SELECT I.id FROM instancia_item I 
+	SELECT I.id, J.valor_moedas FROM instancia_item I 
 		JOIN mochila M on I.id = M.id_instancia_item 
 		JOIN item J On I.id_item = J.id
 		WHERE I.id_item = 1 

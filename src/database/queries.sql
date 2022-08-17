@@ -27,9 +27,22 @@ SELECT * FROM armas
 SELECT * FROM armaduras
 
 -- query para listar todos os itens de um personagem e suas quantidade
-SELECT I.nome, I.tipo_item, I.descricao, I.valor_moedas, count(I.id) as qnt FROM item I
+SELECT I.id, I.nome, I.tipo_item, I.descricao, I.valor_moedas, count(I.id) as qnt FROM item I
 	INNER JOIN instancia_item J ON I.id = J.id_item
-  INNER JOIN mochila M ON M.id_instancia_item = J.id
-  INNER JOIN personagens P ON p.id = M.id_personagem
+ 	INNER JOIN mochila M ON M.id_instancia_item = J.id
+  	INNER JOIN personagens P ON p.id = M.id_personagem
 WHERE P.id = 1 
 GROUP BY I.id
+
+-- equipar item no personagem
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE
+	SELECT I.id FROM instancia_item I 
+		JOIN mochila M on I.id = M.id_instancia_item 
+		WHERE I.id_item = 1 
+ 		AND M.id_personagem = 1 
+ 	LIMIT 1;
+
+	DELETE FROM mochila  WHERE id_instancia_item = I.id and id_personagem = 1;
+
+	UPDATE personagem SET id_arma = I.id WHERE id_personagem = 1;
+COMMIT;

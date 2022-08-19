@@ -135,3 +135,30 @@ CREATE OR REPLACE FUNCTION equipar_armadura(personagem NUMERIC, item NUMERIC) RE
     
 END;  
 $equipar_armadura$ LANGUAGE plpgsql;
+
+
+
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+  DO
+  $$
+    DECLARE
+      id_instancia_armadura INTEGER;
+    BEGIN
+        --- SELECIONA O ID DA INSTANCIA DA ARMADURA
+        SELECT I.id, J.descricao INTO id_instancia_armadura
+          FROM instancia_item I 
+          JOIN mochila M on I.id = M.id_instancia_item 
+          JOIN 	item J on I.id_item = J.id
+          WHERE I.id_item = 1 
+          AND M.id_personagem = 1
+          AND J.tipo_item = 'armadura'
+        LIMIT 1;
+
+      --- DELETA A INSTANCIA DE ARMADURA DA MOCHILA
+        DELETE FROM mochila WHERE id_instancia_item = id_instancia_armadura AND id_personagem = 1;
+
+      --- EQUIPA A INSTANCIA DA ARMADURA NO PERSONAGEM
+        UPDATE personagens SET id_armadura = id_instancia_armadura  WHERE id = 1;
+    END;  
+  $$;
+COMMIT;

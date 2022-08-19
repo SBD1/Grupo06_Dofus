@@ -50,8 +50,7 @@ WHERE P.id = 1
 GROUP BY I.id
 
 -- equipar arma no personagem
-START TRANSACTION
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	SELECT I.id FROM instancia_item I 
 		JOIN mochila M on I.id = M.id_instancia_item 
 		WHERE I.id_item = 1 
@@ -66,8 +65,7 @@ COMMIT;
 
 
 -- vender item para mercador
-START TRANSACTION
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	SELECT I.id, J.valor_moedas FROM instancia_item I 
 		JOIN mochila M on I.id = M.id_instancia_item 
 		JOIN item J On I.id_item = J.id
@@ -81,7 +79,7 @@ SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 COMMIT;
 
 -- equipar amuleto no personagem
-BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	SELECT I.id FROM instancia_item I 
 		JOIN mochila M on I.id = M.id_instancia_item 
 		WHERE I.id_item = 1 
@@ -95,8 +93,7 @@ BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 COMMIT;
 
 -- equipar armadura no personagem
-START TRANSACTION
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	SELECT I.id FROM instancia_item I 
 		JOIN mochila M on I.id = M.id_instancia_item 
 		WHERE I.id_item = 1 

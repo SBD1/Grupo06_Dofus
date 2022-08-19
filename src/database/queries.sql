@@ -87,9 +87,10 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 		AND I.tipo_item = 'amuleto'
  	LIMIT 1;
 
+	UPDATE personagem SET id_arma = I.id WHERE id_personagem = 1;
+
 	DELETE FROM mochila  WHERE id_instancia_item = I.id and id_personagem = 1;
 
-	UPDATE personagem SET id_arma = I.id WHERE id_personagem = 1;
 COMMIT;
 
 -- equipar armadura no personagem
@@ -105,3 +106,32 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 
 	UPDATE personagem SET id_arma = I.id WHERE id_personagem = 1;
 COMMIT;
+
+
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+	SELECT equipar_armadura(1, 1);
+COMMIT;
+
+CREATE OR REPLACE FUNCTION equipar_armadura(personagem NUMERIC, item NUMERIC) RETURNS void AS $equipar_armadura$
+  DECLARE
+  id_instancia_armadura INTEGER;
+  BEGIN
+
+    	--- SELECIONA O ID DA INSTANCIA DA ARMADURA
+      SELECT I.id, J.descricao INTO id_instancia_armadura
+        FROM instancia_item I 
+        JOIN mochila M on I.id = M.id_instancia_item 
+        JOIN 	item J on I.id_item = J.id
+        WHERE I.id_item = item 
+        AND M.id_personagem = personagem
+        AND J.tipo_item = 'armadura'
+      LIMIT 1;
+      
+    --- DELETA A INSTANCIA DE ARMADURA DA MOCHILA
+      DELETE FROM mochila WHERE id_instancia_item = id_instancia_armadura AND id_personagem = personagem;
+
+    --- EQUIPA A INSTANCIA DA ARMADURA NO PERSONAGEM
+      UPDATE personagens SET id_armadura = id_instancia_armadura  WHERE id = personagem;
+    
+END;  
+$equipar_armadura$ LANGUAGE plpgsql;

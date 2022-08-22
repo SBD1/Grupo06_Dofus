@@ -245,3 +245,38 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
     END;  
   $$;
 COMMIT;
+
+
+--- transaction se o personagem morre em combate
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+	DELETE FROM mochila WHERE id_personagem = 1;
+
+	UPDATE personagens SET id_arma = NULL  WHERE id = 1;
+	UPDATE personagens SET id_amuleto = NULL  WHERE id = 1;
+	UPDATE personagens SET id_armadura = NULL  WHERE id = 1;
+	UPDATE personagens SET moedas = 0  WHERE id = 1;
+COMMIT;
+
+
+-- todo
+-- CREATE OR REPLACE FUNCTION check_armadura() RETURNS trigger AS $check_armadura$
+-- 	DECLARE
+-- 		discs_prof INTEGER;
+-- 	BEGIN
+-- 		SELECT COUNT(*) INTO discs_prof
+-- 			FROM DISCIPLINA
+-- 			WHERE Professor = NEW.Aluno AND
+-- 			Sigla = NEW.Sigla;
+-- 			IF discs_prof > 0 THEN
+-- 				RAISE EXCEPTION 'Um professor não pode se matricular em disciplinas que ele mesmo
+-- 				ministra';
+-- 			END IF;
+-- 		RETURN NEW; --- retorna a tupla para prosseguir com a operação
+-- 	END;
+-- $check_armadura$ LANGUAGE plpgsql;
+
+-- DROP TRIGGER check_generalizacao_armadura ON armadura;
+-- CREATE TRIGGER check_generalizacao_armadura
+-- BEFORE INSERT ON armadura
+
+-- FOR EACH ROW EXECUTE PROCEDURE check_armadura();

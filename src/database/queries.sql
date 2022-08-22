@@ -173,3 +173,39 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
     END;  
   $$;
 COMMIT;
+
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+  DO
+  $$
+    DECLARE
+      id_instancia_amuleto INTEGER;
+	  id_intancia_amuleto_antiga INTEGER;
+    BEGIN
+
+		SELECT id_amuleto INTO id_instancia_amuleto_antiga
+			FROM personagens WHERE id = 1;
+
+		--- SE JA POSSUIR AMULETO, RETIRA O AMULETO ANTIGA E COLOCA NA MOCHILA
+		IF (id_instancia_amuleto_antiga <> NULL)
+			UPDATE personagens SET id_amuleto = NULL  WHERE id = 1;
+			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_amuleto_antiga);
+		END IF;
+
+        --- SELECIONA O ID DA INSTANCIA DO AMULETO
+        SELECT I.id, J.descricao INTO id_instancia_amuleto
+          FROM instancia_item I 
+          JOIN mochila M on I.id = M.id_instancia_item 
+          JOIN 	item J on I.id_item = J.id
+          WHERE I.id_item = 1 
+          AND M.id_personagem = 1
+          AND J.tipo_item = 'amuleto'
+        LIMIT 1;
+
+      --- DELETA A INSTANCIA DE AMULETO DA MOCHILA
+        DELETE FROM mochila WHERE id_instancia_item = id_instancia_amuleto AND id_personagem = 1;
+
+      --- EQUIPA A INSTANCIA DA AMULETO NO PERSONAGEM
+        UPDATE personagens SET id_amuleto = id_instancia_amuleto  WHERE id = 1;
+    END;  
+  $$;
+COMMIT;

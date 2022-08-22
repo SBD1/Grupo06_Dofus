@@ -280,3 +280,27 @@ COMMIT;
 -- BEFORE INSERT ON armadura
 
 -- FOR EACH ROW EXECUTE PROCEDURE check_armadura();
+
+
+-- todo
+-- CREATE OR REPLACE FUNCTION calcular_vida_maxima() RETURNS trigger AS $calcular_vida_maxima$
+-- 	DECLARE
+-- 		vida_armadura INTEGER;
+-- 	BEGIN
+-- 		SELECT id_armadura INTO vida_armadura
+-- 			FROM DISCIPLINA
+-- 			WHERE Professor = NEW.Aluno AND
+-- 			Sigla = NEW.Sigla;
+-- 			IF discs_prof > 0 THEN
+-- 				RAISE EXCEPTION 'Um professor não pode se matricular em disciplinas que ele mesmo
+-- 				ministra';
+-- 			END IF;
+-- 		RETURN NEW; --- retorna a tupla para prosseguir com a operação
+-- 	END;
+-- $calcular_vida_maxima$ LANGUAGE plpgsql;
+
+-- DROP TRIGGER calcular_vida_maxima_personagens ON personagens;
+-- CREATE TRIGGER calcular_vida_maxima_personagens
+-- BEFORE INSERT ON personagens
+
+-- FOR EACH ROW EXECUTE PROCEDURE calcular_vida_maxima();

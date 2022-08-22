@@ -143,7 +143,18 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
   $$
     DECLARE
       id_instancia_armadura INTEGER;
+	  id_intancia_armadura_antiga INTEGER;
     BEGIN
+
+		SELECT id_armadura INTO id_instancia_armadura_antiga
+			FROM personagens WHERE id = 1;
+
+		--- SE JA POSSUIR ARMADURA, RETIRA A ARMADURA ANTIGA E COLOCA NA MOCHILA
+		IF (id_instancia_armadura_antiga <> NULL)
+			UPDATE personagens SET id_armadura = NULL  WHERE id = 1;
+			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_armadura_antiga);
+		END IF;
+
         --- SELECIONA O ID DA INSTANCIA DA ARMADURA
         SELECT I.id, J.descricao INTO id_instancia_armadura
           FROM instancia_item I 

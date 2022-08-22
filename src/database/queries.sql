@@ -185,7 +185,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 		SELECT id_amuleto INTO id_instancia_amuleto_antiga
 			FROM personagens WHERE id = 1;
 
-		--- SE JA POSSUIR AMULETO, RETIRA O AMULETO ANTIGA E COLOCA NA MOCHILA
+		--- SE JA POSSUIR AMULETO, RETIRA O AMULETO ANTIGO E COLOCA NA MOCHILA
 		IF (id_instancia_amuleto_antiga <> NULL)
 			UPDATE personagens SET id_amuleto = NULL  WHERE id = 1;
 			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_amuleto_antiga);
@@ -206,6 +206,42 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 
       --- EQUIPA A INSTANCIA DA AMULETO NO PERSONAGEM
         UPDATE personagens SET id_amuleto = id_instancia_amuleto  WHERE id = 1;
+    END;  
+  $$;
+COMMIT;
+
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+  DO
+  $$
+    DECLARE
+      id_instancia_arma INTEGER;
+	  id_intancia_arma_antiga INTEGER;
+    BEGIN
+
+		SELECT id_arma INTO id_instancia_arma_antiga
+			FROM personagens WHERE id = 1;
+
+		--- SE JA POSSUIR ARMA, RETIRA A ARMA ANTIGA E COLOCA NA MOCHILA
+		IF (id_instancia_arma_antiga <> NULL)
+			UPDATE personagens SET id_arma = NULL  WHERE id = 1;
+			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_arma_antiga);
+		END IF;
+
+        --- SELECIONA O ID DA INSTANCIA DO ARMA
+        SELECT I.id, J.descricao INTO id_instancia_arma
+          FROM instancia_item I 
+          JOIN mochila M on I.id = M.id_instancia_item 
+          JOIN 	item J on I.id_item = J.id
+          WHERE I.id_item = 1 
+          AND M.id_personagem = 1
+          AND J.tipo_item = 'arma'
+        LIMIT 1;
+
+      --- DELETA A INSTANCIA DE ARMA DA MOCHILA
+        DELETE FROM mochila WHERE id_instancia_item = id_instancia_arma AND id_personagem = 1;
+
+      --- EQUIPA A INSTANCIA DA ARMA NO PERSONAGEM
+        UPDATE personagens SET id_arma = id_instancia_arma  WHERE id = 1;
     END;  
   $$;
 COMMIT;

@@ -150,7 +150,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 			FROM personagens WHERE id = 1;
 
 		--- SE JA POSSUIR ARMADURA, RETIRA A ARMADURA ANTIGA E COLOCA NA MOCHILA
-		IF (id_instancia_armadura_antiga <> NULL)
+		IF (id_instancia_armadura_antiga <> NULL) THEN
 			UPDATE personagens SET id_armadura = NULL  WHERE id = 1;
 			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_armadura_antiga);
 		END IF;
@@ -186,7 +186,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 			FROM personagens WHERE id = 1;
 
 		--- SE JA POSSUIR AMULETO, RETIRA O AMULETO ANTIGO E COLOCA NA MOCHILA
-		IF (id_instancia_amuleto_antiga <> NULL)
+		IF (id_instancia_amuleto_antiga <> NULL) THEN
 			UPDATE personagens SET id_amuleto = NULL  WHERE id = 1;
 			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_amuleto_antiga);
 		END IF;
@@ -222,7 +222,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 			FROM personagens WHERE id = 1;
 
 		--- SE JA POSSUIR ARMA, RETIRA A ARMA ANTIGA E COLOCA NA MOCHILA
-		IF (id_instancia_arma_antiga <> NULL)
+		IF (id_instancia_arma_antiga <> NULL) THEN
 			UPDATE personagens SET id_arma = NULL  WHERE id = 1;
 			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_arma_antiga);
 		END IF;

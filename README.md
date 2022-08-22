@@ -11,4 +11,4 @@ https://www.dofus.com/en/prehome
 
 ## Integrantes
 * Christian Fleury Alencar Siqueira - 190011602
-* Thiago Siqueira Gomes -
+* Thiago Siqueira Gomes - 190055294

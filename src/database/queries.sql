@@ -143,7 +143,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
   $$
     DECLARE
       id_instancia_armadura INTEGER;
-	  id_intancia_armadura_antiga INTEGER;
+	  id_instancia_armadura_antiga INTEGER;
     BEGIN
 
 		SELECT id_armadura INTO id_instancia_armadura_antiga
@@ -179,7 +179,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
   $$
     DECLARE
       id_instancia_amuleto INTEGER;
-	  id_intancia_amuleto_antiga INTEGER;
+	  id_instancia_amuleto_antiga INTEGER;
     BEGIN
 
 		SELECT id_amuleto INTO id_instancia_amuleto_antiga
@@ -215,7 +215,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
   $$
     DECLARE
       id_instancia_arma INTEGER;
-	  id_intancia_arma_antiga INTEGER;
+	  id_instancia_arma_antiga INTEGER;
     BEGIN
 
 		SELECT id_arma INTO id_instancia_arma_antiga

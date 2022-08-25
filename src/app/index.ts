@@ -1,5 +1,3 @@
-import inquirer from 'inquirer'
+import Game from './game.js'
 
-console.log({ inquirer })
-
-console.log('jnsdj')
+new Game()

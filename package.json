@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "exports": "./dist/index.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch 'src/' --exec 'tsc src/app/index.ts' -e ts"
+    "dev": "nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' src/app/index.ts",
+    "start": "tsc && node dist/"
   },
   "repository": {
     "type": "git",
@@ -22,19 +24,22 @@
     "url": "https://github.com/SBD1/Grupo06_Dofus/issues"
   },
   "homepage": "https://github.com/SBD1/Grupo06_Dofus#readme",
-  "dependencies": {
-    "figlet": "^1.5.2",
-    "gradient-string": "^2.0.1",
-    "inquirer": "^9.1.0"
-  },
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/chalk-animation": "^1.6.1",
     "@types/figlet": "^1.5.5",
     "@types/gradient-string": "^1.1.2",
     "@types/inquirer": "^9.0.1",
-    "@types/node": "^18.7.11",
+    "node-dev": "^7.4.3",
     "nodemon": "^2.0.19",
-    "sucrase": "^3.25.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "chalk-animation": "^2.0.2",
+    "figlet": "^1.5.2",
+    "gradient-string": "^2.0.1",
+    "inquirer": "^9.1.0"
   }
 }

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch 'src/' --exec 'ts-node src/app/index.ts' -e ts"
+    "dev": "nodemon --watch 'src/' --exec 'tsc src/app/index.ts' -e ts"
   },
   "repository": {
     "type": "git",
@@ -22,15 +22,14 @@
   },
   "homepage": "https://github.com/SBD1/Grupo06_Dofus#readme",
   "dependencies": {
-    "chalk": "^5.0.1",
-    "chalk-animation": "^2.0.2",
     "figlet": "^1.5.2",
     "gradient-string": "^2.0.1",
-    "inquirer": "^9.1.0",
-    "nanospinner": "^1.1.0"
+    "inquirer": "^9.1.0"
   },
   "devDependencies": {
-    "@types/chalk-animation": "^1.6.1",
+    "@types/figlet": "^1.5.5",
+    "@types/gradient-string": "^1.1.2",
+    "@types/inquirer": "^9.0.1",
     "@types/node": "^18.7.11",
     "nodemon": "^2.0.19",
     "ts-node": "^10.9.1",

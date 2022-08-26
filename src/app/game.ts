@@ -7,10 +7,16 @@ import figlet from "figlet";
 import dbInstance from "./connection/database.js";
 import { Choices } from "./util/constants.js";
 import ClassScreen from "./screens/ClassScreen.js";
+import GameScreen from "./screens/GameScreen.js";
+
 export default class Game {
   private readonly classScreen;
+  private readonly gameScreen;
+  
   constructor() {
     this.classScreen = new ClassScreen(1);
+    this.gameScreen = new GameScreen(1);
+
     this.run();
   }
 
@@ -25,10 +31,12 @@ export default class Game {
         message: "Selecione uma opção.\n",
         choices: [Choices.PLAY_NOW, Choices.LIST_ACHIEVEMENTS, Choices.QUIT],
       });
-      console.log(answer.playOrListAchievements);
 
       if (answer.playOrListAchievements === Choices.PLAY_NOW)
         await this.classScreen.handleClass();
+
+        await this.gameScreen.handleGameScreen();
+
     });
   }
 }

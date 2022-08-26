@@ -307,7 +307,7 @@ COMMIT;
 
 
 -- query para ver em qual mapa o personagem esta
-    SELECT M.id, M.coord_x, M.coord_y, M.descricao, M.mapa_norte, M.mapa_sul, M.mapa_leste, M.mapa_oeste
+    SELECT M.id, M.coord_x, M.coord_y, M.descricao, M.mapa_norte, M.mapa_sul, M.mapa_leste, M.mapa_oeste, M.nome
          from mapa M 
          INNER JOIN personagens 
          p ON m.id = p.id_mapa WHERE p.id = 1;

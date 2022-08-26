@@ -39,7 +39,9 @@ export default class ClassScreen {
         SELECT id_classe FROM personagens WHERE id = ${this.idPersonagem}
         `;
 
-    if (!hasClass) {
+    console.log(hasClass[0])
+
+    if (!hasClass[0]) {
       this.pickClass();
     }
   }

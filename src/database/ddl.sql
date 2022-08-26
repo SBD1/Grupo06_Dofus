@@ -16,6 +16,7 @@ CREATE TABLE mapa (
     id SERIAL PRIMARY KEY,
     coord_x INT NOT NULL,
     coord_y INT NOT NULL,
+    nome VARCHAR(50) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
     mapa_norte INT,
     mapa_sul INT,

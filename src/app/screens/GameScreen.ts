@@ -25,11 +25,16 @@ export default class GameScreen {
          p ON m.id = p.id_mapa WHERE p.id = ${this.idPersonagem}
         `)[0] as any;
 
+        const characterMaxHp = (await dbInstance`
+        SELECT vida_maxima FROM personagens WHERE id = ${this.idPersonagem}
+        `)[0] as any;
+
 
         // prints map info
         console.log(`(${currentMap.coord_x}, ${currentMap.coord_y}) - ${currentMap.nome}`)
         console.log()
         console.log(currentMap.descricao)
+        console.log(`Vida Máxima: ${characterMaxHp.vida_maxima}`)
 
         const answer = await inquirer.prompt({
             name: "gameScreen",

@@ -1,15 +1,16 @@
-import postgres from 'postgres'
+import { Client } from 'pg'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const config = {
+const client = new Client({
+  user: process.env.USER,
   host: process.env.HOST,
+  database:  process.env.DATABASE,
+  password:  process.env.PASSWORD,
   port: Number(process.env.PORT),
-  database: process.env.DATABASE,
-  username: "postgres",
-  password: process.env.PASSWORD
-}
+})
 
-const dbInstance = postgres(config)
+client.connect()
 
-export default dbInstance
+
+export default client

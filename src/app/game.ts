@@ -35,7 +35,9 @@ export default class Game {
       if (answer.playOrListAchievements === Choices.PLAY_NOW)
         await this.classScreen.handleClass();
 
-        await this.gameScreen.handleGameScreen();
+        while(true){
+          await this.gameScreen.handleGameScreen();
+        }
 
     });
   }

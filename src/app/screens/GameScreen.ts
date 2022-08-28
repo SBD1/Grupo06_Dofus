@@ -10,6 +10,10 @@ import { NPC, TipoNPC } from "../interfaces/npc.js";
 
 export default class GameScreen {
   private readonly idPersonagem: number;
+  private readonly WALK_SOUTH: string = "Andar Para o Sul";
+  private readonly WALK_EAST: string = "Andar Para o Leste";
+  private readonly WALK_WEST: string = "Andar Para o Oeste";
+  private readonly WALK_NORTH: string = "Andar Para o Norte";
 
   constructor(idPersonagem: number) {
     this.idPersonagem = idPersonagem;
@@ -60,11 +64,32 @@ export default class GameScreen {
       ],
     });
 
-    if (answer.gameScreen === Choices.QUIT) {
+    this.handleChoices(answer.gameScreen, currentMap);
+  }
+
+  private async handleChoices(answer: string, currentMap: Mapa): Promise<void> {
+    let newMapId: number = ((): number => {
+      if (answer === this.WALK_EAST) return currentMap.mapa_leste;
+      if (answer === this.WALK_NORTH) return currentMap.mapa_oeste;
+      if (answer === this.WALK_SOUTH) return currentMap.mapa_sul;
+      if (answer === this.WALK_WEST) return currentMap.mapa_oeste;
+      return 0;
+    })();
+
+    if (answer === Choices.QUIT) process.exit(0);
+    if (answer === Choices.INVENTORY) process.exit(0); // TODO inventory
+
+    if (
+      answer === this.WALK_EAST ||
+      answer === this.WALK_NORTH ||
+      answer === this.WALK_SOUTH ||
+      (answer === this.WALK_WEST && newMapId)
+    ) {
+      await dbInstance`
+      UPDATE personagens SET id_mapa = ${newMapId} WHERE id = ${this.idPersonagem}
+      `;
       process.exit(0);
     }
-
-    return true;
   }
 
   private availableChoices(npcsAtMap: NPC[], currentMap: Mapa): string[] {
@@ -79,10 +104,10 @@ export default class GameScreen {
     });
 
     let mapChoices: any = {
-      ...(currentMap.mapa_norte && { mapa_leste: "Andar para o Norte" }),
-      ...(currentMap.mapa_sul && { mapa_leste: "Andar para o Sul" }),
-      ...(currentMap.mapa_leste && { mapa_leste: "Andar para o Leste" }),
-      ...(currentMap.mapa_oeste && { mapa_leste: "Andar para o Oeste" }),
+      ...(currentMap.mapa_norte && { mapa_norte: this.WALK_NORTH }),
+      ...(currentMap.mapa_sul && { mapa_sul: this.WALK_SOUTH }),
+      ...(currentMap.mapa_leste && { mapa_leste: this.WALK_EAST }),
+      ...(currentMap.mapa_oeste && { mapa_oeste: this.WALK_WEST }),
     };
 
     mapChoices = Object.keys(mapChoices).map(function (key) {

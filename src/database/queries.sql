@@ -311,4 +311,12 @@ COMMIT;
          from mapa M 
          INNER JOIN personagens 
          p ON m.id = p.id_mapa WHERE p.id = 1;
-        
+
+-- query para pegar stats do personagem
+SELECT P.vida_maxima, C.nome as nome_classe, P.sorte_total FROM personagens P JOIN classe C ON C.id = P.id_classe WHERE P.id = ${this.idPersonagem}
+
+-- query para pegar todos npcs de um mapa
+SELECT N.id, N.nome, N.tipo_npc, N.descricao, n.id_mapa
+        FROM npc N 
+        JOIN mapa M ON M.id = N.id_mapa 
+        WHERE M.id = ${currentMap.id};  

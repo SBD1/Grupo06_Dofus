@@ -11,7 +11,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' src/app/index.ts",
-    "start": "tsc && node dist/"
+    "start": "tsc && node dist/",
+    "migrate": "tsc && node dist/scripts/populateDb.js"
   },
   "repository": {
     "type": "git",

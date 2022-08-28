@@ -8,13 +8,27 @@ import { Mapa } from "../interfaces/mapa.js";
 import { Choices, INFINTE } from "../util/constants.js";
 import { NPC, TipoNPC } from "../interfaces/npc.js";
 
+type AvailableChoicesType = {
+  npcChoices: {
+    [key: string]: {
+      choice: string;
+      npc_id: NPC["id"];
+      tipo_npc: NPC["tipo_npc"];
+    };
+  };
+  mapChoices: {
+    [key: string]: {
+      choice: string;
+      mapa_id: Mapa["id"];
+    };
+  };
+};
 export default class GameScreen {
   private readonly idPersonagem: number;
   private readonly WALK_SOUTH: string = "Andar Para o Sul";
   private readonly WALK_EAST: string = "Andar Para o Leste";
   private readonly WALK_WEST: string = "Andar Para o Oeste";
   private readonly WALK_NORTH: string = "Andar Para o Norte";
-
   constructor(idPersonagem: number) {
     this.idPersonagem = idPersonagem;
   }
@@ -53,6 +67,11 @@ export default class GameScreen {
         WHERE M.id = ${currentMap.id};  
         `;
 
+    const availableChoices: AvailableChoicesType = this.availableChoices(
+      npcsAtMap,
+      currentMap
+    );
+
     const answer = await inquirer.prompt({
       name: "gameScreen",
       type: "list",
@@ -60,62 +79,89 @@ export default class GameScreen {
       pageSize: INFINTE,
       message: "Selecione uma ação.\n",
       choices: [
-        ...this.availableChoices(npcsAtMap, currentMap),
+        ...Object.keys(availableChoices.mapChoices),
+        ...Object.keys(availableChoices.npcChoices),
         Choices.INVENTORY,
         Choices.QUIT,
       ],
     });
 
-    this.handleChoices(answer.gameScreen, currentMap);
+    this.handleChoices(answer.gameScreen, availableChoices);
   }
 
-  private async handleChoices(answer: string, currentMap: Mapa): Promise<void> {
-    let newMapId: number = ((): number => {
-      if (answer === this.WALK_EAST) return currentMap.mapa_leste;
-      if (answer === this.WALK_NORTH) return currentMap.mapa_norte;
-      if (answer === this.WALK_SOUTH) return currentMap.mapa_sul;
-      if (answer === this.WALK_WEST) return currentMap.mapa_oeste;
-      return 0;
-    })();
-
+  private async handleChoices(
+    answer: string,
+    availableChoices: AvailableChoicesType
+  ): Promise<void> {
     if (answer === Choices.QUIT) process.exit(0);
     if (answer === Choices.INVENTORY) process.exit(0); // TODO inventory
-    // TODO NPC CHOICES
 
-    if (
-      answer === this.WALK_EAST ||
-      answer === this.WALK_NORTH ||
-      answer === this.WALK_SOUTH ||
-      (answer === this.WALK_WEST && newMapId)
-    ) {
+    if (availableChoices.mapChoices[answer]) {
       await dbInstance`
-      UPDATE personagens SET id_mapa = ${newMapId} WHERE id = ${this.idPersonagem}
+      UPDATE personagens SET id_mapa = ${availableChoices.mapChoices[answer].mapa_id} WHERE id = ${this.idPersonagem}
       `;
+    }
+
+    if (availableChoices.npcChoices[answer]) {
+      console.log("npc TODO");
     }
   }
 
-  private availableChoices(npcsAtMap: NPC[], currentMap: Mapa): string[] {
+  private availableChoices(
+    npcsAtMap: NPC[],
+    currentMap: Mapa
+  ): AvailableChoicesType {
     const npcActions: { [key in TipoNPC]: string } = {
       monstro: "Atacar",
       npc_missao: "Pegar missão com",
       mercador: "Negociar com",
     };
+    let npcChoices: any = {};
 
-    const npcChoices = npcsAtMap.map((npc) => {
-      return `${npcActions[npc.tipo_npc]} ${npc.nome}`;
+    npcsAtMap.forEach((npc) => {
+      let choice: string = `${npcActions[npc.tipo_npc]} ${npc.nome}`;
+      npcChoices[choice] = { npc_id: npc.id, choice, tipo_npc: npc.tipo_npc };
     });
 
     let mapChoices: any = {
-      ...(currentMap.mapa_norte && { mapa_norte: this.WALK_NORTH }),
-      ...(currentMap.mapa_sul && { mapa_sul: this.WALK_SOUTH }),
-      ...(currentMap.mapa_leste && { mapa_leste: this.WALK_EAST }),
-      ...(currentMap.mapa_oeste && { mapa_oeste: this.WALK_WEST }),
+      ...(currentMap.mapa_norte &&
+        (() => {
+          const obj: any = {};
+          obj[this.WALK_NORTH] = {
+            choice: this.WALK_NORTH,
+            mapa_id: currentMap.mapa_norte,
+          };
+          return obj;
+        })()),
+      ...(currentMap.mapa_leste &&
+        (() => {
+          const obj: any = {};
+          obj[this.WALK_EAST] = {
+            choice: this.WALK_EAST,
+            mapa_id: currentMap.mapa_leste,
+          };
+          return obj;
+        })()),
+      ...(currentMap.mapa_oeste &&
+        (() => {
+          const obj: any = {};
+          obj[this.WALK_WEST] = {
+            choice: this.WALK_EAST,
+            mapa_id: currentMap.mapa_oeste,
+          };
+          return obj;
+        })()),
+      ...(currentMap.mapa_sul &&
+        (() => {
+          const obj: any = {};
+          obj[this.WALK_SOUTH] = {
+            choice: this.WALK_SOUTH,
+            mapa_id: currentMap.mapa_sul,
+          };
+          return obj;
+        })()),
     };
 
-    mapChoices = Object.keys(mapChoices).map(function (key) {
-      return mapChoices[key];
-    });
-
-    return [...mapChoices, ...npcChoices];
+    return { mapChoices, npcChoices };
   }
 }

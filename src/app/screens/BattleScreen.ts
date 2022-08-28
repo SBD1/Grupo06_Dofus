@@ -4,6 +4,7 @@ import gradient from "gradient-string";
 import chalkAnimation from "chalk-animation";
 import figlet from "figlet";
 import dbInstance from "../connection/database.js";
+import { Magias } from "../interfaces/magias.js";
 
 export default class BattleScreen {
   private readonly idPersonagem: number;
@@ -43,6 +44,14 @@ export default class BattleScreen {
     `
     )[0] as any;
 
-    console.log({ battleStats, monsterStats });
+    const skillsStats: Omit<Magias, "id" | "id_classe">[] = await dbInstance`
+      SELECT magias.nome, magias.descricao, magias.dano, magias.cura FROM magias 
+        INNER JOIN classe ON magias.classe_id = classe.id
+        WHERE classe.id = 
+        (SELECT id_classe FROM personagens 
+        INNER JOIN classe ON personagens.id_classe = classe.id
+        WHERE personagens.id = ${this.idPersonagem});`;
+
+    console.log({ battleStats, monsterStats, skillsStats });
   }
 }

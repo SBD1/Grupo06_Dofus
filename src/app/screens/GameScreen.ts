@@ -27,9 +27,9 @@ export default class GameScreen {
         `
     )[0] as any;
 
-    const characterMaxHp = (
+    const charStats = (
       await dbInstance`
-        SELECT vida_maxima FROM personagens WHERE id = ${this.idPersonagem}
+        SELECT P.vida_maxima, C.nome as nome_classe, P.sorte_total FROM personagens P JOIN classe C ON C.id = P.id_classe WHERE P.id = ${this.idPersonagem}
         `
     )[0] as any;
 
@@ -38,10 +38,12 @@ export default class GameScreen {
     );
     console.log();
     console.log(currentMap.descricao);
-    console.log(`Vida Máxima: ${characterMaxHp.vida_maxima}`);
+    console.log(
+      `Vida Máxima: ${charStats.vida_maxima}         Sorte total: ${charStats.sorte_total}         Classe: ${charStats.nome_classe}`
+    );
 
     const npcsAtMap: NPC[] = await dbInstance`
-        SELECT N.id, N.nome, N.tipo_npc, N.descricao, M.id_mapa
+        SELECT N.id, N.nome, N.tipo_npc, N.descricao, n.id_mapa
         FROM npc N 
         JOIN mapa M ON M.id = N.id_mapa 
         WHERE M.id = ${currentMap.id};  
@@ -51,7 +53,11 @@ export default class GameScreen {
       name: "gameScreen",
       type: "list",
       message: "Selecione uma ação.\n",
-      choices: [...this.availableActions(npcsAtMap), Choices.INVENTORY, Choices.QUIT],
+      choices: [
+        ...this.availableChoices(npcsAtMap, currentMap),
+        Choices.INVENTORY,
+        Choices.QUIT,
+      ],
     });
 
     if (answer.gameScreen === Choices.QUIT) {
@@ -61,15 +67,28 @@ export default class GameScreen {
     return true;
   }
 
-  private availableActions(npcsAtMap: NPC[]): string[] {
+  private availableChoices(npcsAtMap: NPC[], currentMap: Mapa): string[] {
     const npcActions: { [key in TipoNPC]: string } = {
       monstro: "Atacar",
       npc_missao: "Pegar missão com",
       mercador: "Negociar com",
     };
 
-    return npcsAtMap.map((npc) => {
+    const npcChoices = npcsAtMap.map((npc) => {
       return `${npcActions[npc.tipo_npc]} ${npc.nome}`;
     });
+
+    let mapChoices: any = {
+      ...(currentMap.mapa_norte && { mapa_leste: "Andar para o Norte" }),
+      ...(currentMap.mapa_sul && { mapa_leste: "Andar para o Sul" }),
+      ...(currentMap.mapa_leste && { mapa_leste: "Andar para o Leste" }),
+      ...(currentMap.mapa_oeste && { mapa_leste: "Andar para o Oeste" }),
+    };
+
+    mapChoices = Object.keys(mapChoices).map(function (key) {
+      return mapChoices[key];
+    });
+
+    return [...mapChoices, ...npcChoices];
   }
 }

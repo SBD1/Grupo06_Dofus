@@ -23,6 +23,7 @@ export default class Game {
   private async run() {
     figlet("DOFUS", async (_err, data) => {
       console.clear();
+      console.log();
       console.log(gradient.pastel.multiline(data) + "\n");
       console.log(
         chalk.greenBright(

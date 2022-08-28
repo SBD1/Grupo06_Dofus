@@ -38,6 +38,7 @@ export default class GameScreen {
 
   async handleGameScreen() {
     console.clear();
+    console.log();
 
     const currentMap: Mapa = (
       await dbInstance`
@@ -89,7 +90,7 @@ export default class GameScreen {
       ],
     });
 
-    this.handleChoices(answer.gameScreen, availableChoices);
+    await this.handleChoices(answer.gameScreen, availableChoices);
   }
 
   private async handleChoices(

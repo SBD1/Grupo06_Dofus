@@ -7,7 +7,8 @@ const config = {
   port: Number(process.env.DBPORT),
   database: process.env.DBNAME,
   username: process.env.DBUSER,
-  password: process.env.DBPASS
+  password: process.env.DBPASS,
+  max: 1
 }
 
 const dbInstance = postgres(config)

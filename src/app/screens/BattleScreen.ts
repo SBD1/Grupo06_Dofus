@@ -94,24 +94,19 @@ export default class BattleScreen {
   private async battleTurn(battleInfo: BattleInfoType): Promise<void> {
     console.clear();
     console.log();
-    const {
-      battleStats,
-      skills,
-      monsterStats,
-      currentHp,
-      currentMonsterHp,
-      battleOver,
-    } = battleInfo;
+    const { battleStats, skills, monsterStats } = battleInfo;
 
     console.log(
       chalk.red(
-        `${monsterStats.nome}: ${currentMonsterHp} / ${monsterStats.vida_maxima}`
+        `${monsterStats.nome}: ${battleInfo.currentMonsterHp} / ${monsterStats.vida_maxima}`
       )
     );
     console.log(chalk.red(monsterStats.descricao));
 
     console.log(
-      chalk.green(`Sua vida: ${currentHp} / ${battleStats.vida_maxima}`)
+      chalk.green(
+        `Sua vida: ${battleInfo.currentHp} / ${battleStats.vida_maxima}`
+      )
     );
 
     const answer = await inquirer.prompt({
@@ -132,20 +127,25 @@ export default class BattleScreen {
         battleInfo.currentHp += heal;
         battleInfo.currentMonsterHp -= damage;
 
-        if (currentHp > battleStats.vida_maxima) {
+        if (battleInfo.currentHp > battleStats.vida_maxima) {
           battleInfo.currentHp = battleStats.vida_maxima;
         }
 
         console.log(`Você lança ${skill.nome}. ${skill.descricao}`);
         console.log(`Dano: ${damage}   Cura: ${heal}`);
-        console.log("---------------------------------");
+        console.log(
+          "---------------------------------------------------------------------------------------------------"
+        );
+
+        battleInfo.currentHp -= monsterStats.dano;
+
         console.log(
           `${monsterStats.nome} te ataca, causando ${monsterStats.dano} de dano.`
         );
       }
     });
 
-    if (currentMonsterHp <= 0) {
+    if (battleInfo.currentMonsterHp <= 0) {
       console.clear();
       console.log();
       console.log(`Você matou ${monsterStats.nome}`);
@@ -153,7 +153,7 @@ export default class BattleScreen {
         `Você recebeu ${monsterStats.moedas} moedas e x1 ${monsterStats.id_item_recompensa}`
       );
       battleInfo.battleOver = true;
-    } else if (currentHp <= 0) {
+    } else if (battleInfo.currentHp <= 0) {
       console.clear;
       console.log("Você morreu! Você perde todos seus itens e moedas.");
 

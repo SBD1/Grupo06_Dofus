@@ -5,7 +5,7 @@ import chalkAnimation from "chalk-animation";
 import figlet from "figlet";
 import dbInstance from "../connection/database.js";
 import { Mapa } from "../interfaces/mapa.js";
-import { Choices } from "../util/constants.js";
+import { Choices, INFINTE } from "../util/constants.js";
 import { NPC, TipoNPC } from "../interfaces/npc.js";
 
 export default class GameScreen {
@@ -56,6 +56,8 @@ export default class GameScreen {
     const answer = await inquirer.prompt({
       name: "gameScreen",
       type: "list",
+      loop: false,
+      pageSize: INFINTE,
       message: "Selecione uma ação.\n",
       choices: [
         ...this.availableChoices(npcsAtMap, currentMap),
@@ -70,7 +72,7 @@ export default class GameScreen {
   private async handleChoices(answer: string, currentMap: Mapa): Promise<void> {
     let newMapId: number = ((): number => {
       if (answer === this.WALK_EAST) return currentMap.mapa_leste;
-      if (answer === this.WALK_NORTH) return currentMap.mapa_oeste;
+      if (answer === this.WALK_NORTH) return currentMap.mapa_norte;
       if (answer === this.WALK_SOUTH) return currentMap.mapa_sul;
       if (answer === this.WALK_WEST) return currentMap.mapa_oeste;
       return 0;
@@ -78,6 +80,7 @@ export default class GameScreen {
 
     if (answer === Choices.QUIT) process.exit(0);
     if (answer === Choices.INVENTORY) process.exit(0); // TODO inventory
+    // TODO NPC CHOICES
 
     if (
       answer === this.WALK_EAST ||
@@ -88,7 +91,6 @@ export default class GameScreen {
       await dbInstance`
       UPDATE personagens SET id_mapa = ${newMapId} WHERE id = ${this.idPersonagem}
       `;
-      process.exit(0);
     }
   }
 

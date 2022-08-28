@@ -12,7 +12,7 @@ import GameScreen from "./screens/GameScreen.js";
 export default class Game {
   private readonly classScreen;
   private readonly gameScreen;
-  
+
   constructor() {
     this.classScreen = new ClassScreen(1);
     this.gameScreen = new GameScreen(1);
@@ -35,10 +35,9 @@ export default class Game {
       if (answer.playOrListAchievements === Choices.PLAY_NOW)
         await this.classScreen.handleClass();
 
-        while(true){
-          await this.gameScreen.handleGameScreen();
-        }
-
+      while (true) {
+        await this.gameScreen.handleGameScreen();
+      }
     });
   }
 }

@@ -98,24 +98,28 @@ export default class BattleScreen {
 
     console.log(
       chalk.red(
-        `${monsterStats.nome}: ${battleInfo.currentMonsterHp} / ${monsterStats.vida_maxima}`
+        `Vida de ${monsterStats.nome}: ${battleInfo.currentMonsterHp} / ${monsterStats.vida_maxima}`
       )
     );
     console.log(chalk.red(monsterStats.descricao));
+    console.log();
 
     console.log(
       chalk.green(
         `Sua vida: ${battleInfo.currentHp} / ${battleStats.vida_maxima}`
       )
     );
+    console.log();
+    console.log();
 
     const answer = await inquirer.prompt({
       name: "battleScreen",
       type: "list",
       loop: false,
-      message: "Selecione uma ação.\n",
+      message: "Escolha uma magia.\n",
       choices: [...skills.map((skill) => skill.nome)],
     });
+
     console.log();
     console.log();
     console.log();

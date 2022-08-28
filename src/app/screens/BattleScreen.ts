@@ -25,6 +25,7 @@ type BattleInfoType = {
     id_item_recompensa: number;
     nome: string;
     descricao: string;
+    nome_item_recompensa?: string;
   };
   skills: Omit<Magias, "id" | "id_classe">[];
   battleOver: boolean;
@@ -39,12 +40,7 @@ export default class BattleScreen {
   }
 
   async handleBattleScreen(idNPC: number): Promise<void> {
-    const battleStats: {
-      dano: number;
-      nome_arma: string;
-      sorte_total: number;
-      vida_maxima: number;
-    } = (
+    const battleStats: BattleInfoType["battleStats"] = (
       await dbInstance`
       SELECT A.dano, I.nome AS nome_arma, P.sorte_total, P.vida_maxima FROM personagens P 
         JOIN instancia_item J ON P.id_arma = J.id
@@ -53,23 +49,16 @@ export default class BattleScreen {
         WHERE P.id = ${this.idPersonagem}`
     )[0] as any;
 
-    const monsterStats: {
-      moedas: number;
-      vida_maxima: number;
-      dano: number;
-      id_item_recompensa: number;
-      nome: string;
-      descricao: string;
-    } = (
+    const monsterStats: BattleInfoType["monsterStats"] = (
       await dbInstance`
-      SELECT M.moedas, M.vida_maxima, M.dano, M.id_item_recompensa, N.nome, N.descricao, I.nome as nome_item FROM monstro M 
+      SELECT M.moedas, M.vida_maxima, M.dano, M.id_item_recompensa, N.nome, N.descricao, I.nome as nome_item_recompensa FROM monstro M 
       JOIN npc N ON N.id = M.id_npc_monstro 
-      JOIN item I ON i.id = M.id_item_recompensa
+      LEFT JOIN item I ON i.id = M.id_item_recompensa
       WHERE id_npc_monstro = ${idNPC};
     `
     )[0] as any;
 
-    const skills: Omit<Magias, "id" | "id_classe">[] = await dbInstance`
+    const skills: BattleInfoType["skills"] = await dbInstance`
       SELECT magias.nome, magias.descricao, magias.dano, magias.cura FROM magias 
         INNER JOIN classe ON magias.classe_id = classe.id
         WHERE classe.id = 
@@ -153,9 +142,12 @@ export default class BattleScreen {
       console.clear();
       console.log();
       console.log(`Você matou ${monsterStats.nome}`);
-      console.log(
-        `Você recebeu ${monsterStats.moedas} moedas e x1 ${monsterStats.id_item_recompensa}`
-      );
+      let drops: string = `Você recebeu ${monsterStats.moedas} moedas `;
+      monsterStats.nome_item_recompensa
+        ? (drops += `e x1 ${monsterStats.nome_item_recompensa}`)
+        : null;
+
+      console.log(drops);
       battleInfo.battleOver = true;
     } else if (battleInfo.currentHp <= 0) {
       console.clear;
@@ -163,6 +155,7 @@ export default class BattleScreen {
 
       battleInfo.battleOver = true;
     }
+
     console.log();
     console.log();
 

@@ -320,3 +320,18 @@ SELECT N.id, N.nome, N.tipo_npc, N.descricao, n.id_mapa
         FROM npc N 
         JOIN mapa M ON M.id = N.id_mapa 
         WHERE M.id = ${currentMap.id};  
+
+-- update do mapa
+UPDATE personagens SET id_mapa = ${availableChoices.mapChoices[answer].mapa_id} WHERE id = ${this.idPersonagem};
+
+-- pegar informacoes do personagem batalha
+SELECT A.dano, I.nome AS nome_arma, P.sorte_total, P.vida_maxima FROM personagens P 
+  JOIN instancia_item J ON P.id_arma = J.id
+  JOIN item I ON I.id = J.id_item
+  JOIN arma A ON A.id_item = I.id
+  WHERE P.id = 1;
+
+  -- pegar informacoes do monstro para batalha
+  SELECT M.moedas, M.vida_maxima, M.dano, M.id_item_recompensa, N.nome, N.descricao FROM monstro M 
+    JOIN npc N ON N.id = M.id_npc_monstro 
+    WHERE id_npc_monstro = 3;

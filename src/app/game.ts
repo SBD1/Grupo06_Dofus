@@ -21,10 +21,26 @@ export default class Game {
   }
 
   private async run() {
-    figlet("DOFUS", "Doom", async (_err, data) => {
+    figlet("DOFUS", async (_err, data) => {
       console.clear();
       console.log(gradient.pastel.multiline(data) + "\n");
-
+      console.log(
+        chalk.greenBright(
+          String.raw`
+       / \    )\__/(     / \       
+      /   \  (_\  /_)   /   \      
+ ____/_____\__\@  @/___/_____\____ 
+|             |\../|              |
+|              \VV/               |
+|        ----JOGO MUD----         |
+|____________________________ ____|
+ |    /\ /      \\       \ /\    | 
+ |  /   V        ))       V   \  | 
+ |/     '       //       ´      \| 
+ '              V               ´
+       `.toString()
+        )
+      );
       const answer = await inquirer.prompt({
         name: "playOrListAchievements",
         type: "list",

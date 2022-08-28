@@ -332,6 +332,7 @@ SELECT A.dano, I.nome AS nome_arma, P.sorte_total, P.vida_maxima FROM personagen
   WHERE P.id = 1;
 
   -- pegar informacoes do monstro para batalha
-  SELECT M.moedas, M.vida_maxima, M.dano, M.id_item_recompensa, N.nome, N.descricao FROM monstro M 
-    JOIN npc N ON N.id = M.id_npc_monstro 
+SELECT M.moedas, M.vida_maxima, M.dano, M.id_item_recompensa, N.nome, N.descricao, I.nome as nome_item FROM monstro M 
+	JOIN npc N ON N.id = M.id_npc_monstro 
+  JOIN item I ON i.id = M.id_item_recompensa
     WHERE id_npc_monstro = 3;

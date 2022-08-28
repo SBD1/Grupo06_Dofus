@@ -5,6 +5,11 @@ import chalkAnimation from "chalk-animation";
 import figlet from "figlet";
 import dbInstance from "../connection/database.js";
 import { Magias } from "../interfaces/magias.js";
+import { INFINTE } from "../util/constants.js";
+import PressToContinuePrompt, {
+  KeyDescriptor,
+} from "inquirer-press-to-continue";
+inquirer.registerPrompt("press-to-continue", PressToContinuePrompt);
 
 type BattleInfoType = {
   battleStats: {
@@ -33,21 +38,6 @@ export default class BattleScreen {
     this.idPersonagem = idPersonagem;
   }
 
-  private async battleTurn({
-    battleStats,
-    skills,
-    monsterStats,
-    currentHp,
-    currentMonsterHp,
-    battleOver,
-  }: BattleInfoType): Promise<boolean> {
-    console.clear();
-
-    console.log(chalk.red(`Vida: ${currentHp} / ${battleStats.vida_maxima}`));
-
-    return true;
-  }
-
   async handleBattleScreen(idNPC: number): Promise<void> {
     const battleStats: {
       dano: number;
@@ -72,8 +62,9 @@ export default class BattleScreen {
       descricao: string;
     } = (
       await dbInstance`
-    SELECT M.moedas, M.vida_maxima, M.dano, M.id_item_recompensa, N.nome, N.descricao FROM monstro M 
+      SELECT M.moedas, M.vida_maxima, M.dano, M.id_item_recompensa, N.nome, N.descricao, I.nome as nome_item FROM monstro M 
       JOIN npc N ON N.id = M.id_npc_monstro 
+      JOIN item I ON i.id = M.id_item_recompensa
       WHERE id_npc_monstro = ${idNPC};
     `
     )[0] as any;
@@ -98,5 +89,84 @@ export default class BattleScreen {
     while (!battleInfo.battleOver) {
       await this.battleTurn(battleInfo);
     }
+  }
+
+  private async battleTurn(battleInfo: BattleInfoType): Promise<void> {
+    console.clear();
+    console.log();
+    const {
+      battleStats,
+      skills,
+      monsterStats,
+      currentHp,
+      currentMonsterHp,
+      battleOver,
+    } = battleInfo;
+
+    console.log(
+      chalk.red(
+        `${monsterStats.nome}: ${currentMonsterHp} / ${monsterStats.vida_maxima}`
+      )
+    );
+    console.log(chalk.red(monsterStats.descricao));
+
+    console.log(
+      chalk.green(`Sua vida: ${currentHp} / ${battleStats.vida_maxima}`)
+    );
+
+    const answer = await inquirer.prompt({
+      name: "battleScreen",
+      type: "list",
+      loop: false,
+      message: "Selecione uma ação.\n",
+      choices: [...skills.map((skill) => skill.nome)],
+    });
+    console.log();
+    console.log();
+    console.log();
+
+    skills.forEach((skill) => {
+      if (answer.battleScreen === skill.nome) {
+        let damage = skill.dano + battleStats.sorte_total + battleStats.dano;
+        let heal = skill.cura + battleStats.sorte_total;
+        battleInfo.currentHp += heal;
+        battleInfo.currentMonsterHp -= damage;
+
+        if (currentHp > battleStats.vida_maxima) {
+          battleInfo.currentHp = battleStats.vida_maxima;
+        }
+
+        console.log(`Você lança ${skill.nome}. ${skill.descricao}`);
+        console.log(`Dano: ${damage}   Cura: ${heal}`);
+        console.log("---------------------------------");
+        console.log(
+          `${monsterStats.nome} te ataca, causando ${monsterStats.dano} de dano.`
+        );
+      }
+    });
+
+    if (currentMonsterHp <= 0) {
+      console.clear();
+      console.log();
+      console.log(`Você matou ${monsterStats.nome}`);
+      console.log(
+        `Você recebeu ${monsterStats.moedas} moedas e x1 ${monsterStats.id_item_recompensa}`
+      );
+      battleInfo.battleOver = true;
+    } else if (currentHp <= 0) {
+      console.clear;
+      console.log("Você morreu! Você perde todos seus itens e moedas.");
+
+      battleInfo.battleOver = true;
+    }
+    console.log();
+    console.log();
+
+    await inquirer.prompt<{ key: KeyDescriptor }>({
+      name: "key",
+      type: "press-to-continue",
+      anyKey: true,
+      pressToContinueMessage: "Pressione qualquer tecla para continuar...",
+    } as any);
   }
 }

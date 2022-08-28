@@ -6,20 +6,54 @@ import figlet from "figlet";
 import dbInstance from "../connection/database.js";
 import { Magias } from "../interfaces/magias.js";
 
+type BattleInfoType = {
+  battleStats: {
+    dano: number;
+    nome_arma: string;
+    sorte_total: number;
+    vida_maxima: number;
+  };
+  monsterStats: {
+    moedas: number;
+    vida_maxima: number;
+    dano: number;
+    id_item_recompensa: number;
+    nome: string;
+    descricao: string;
+  };
+  skills: Omit<Magias, "id" | "id_classe">[];
+  battleOver: boolean;
+  currentHp: number;
+  currentMonsterHp: number;
+};
+
 export default class BattleScreen {
   private readonly idPersonagem: number;
   constructor(idPersonagem: number) {
     this.idPersonagem = idPersonagem;
   }
 
-  async handleBattleScreen(idNPC: number) {
+  private async battleTurn({
+    battleStats,
+    skills,
+    monsterStats,
+    currentHp,
+    currentMonsterHp,
+    battleOver,
+  }: BattleInfoType): Promise<boolean> {
     console.clear();
 
+    console.log(chalk.red(`Vida: ${currentHp} / ${battleStats.vida_maxima}`));
+
+    return true;
+  }
+
+  async handleBattleScreen(idNPC: number): Promise<void> {
     const battleStats: {
       dano: number;
       nome_arma: string;
-      sorte_total: string;
-      vida_maxima: string;
+      sorte_total: number;
+      vida_maxima: number;
     } = (
       await dbInstance`
       SELECT A.dano, I.nome AS nome_arma, P.sorte_total, P.vida_maxima FROM personagens P 
@@ -44,7 +78,7 @@ export default class BattleScreen {
     `
     )[0] as any;
 
-    const skillsStats: Omit<Magias, "id" | "id_classe">[] = await dbInstance`
+    const skills: Omit<Magias, "id" | "id_classe">[] = await dbInstance`
       SELECT magias.nome, magias.descricao, magias.dano, magias.cura FROM magias 
         INNER JOIN classe ON magias.classe_id = classe.id
         WHERE classe.id = 
@@ -52,6 +86,17 @@ export default class BattleScreen {
         INNER JOIN classe ON personagens.id_classe = classe.id
         WHERE personagens.id = ${this.idPersonagem});`;
 
-    console.log({ battleStats, monsterStats, skillsStats });
+    const battleInfo: BattleInfoType = {
+      battleStats,
+      monsterStats,
+      skills,
+      currentHp: battleStats.vida_maxima,
+      currentMonsterHp: monsterStats.vida_maxima,
+      battleOver: false,
+    };
+
+    while (!battleInfo.battleOver) {
+      await this.battleTurn(battleInfo);
+    }
   }
 }

@@ -7,13 +7,11 @@ import dbInstance from "../connection/database.js";
 
 export default class BattleScreen {
   private readonly idPersonagem: number;
-  private readonly idNPC: number;
-  constructor({ idPersonagem, idNPC }: { [key: string]: number }) {
-    this.idNPC = idNPC;
+  constructor(idPersonagem: number) {
     this.idPersonagem = idPersonagem;
   }
 
-  async handleBattleScreen() {
+  async handleBattleScreen(idNPC: number) {
     console.clear();
 
     const battleStats: {
@@ -41,7 +39,7 @@ export default class BattleScreen {
       await dbInstance`
     SELECT M.moedas, M.vida_maxima, M.dano, M.id_item_recompensa, N.nome, N.descricao FROM monstro M 
       JOIN npc N ON N.id = M.id_npc_monstro 
-      WHERE id_npc_monstro = ${this.idNPC};
+      WHERE id_npc_monstro = ${idNPC};
     `
     )[0] as any;
 

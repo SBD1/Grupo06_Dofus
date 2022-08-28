@@ -7,6 +7,7 @@ import dbInstance from "../connection/database.js";
 import { Mapa } from "../interfaces/mapa.js";
 import { Choices, INFINTE } from "../util/constants.js";
 import { NPC, TipoNPC } from "../interfaces/npc.js";
+import BattleScreen from "./BattleScreen.js";
 
 type AvailableChoicesType = {
   npcChoices: {
@@ -29,8 +30,10 @@ export default class GameScreen {
   private readonly WALK_EAST: string = "Andar Para o Leste";
   private readonly WALK_WEST: string = "Andar Para o Oeste";
   private readonly WALK_NORTH: string = "Andar Para o Norte";
+  private readonly BattleScreen: BattleScreen;
   constructor(idPersonagem: number) {
     this.idPersonagem = idPersonagem;
+    this.BattleScreen = new BattleScreen(idPersonagem);
   }
 
   async handleGameScreen() {
@@ -103,7 +106,9 @@ export default class GameScreen {
     }
 
     if (availableChoices.npcChoices[answer]) {
-      console.log("npc TODO");
+      await this.BattleScreen.handleBattleScreen(
+        availableChoices.npcChoices[answer].npc_id
+      );
     }
   }
 

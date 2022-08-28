@@ -48,9 +48,9 @@ export default class GameScreen {
         `
     )[0] as any;
 
-    const charStats = (
+    const charInfo = (
       await dbInstance`
-        SELECT P.vida_maxima, C.nome as nome_classe, P.sorte_total FROM personagens P JOIN classe C ON C.id = P.id_classe WHERE P.id = ${this.idPersonagem}
+        SELECT P.vida_maxima, C.nome as nome_classe, P.sorte_total, P.moedas FROM personagens P JOIN classe C ON C.id = P.id_classe WHERE P.id = ${this.idPersonagem}
         `
     )[0] as any;
 
@@ -60,7 +60,7 @@ export default class GameScreen {
     console.log();
     console.log(currentMap.descricao);
     console.log(
-      `Vida Máxima: ${charStats.vida_maxima}         Sorte total: ${charStats.sorte_total}         Classe: ${charStats.nome_classe}`
+      `Moedas: ${charInfo.moedas}         Vida Máxima: ${charInfo.vida_maxima}         Sorte total: ${charInfo.sorte_total}         Classe: ${charInfo.nome_classe}`
     );
 
     const npcsAtMap: NPC[] = await dbInstance`

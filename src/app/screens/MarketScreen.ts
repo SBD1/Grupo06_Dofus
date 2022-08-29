@@ -9,29 +9,35 @@ import figlet from "figlet";
 import dbInstance from "../connection/database.js";
 
 export default class MarketScreen {
-  constructor(merchant_id: number) {
-    this.merchant_id = merchant_id
+  constructor(id_personagem: number) {
+    this.id_personagem = id_personagem
   }
 
-  private readonly merchant_id
+  private readonly id_personagem
 
-  private async showMercatorInformations () {
+  async handleMarketScreen(id_npc: number): Promise<void> {
+    console.log(console.log(id_npc))
+    this.showMercatorInformations(id_npc)
+    this.listItems(id_npc)
+  }
+
+  private async showMercatorInformations (id_npc: number) {
     const merchant = await dbInstance`
-      SELECT * FROM npc WHERE id = ${this.merchant_id}
+      SELECT * FROM npc WHERE id = ${id_npc}
     `;
-
-    console.log(merchant)
+    const { nome, descricao } = merchant[0]
+    console.log(`Mercador ${nome} - ${descricao}\n\n`)
   }
-  private async showItems () {
+  private async listItems (id_npc: number) {
     const items = await dbInstance`
-      SLECT * FROM npc_mercador_itens WHERE id_npc_mercador = ${this.merchant_id}
+      SELECT * FROM npc_mercador_itens WHERE id_npc_mercador = ${id_npc}
     `
+    console.log('Items disponíveis: \n')
     console.log(items)
-
+    console.log('\n')
   }
   private async buyItem() {
     
   }
-
 
 }

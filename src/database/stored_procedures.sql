@@ -12,6 +12,7 @@ AS $$
   END;
 $$ LANGUAGE plpgsql;
 
+-- Procedure de criação de nova armadura
 CREATE OR REPLACE PROCEDURE cria_nova_armadura (_nome_armadura VARCHAR, _descricao_armadura VARCHAR, _valor_armadura INTEGER, _armadura_dano INTEGER)
 AS $$
   DECLARE
@@ -22,5 +23,19 @@ AS $$
 
     INSERT INTO armadura(id_item, dano) VALUES
     (_id_item, _armadura_dano),
+  END;
+$$ LANGUAGE plpgsql;
+
+-- Procedure de criação de novo amuleto
+CREATE OR REPLACE PROCEDURE cria_nova_amuleto (_nome_amuleto VARCHAR, _descricao_amuleto VARCHAR, _valor_amuleto INTEGER, _amuleto_dano INTEGER)
+AS $$
+  DECLARE
+    _id_item INTEGER;
+  BEGIN
+    INSERT INTO item (nome, tipo_item, descricao, valor_moedas) 
+    VALUES (_nome_amuleto, 'amuleto', _descricao_amuleto, _valor_amuleto) RETURNING id INTO [_id_item],
+
+    INSERT INTO amuleto(id_item, dano) VALUES
+    (_id_item, _amuleto_dano),
   END;
 $$ LANGUAGE plpgsql;

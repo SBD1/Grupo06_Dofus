@@ -337,3 +337,19 @@ SELECT A.dano, I.nome AS nome_arma, P.sorte_total, P.vida_maxima FROM personagen
       JOIN npc N ON N.id = M.id_npc_monstro 
       LEFT JOIN item I ON i.id = M.id_item_recompensa
       WHERE id_npc_monstro = ${idNPC}
+
+
+-- receber o item apos matar monstro
+   START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+        DO
+        $$
+          DECLARE
+            id_instancia_item INTEGER;
+          BEGIN
+            INSERT INTO instancia_item (id_item) VALUES (${monsterStats.id_item_recompensa});
+            SELECT currval(pg_get_serial_sequence('instancia_item','id')) INTO id_instancia_item;
+            INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (${this.idPersonagem}, id_instancia_item);
+            UPDATE personagens SET moedas = moedas + ${monsterStats.moedas};
+          END;  
+        $$;
+        COMMIT;

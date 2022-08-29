@@ -148,6 +148,29 @@ export default class BattleScreen {
         : null;
 
       console.log(drops);
+
+      if (monsterStats?.id_item_recompensa) {
+        await dbInstance`
+        START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+        DO
+        $$
+          DECLARE
+            id_instancia_item INTEGER;
+          BEGIN
+            INSERT INTO instancia_item (id_item) VALUES (${monsterStats.id_item_recompensa});
+            SELECT currval(pg_get_serial_sequence('instancia_item','id')) INTO id_instancia_item;
+            INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (${this.idPersonagem}, id_instancia_item);
+            UPDATE personagens SET moedas = moedas + ${monsterStats.moedas};
+          END;  
+        $$;
+        COMMIT;
+        `;
+      } else {
+        await dbInstance`
+          UPDATE personagens SET moedas = moedas + ${monsterStats.moedas};
+        `;
+      }
+
       battleInfo.battleOver = true;
     } else if (battleInfo.currentHp <= 0) {
       console.clear;

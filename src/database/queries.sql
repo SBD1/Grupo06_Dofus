@@ -252,6 +252,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	DELETE FROM mochila WHERE id_personagem = 1;
 
 	UPDATE personagens SET id_arma = NULL  WHERE id = 1;
+  UPDATE personagens SET id_mapa = 1 WHERE id = 1;
 	UPDATE personagens SET id_amuleto = NULL  WHERE id = 1;
 	UPDATE personagens SET id_armadura = NULL  WHERE id = 1;
 	UPDATE personagens SET moedas = 0  WHERE id = 1;

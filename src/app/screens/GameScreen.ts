@@ -106,7 +106,7 @@ export default class GameScreen {
       `;
     }
 
-    if (availableChoices.npcChoices[answer]) {
+    if (availableChoices.npcChoices[answer]?.tipo_npc === TipoNPC.MONSTRO) {
       await this.BattleScreen.handleBattleScreen(
         availableChoices.npcChoices[answer].npc_id
       );

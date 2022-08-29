@@ -150,7 +150,7 @@ export default class BattleScreen {
       console.log(drops);
 
       if (monsterStats?.id_item_recompensa) {
-        await dbInstance`
+        await dbInstance.unsafe(`
         START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
         DO
         $$
@@ -164,7 +164,7 @@ export default class BattleScreen {
           END;  
         $$;
         COMMIT;
-        `;
+        `);
       } else {
         await dbInstance`
           UPDATE personagens SET moedas = moedas + ${monsterStats.moedas};

@@ -9,7 +9,11 @@ import figlet from "figlet";
 import dbInstance from "../connection/database.js";
 
 export default class MarketScreen {
+  constructor(merchant_id: number) {
+    this.merchant_id = merchant_id
+  }
   
+  private readonly merchant_id
 
   private async showMercatorInformations () {
     const merchant = await dbInstance`

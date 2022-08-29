@@ -11,10 +11,13 @@ import dbInstance from "../connection/database.js";
 export default class MarketScreen {
   
 
-  private async showMercatorInfos () {
+  private async showMercatorInformations () {
+    const merchant = await dbInstance`
+      SELECT * FROM npc WHERE id = ${this.merchant_id}
+    `;
     
+    console.log(merchant)
   }
-
   private async showItems () {
 
   }

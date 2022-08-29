@@ -39,16 +39,13 @@ INSERT INTO magias (classe_id, nome, descricao, dano, cura) VALUES
 (5, 'Ataque natural', 'Um ataque das forças da terra.', 200, 50),
 (5, 'Ataque tempestuoso', 'Um ataque das forças das núvens.',250, 0);
 
+-- Cria itens não equipaveis
 INSERT INTO item (, nome, tipo_item, descricao, valor_moedas) VALUES  
 ( 'Semente de Gergelim', 'nao_equipavel', 'Esta semente extremamente rica em proteína é um ingrediente seleto para a fabricação de pão saboroso, mas o cultivo de gergelim é especialmente delicado em nosso clima dofusiano. Como resultado, uma semente muito rara e cara.', 9),
 ( 'Pelo de Rato', 'nao_equipavel', 'Restos de pelo coletados dos esgotos de Astrub, cuidado com o odor.', 14),
 ( 'Testiculo de Lobo', 'nao_equipavel', 'Esferas de carne removidas de grandes lobos selvagens das planices de Incarnan', 40),
 ( 'Lã de papatudo', 'nao_equipavel', 'Papatudo são criaturas que tem uma lã platinada fofinha.', 80),
 ( 'Pedregulho de Rochedo', 'nao_equipavel', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 25),
-( 'Amuleto do Pow Uatisson', 'amuleto', 'O capitão do Chafer Marítimo sempre carrega este amuleto, símbolo da sua embarcação', 500),
-( 'Amuleto de Cristal', 'amuleto', 'Amuleto feito de cristais de quartzo rosa.', 200),
-( 'Amuleto de Conchinha', 'amuleto', 'Amuleto de conchas de seres acestrais.', 350),
-( 'Corujamuleto', 'amuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 700);
 
 -- Cria armaduras
 CALL cria_nova_armadura('Armadura de Papatudo Real', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 25, 50)
@@ -64,11 +61,13 @@ CALL cria_nova_arma('Lança de Chefer', 'Lança retirada em espedições no cala
 CALL cria_nova_arma('Pá de Cortes Sombrios ', 'Esta pá serve para enterrar objetos, mortos ou vivos.', 100, 120),
 CALL cria_nova_arma('Espatula Corta Guloso', 'Esta espátula gigante é uma ferramenta de trabalho muito completa. Com ela, é possível preparar quantidades enormes de doces de chocolate deliciosos e, depois, fatiar sem dó nem piedade os gulosos que tentarem comer o seu bolo sem a sua permissão.', 333, 444),
 
-INSERT INTO amuleto(id_item, sorte) VALUES
-(16, 20),
-(17, 5),
-(18, 15),
-(19, 30);
+-- Cria amuletos
+CALL cria_novo_amuleto('Amuleto do Pow Uatisson', 'O capitão do Chafer Marítimo sempre carrega este amuleto, símbolo da sua embarcação', 90, 130),
+CALL cria_novo_amuleto('Amuleto de Cristal', 'Amuleto feito de cristais de quartzo rosa.', 140, 190),
+CALL cria_novo_amuleto('Amuleto de Conchinha', 'Amuleto de conchas de seres acestrais.', 350, 360),
+CALL cria_novo_amuleto('Corujamuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 400, 420);
+CALL cria_novo_amuleto('Amuleto de Safira', 'Dizem que este um dos mais belo amuletos já vistos no mundo dos dose, e sua beleza é proporcional a sorte', 600, 700)
+
 
 INSERT INTO instancia_item(id, id_item) VALUES
 (1, 1),

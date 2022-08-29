@@ -46,7 +46,7 @@ export default class BattleScreen {
         JOIN instancia_item J ON P.id_arma = J.id
         JOIN item I ON I.id = J.id_item
         JOIN arma A ON A.id_item = I.id
-        WHERE P.id = ${this.idPersonagem}`
+        WHERE P.id = ${this.idPersonagem};`
     )[0] as any;
 
     const monsterStats: BattleInfoType["monsterStats"] = (
@@ -176,6 +176,7 @@ export default class BattleScreen {
       console.clear;
       console.log("Você morreu! Você perde todos seus itens e moedas.");
 
+      // TODO
       battleInfo.battleOver = true;
     }
 

@@ -15,6 +15,10 @@ export default class MarketScreen {
 
   private readonly merchant_id
 
+  async handleMarketScreen(id_npc: number): Promise<void> {
+    console.log(console.log(id_npc))
+  }
+
   private async showMercatorInformations () {
     const merchant = await dbInstance`
       SELECT * FROM npc WHERE id = ${this.merchant_id}

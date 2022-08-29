@@ -54,6 +54,8 @@ export default class Game {
 
       if (answer.playOrListAchievements === Choices.QUIT) return;
 
+      if (answer.playOrListAchievements === Choices.LIST_ACHIEVEMENTS) return; // TODO
+
       while (true) {
         await this.gameScreen.handleGameScreen();
       }

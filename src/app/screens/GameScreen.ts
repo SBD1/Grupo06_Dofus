@@ -36,7 +36,7 @@ export default class GameScreen {
   constructor(idPersonagem: number) {
     this.idPersonagem = idPersonagem;
     this.BattleScreen = new BattleScreen(idPersonagem);
-    this.MarketScreen = new MarketScreen(idPersonagem)
+    this.MarketScreen = new MarketScreen(idPersonagem);
   }
 
   async handleGameScreen() {
@@ -114,6 +114,8 @@ export default class GameScreen {
         availableChoices.npcChoices[answer].npc_id
       );
     }
+
+    console.log(answer)
 
     if (availableChoices.npcChoices[answer]?.tipo_npc === TipoNPC.MERCADOR) {
       await this.MarketScreen.handleMarketScreen(

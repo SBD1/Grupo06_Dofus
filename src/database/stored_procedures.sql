@@ -57,8 +57,6 @@ FOR EACH ROW EXECUTE PROCEDURE check_especializacao_arma();
 
 -- procedure para checar item
 CREATE OR REPLACE FUNCTION check_item() RETURNS TRIGGER AS $check_item$
-DECLARE 
-    _tipo_item TIPO_ITEM;
 BEGIN
 
 
@@ -88,14 +86,33 @@ BEGIN
 END;
 $check_item$ LANGUAGE plpgsql;
 
-DROP TRIGGER check_items ON item;
+-- DROP TRIGGER check_items ON item;
 
 CREATE  CONSTRAINT TRIGGER check_items
 AFTER UPDATE OR INSERT ON item
 DEFERRABLE INITIALLY DEFERRED
 FOR EACH ROW EXECUTE PROCEDURE check_item();
  
+-- checar npc
+CREATE OR REPLACE FUNCTION check_npc() RETURNS TRIGGER AS $check_npc$
+BEGIN
+		IF NEW.tipo_npc = 'monstro' THEN
+ 				PERFORM * FROM monstro WHERE id_item = NEW.id;
+    		IF NOT FOUND THEN 
+					RAISE EXCEPTION 'Não pode ser criado um npc do tipo monstro sem adicionar na tabela monstro';
+    		END IF;
+    END IF;
 
+    RETURN NEW;
+
+END;
+$check_npc$ LANGUAGE plpgsql;
+
+--DROP TRIGGER check_npcs ON npc;
+CREATE  CONSTRAINT TRIGGER check_npcs
+AFTER UPDATE OR INSERT ON npc
+DEFERRABLE INITIALLY DEFERRED
+FOR EACH ROW EXECUTE PROCEDURE check_npc();
  
 -- Procedure de criação de nova arma
 CREATE OR REPLACE PROCEDURE cria_nova_arma (_nome_arma VARCHAR, _descricao_arma VARCHAR, _valor_arma INTEGER, _arma_dano INTEGER)

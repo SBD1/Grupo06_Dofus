@@ -22,10 +22,21 @@ export default class InventoryScreen {
 
   private async listBackpackItems () {
     const items = await dbInstance`
-      SELECT * FROM mochila WHERE id_personagem = ${this.id_personagem}
+        SELECT I.id, I.nome, I.tipo_item, I.descricao, I.valor_moedas, count(I.id) as qnt FROM item I
+        INNER JOIN instancia_item J ON I.id = J.id_item
+        INNER JOIN mochila M ON M.id_instancia_item = J.id
+        INNER JOIN personagens P ON p.id = M.id_personagem
+        WHERE P.id = ${this.id_personagem} 
+        GROUP BY I.id
     `
     console.log('Items Mochila: \n')
-    console.log(items)
+    items.forEach((item, index) => {
+        console.log(`Nome: ${item.nome}`)
+        console.log(`Descrição: ${item.descricao}`)
+        console.log(`Tipo: ${item.tipo}`)
+        console.log(`Quantidade: ${item.qnt}`)
+        console.log(`Valor: ${item.valor}\n`)
+    })
     console.log('\n')
   }
 }

@@ -8,6 +8,7 @@ import { Mapa } from "../interfaces/mapa.js";
 import { Choices, INFINTE } from "../util/constants.js";
 import { NPC, TipoNPC } from "../interfaces/npc.js";
 import BattleScreen from "./BattleScreen.js";
+import MarketScreen from "./MarketScreen.js";
 
 type AvailableChoicesType = {
   npcChoices: {
@@ -31,9 +32,11 @@ export default class GameScreen {
   private readonly WALK_WEST: string = "Andar Para o Oeste";
   private readonly WALK_NORTH: string = "Andar Para o Norte";
   private readonly BattleScreen: BattleScreen;
+  private readonly MarketScreen: MarketScreen;
   constructor(idPersonagem: number) {
     this.idPersonagem = idPersonagem;
     this.BattleScreen = new BattleScreen(idPersonagem);
+    this.MarketScreen = new MarketScreen(idPersonagem)
   }
 
   async handleGameScreen() {
@@ -108,6 +111,12 @@ export default class GameScreen {
 
     if (availableChoices.npcChoices[answer]?.tipo_npc === TipoNPC.MONSTRO) {
       await this.BattleScreen.handleBattleScreen(
+        availableChoices.npcChoices[answer].npc_id
+      );
+    }
+
+    if (availableChoices.npcChoices[answer]?.tipo_npc === TipoNPC.MERCADOR) {
+      await this.MarketScreen.handleMarketScreen(
         availableChoices.npcChoices[answer].npc_id
       );
     }

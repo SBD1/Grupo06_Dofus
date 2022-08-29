@@ -9,6 +9,7 @@ import { Choices, INFINTE } from "../util/constants.js";
 import { NPC, TipoNPC } from "../interfaces/npc.js";
 import BattleScreen from "./BattleScreen.js";
 import MarketScreen from "./MarketScreen.js";
+import InventoryScreen from "./InventoryScreen.js";
 
 type AvailableChoicesType = {
   npcChoices: {
@@ -33,10 +34,13 @@ export default class GameScreen {
   private readonly WALK_NORTH: string = "Andar Para o Norte";
   private readonly BattleScreen: BattleScreen;
   private readonly MarketScreen: MarketScreen;
+  private readonly InventoryScreen: InventoryScreen;
   constructor(idPersonagem: number) {
     this.idPersonagem = idPersonagem;
     this.BattleScreen = new BattleScreen(idPersonagem);
     this.MarketScreen = new MarketScreen(idPersonagem);
+    this.MarketScreen = new MarketScreen(idPersonagem);
+    this.InventoryScreen = new InventoryScreen(idPersonagem);
   }
 
   async handleGameScreen() {
@@ -101,7 +105,9 @@ export default class GameScreen {
     availableChoices: AvailableChoicesType
   ): Promise<void> {
     if (answer === Choices.QUIT) process.exit(0);
-    if (answer === Choices.INVENTORY) process.exit(0); // TODO inventory
+    if (answer === Choices.INVENTORY) {
+      await this.InventoryScreen.handleInventoryScreen()
+    }
 
     if (availableChoices.mapChoices[answer]) {
       await dbInstance`
@@ -114,8 +120,6 @@ export default class GameScreen {
         availableChoices.npcChoices[answer].npc_id
       );
     }
-
-    console.log(answer)
 
     if (availableChoices.npcChoices[answer]?.tipo_npc === TipoNPC.MERCADOR) {
       await this.MarketScreen.handleMarketScreen(

@@ -88,9 +88,14 @@ BEGIN
 END;
 $check_item$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_items
-BEFORE UPDATE OR INSERT ON item
+DROP TRIGGER check_items ON item;
+
+CREATE  CONSTRAINT TRIGGER check_items
+AFTER UPDATE OR INSERT ON item
+DEFERRABLE INITIALLY DEFERRED
 FOR EACH ROW EXECUTE PROCEDURE check_item();
+ 
+
  
 -- Procedure de criação de nova arma
 CREATE OR REPLACE PROCEDURE cria_nova_arma (_nome_arma VARCHAR, _descricao_arma VARCHAR, _valor_arma INTEGER, _arma_dano INTEGER)

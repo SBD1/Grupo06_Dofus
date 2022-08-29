@@ -39,33 +39,27 @@ INSERT INTO magias (classe_id, nome, descricao, dano, cura) VALUES
 (5, 'Ataque natural', 'Um ataque das forças da terra.', 200, 50),
 (5, 'Ataque tempestuoso', 'Um ataque das forças das núvens.',250, 0);
 
-INSERT INTO item (id, nome, tipo_item, descricao, valor_moedas) VALUES  
-(1, 'Armadura de Papatudo Real', 'armadura', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 288),
-(2, 'Armadura do Aventureiro', 'armadura', 'Todo grande guerreiro tem um ponto de partida, essa armadura é o que você precisa para iniciar suas expedições', 25),
-(3, 'Armadura de Piwi', 'armadura', 'A nobreza de um guerreiro está no coração, está armadura de penas não muito elegante carrega o poder da aura pura dos Piwis de Astrub', 90),
-(4, 'Armadura de Prespic', 'armadura', 'Armadura feita com os espinhos, unhas, e pelos de Prespics selvagens, conferindo imensa resistência ao barbaro guerreiro que a usa', 25),
-(5, 'Armadura de Girassol', 'armadura', 'Está armadura é leve, feita para guerreiros de porte pequeno, com brancinhos de girassol, apesar de singela ela carrega o poder das magias solares.', 144),
-(6, 'Arco de Bwork', 'arma', 'Alcance alidado à força bruta, arco dos selvagens Bworks das grutas de Astrub.', 402),
-(7, 'Espada de Iop', 'arma', 'Essa espada foi roubada de um lendário Iop que pereceu nas grandes batalhas do calabouço de Incarnan', 750),
-(8, 'Lança de Chefer', 'arma', 'Lança retirada em espedições no calabouço de Incarnan, confeccionada com restos de ossos de Chefers malucos', 489),
-(9, 'Pá de Cortes Sombrios ', 'arma', 'Esta pá serve para enterrar objetos, mortos ou vivos.', 500),
-(10, 'Espatula Corta Guloso', 'arma', 'Esta espátula gigante é uma ferramenta de trabalho muito completa. Com ela, é possível preparar quantidades enormes de doces de chocolate deliciosos e, depois, fatiar sem dó nem piedade os gulosos que tentarem comer o seu bolo sem a sua permissão.', 333),
-(11, 'Semente de Gergelim', 'nao_equipavel', 'Esta semente extremamente rica em proteína é um ingrediente seleto para a fabricação de pão saboroso, mas o cultivo de gergelim é especialmente delicado em nosso clima dofusiano. Como resultado, uma semente muito rara e cara.', 9),
-(12, 'Pelo de Rato', 'nao_equipavel', 'Restos de pelo coletados dos esgotos de Astrub, cuidado com o odor.', 14),
-(13, 'Testiculo de Lobo', 'nao_equipavel', 'Esferas de carne removidas de grandes lobos selvagens das planices de Incarnan', 40),
-(14, 'Lã de papatudo', 'nao_equipavel', 'Papatudo são criaturas que tem uma lã platinada fofinha.', 80),
-(15, 'Pedregulho de Rochedo', 'nao_equipavel', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 25),
-(16, 'Amuleto do Pow Uatisson', 'amuleto', 'O capitão do Chafer Marítimo sempre carrega este amuleto, símbolo da sua embarcação', 500),
-(17, 'Amuleto de Cristal', 'amuleto', 'Amuleto feito de cristais de quartzo rosa.', 200),
-(18, 'Amuleto de Conchinha', 'amuleto', 'Amuleto de conchas de seres acestrais.', 350),
-(19, 'Corujamuleto', 'amuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 700);
+INSERT INTO item (, nome, tipo_item, descricao, valor_moedas) VALUES  
+('Arco de Bwork', 'arma', 'Alcance alidado à força bruta, arco dos selvagens Bworks das grutas de Astrub.', 402),
+('Espada de Iop', 'arma', 'Essa espada foi roubada de um lendário Iop que pereceu nas grandes batalhas do calabouço de Incarnan', 750),
+('Lança de Chefer', 'arma', 'Lança retirada em espedições no calabouço de Incarnan, confeccionada com restos de ossos de Chefers malucos', 489),
+('Pá de Cortes Sombrios ', 'arma', 'Esta pá serve para enterrar objetos, mortos ou vivos.', 500),
+( 'Espatula Corta Guloso', 'arma', 'Esta espátula gigante é uma ferramenta de trabalho muito completa. Com ela, é possível preparar quantidades enormes de doces de chocolate deliciosos e, depois, fatiar sem dó nem piedade os gulosos que tentarem comer o seu bolo sem a sua permissão.', 333),
+( 'Semente de Gergelim', 'nao_equipavel', 'Esta semente extremamente rica em proteína é um ingrediente seleto para a fabricação de pão saboroso, mas o cultivo de gergelim é especialmente delicado em nosso clima dofusiano. Como resultado, uma semente muito rara e cara.', 9),
+( 'Pelo de Rato', 'nao_equipavel', 'Restos de pelo coletados dos esgotos de Astrub, cuidado com o odor.', 14),
+( 'Testiculo de Lobo', 'nao_equipavel', 'Esferas de carne removidas de grandes lobos selvagens das planices de Incarnan', 40),
+( 'Lã de papatudo', 'nao_equipavel', 'Papatudo são criaturas que tem uma lã platinada fofinha.', 80),
+( 'Pedregulho de Rochedo', 'nao_equipavel', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 25),
+( 'Amuleto do Pow Uatisson', 'amuleto', 'O capitão do Chafer Marítimo sempre carrega este amuleto, símbolo da sua embarcação', 500),
+( 'Amuleto de Cristal', 'amuleto', 'Amuleto feito de cristais de quartzo rosa.', 200),
+( 'Amuleto de Conchinha', 'amuleto', 'Amuleto de conchas de seres acestrais.', 350),
+( 'Corujamuleto', 'amuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 700);
 
-INSERT INTO armadura(id_item, vida) VALUES
-(1, 200),
-(2, 41),
-(3, 120),
-(4, 63),
-(5, 160);
+CALL cria_nova_armadura('Armadura de Papatudo Real', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 25, 50)
+CALL cria_nova_armadura('Armadura do Aventureiro', 'Todo grande guerreiro tem um ponto de partida, essa armadura é o que você precisa para iniciar suas expedições', 90, 140)
+CALL cria_nova_armadura('Armadura de Piwi', 'A nobreza de um guerreiro está no coração, está armadura de penas não muito elegante carrega o poder da aura pura dos Piwis de Astrub', 90, 120),
+CALL cria_nova_armadura('Armadura de Prespic', 'Armadura feita com os espinhos, unhas, e pelos de Prespics selvagens, conferindo imensa resistência ao barbaro guerreiro que a usa', 25, 65),
+CALL cria_nova_armadura('Armadura de Girassol', 'armadura', 'Está armadura é leve, feita para guerreiros de porte pequeno, com brancinhos de girassol, apesar de singela ela carrega o poder das magias solares.', 145, 150),
 
 INSERT INTO arma(id_item, dano) VALUES
 (6, 202),

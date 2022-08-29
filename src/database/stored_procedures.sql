@@ -25,6 +25,73 @@ BEFORE UPDATE OR INSERT ON monstro
 FOR EACH ROW EXECUTE PROCEDURE check_especializacao_monstro();
 
 
+
+-- procedure para checar especializacao arma
+
+CREATE OR REPLACE FUNCTION check_especializacao_arma() RETURNS TRIGGER AS $check_especializacao_arma$
+DECLARE 
+    _tipo_item TIPO_ITEM;
+BEGIN
+
+    SELECT tipo_item INTO _tipo_item FROM item WHERE item.id = NEW.id_item;
+
+    IF _tipo_item <> 'arma' THEN
+			RAISE EXCEPTION 'Apenas items do tipo arma pode ser inseridos nessa tabela.';
+    END IF;
+
+    PERFORM * FROM arma WHERE id_item = NEW.id_npc_monstro;
+    IF FOUND THEN 
+			RAISE EXCEPTION 'Já existe uma arma com esse id_item';
+    END IF;
+    RETURN NEW;
+
+END;
+$check_especializacao_arma$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_arma
+BEFORE UPDATE OR INSERT ON arma
+FOR EACH ROW EXECUTE PROCEDURE check_especializacao_arma();
+
+
+
+
+-- procedure para checar item
+CREATE OR REPLACE FUNCTION check_item() RETURNS TRIGGER AS $check_item$
+DECLARE 
+    _tipo_item TIPO_ITEM;
+BEGIN
+
+
+		IF NEW.tipo_item = 'arma' THEN
+ 				PERFORM * FROM arma WHERE id_item = NEW.id;
+    		IF NOT FOUND THEN 
+					RAISE EXCEPTION 'Não pode ser criado um item do tipo arma sem adicionar na tabela arma';
+    		END IF;
+    END IF;
+
+		IF NEW.tipo_item = 'amuleto' THEN
+ 				PERFORM * FROM amuleto WHERE id_item = NEW.id;
+    		IF NOT FOUND THEN 
+					RAISE EXCEPTION 'Não pode ser criado um item do tipo amuleto sem adicionar na tabela amuleto';
+    		END IF;
+    END IF;
+
+		IF NEW.tipo_item = 'armadura' THEN
+ 				PERFORM * FROM amuleto WHERE id_item = NEW.id;
+    		IF NOT FOUND THEN 
+					RAISE EXCEPTION 'Não pode ser criado um item do tipo armadura sem adicionar na tabela armadura';
+    		END IF;
+    END IF;
+
+    RETURN NEW;
+
+END;
+$check_item$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_items
+BEFORE UPDATE OR INSERT ON item
+FOR EACH ROW EXECUTE PROCEDURE check_item();
+ 
 -- Procedure de criação de nova arma
 CREATE OR REPLACE PROCEDURE cria_nova_arma (_nome_arma VARCHAR, _descricao_arma VARCHAR, _valor_arma INTEGER, _arma_dano INTEGER)
 AS $$

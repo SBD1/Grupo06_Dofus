@@ -39,7 +39,7 @@ BEGIN
 			RAISE EXCEPTION 'Apenas items do tipo arma pode ser inseridos nessa tabela.';
     END IF;
 
-    PERFORM * FROM arma WHERE id_item = NEW.id_npc_monstro;
+    PERFORM * FROM arma WHERE id_item = NEW.id_item;
     IF FOUND THEN 
 			RAISE EXCEPTION 'Já existe uma arma com esse id_item';
     END IF;

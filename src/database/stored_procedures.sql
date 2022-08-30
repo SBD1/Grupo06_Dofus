@@ -206,7 +206,7 @@ AS $cria_nova_amuleto$
 $cria_nova_amuleto$ LANGUAGE plpgsql;
 
 -- Procedure de criação de novo monstro
-CREATE OR REPLACE PROCEDURE cria_novo_monstro (_nome_monstro VARCHAR, _descricao_monstro VARCHAR, _id_mapa_monstro INTEGER, _moedas_monstro INTEGER, _vida_maxima_monstro, _dano_monstro INTEGER, id_item_recompensa_monstro INTEGER)
+CREATE OR REPLACE PROCEDURE cria_novo_monstro (_nome_monstro VARCHAR, _descricao_monstro VARCHAR, _id_mapa_monstro INTEGER, _moedas_monstro INTEGER, _vida_maxima_monstro INTEGER, _dano_monstro INTEGER, id_item_recompensa_monstro INTEGER)
 AS $cria_novo_monstro$
   DECLARE
     _id_npc INTEGER;

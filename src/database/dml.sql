@@ -88,11 +88,6 @@ INSERT INTO mochila (id_personagem, id_instancia_item) VALUES
 INSERT INTO npc (nome, tipo_npc, descricao, id_mapa) VALUES
 ('Maurí Sioserrano', 'npc_missao', 'Maurí é um guerreiro experiente, que possui várias cicatrizes de batalha, você sente que ele pode te ensinar sobre magia.', 6),
 ('Afonso', 'mercador', 'O maior varegista de Astrub', 2),
-('Chupa Cabra', 'monstro', 'Criatura sanguinaria destruidora de vilas', 3),
-('Papatudo', 'monstro', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 3),
-('Piwi', 'monstro', 'Pequenina ave colorida, porem poderosa', 3),
-('Lobo', 'monstro', 'Criatura uivante maluca e assassina', 3),
-('Prespic', 'monstro', 'Espinhoso monstro venenoso', 3);
 
 INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_recompensa) VALUES
 (1, 'Encontre uma semente de gergelim para completar essa missão, geralmente os Piwis gostam muito dessas sementes.', 40, 11, NULL),
@@ -113,12 +108,11 @@ INSERT INTO npc_mercador_itens(id_npc_mercador, id_instancia_item) VALUES
 (2, 4), 
 (2, 5);
 
-INSERT INTO monstro (id_npc_monstro, moedas, vida_maxima, dano, id_item_recompensa) VALUES
-(3, 23, 599, 59, 1),
-(4, 28, 455, 24, 2),
-(5, 30, 504, 30, 3),
-(6, 30, 444, 40, 4),
-(7, 30, 401, 20, 5);
+CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 1, 50, 600, 60, 1);
+CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 1, 50, 700, 70, 1);
+CALL cria_novo_monstro('Piwi', 'monstro', 'Pequenina ave colorida, porem poderosa', 1, 50, 700, 70, 1);
+CALL cria_novo_monstro('Lobo', 'monstro', 'Criatura uivante maluca e assassina', 1, 44, 500, 55, 1),
+CALL cria_novo_monstro('Prespic', 'monstro', 'Espinhoso monstro venenoso', 1, 65, 800, 70, 1);
 
 INSERT INTO conquistas (nome, tipo_conquista, descricao) VALUES  
 ('Encarnação!', 'geral', 'Escolha uma classe para seu personagem.'),

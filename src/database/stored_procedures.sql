@@ -24,10 +24,33 @@ CREATE TRIGGER check_monstro
 BEFORE UPDATE OR INSERT ON monstro
 FOR EACH ROW EXECUTE PROCEDURE check_especializacao_monstro();
 
+-- procedure para checar especializacao armadura
+CREATE OR REPLACE FUNCTION check_especializacao_armadura() RETURNS TRIGGER AS $check_especializacao_armadura$
+DECLARE 
+    _tipo_item TIPO_ITEM;
+BEGIN
+
+    SELECT tipo_item INTO _tipo_item FROM item WHERE item.id = NEW.id_item;
+
+    IF _tipo_item <> 'armadura' THEN
+			RAISE EXCEPTION 'Apenas items do tipo armadura pode ser inseridos nessa tabela.';
+    END IF;
+
+    PERFORM * FROM armadura WHERE id_item = NEW.id_item;
+    IF FOUND THEN 
+			RAISE EXCEPTION 'Já existe uma armadura com esse id_item';
+    END IF;
+    RETURN NEW;
+
+END;
+$check_especializacao_armadura$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_armadura
+BEFORE UPDATE OR INSERT ON armadura
+FOR EACH ROW EXECUTE PROCEDURE check_especializacao_armadura();
 
 
 -- procedure para checar especializacao arma
-
 CREATE OR REPLACE FUNCTION check_especializacao_arma() RETURNS TRIGGER AS $check_especializacao_arma$
 DECLARE 
     _tipo_item TIPO_ITEM;

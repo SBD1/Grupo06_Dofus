@@ -70,12 +70,12 @@ CALL cria_novo_amuleto('Amuleto de Safira', 'Dizem que este um dos mais belo amu
 
 
 INSERT INTO instancia_item(id_item) VALUES
-(1, 1),
-(2, 6),
-(3, 11),
-(4, 12),
-(5, 13),
-(6, 14);
+(1),
+(6),
+(11),
+(12),
+(13),
+(14);
 
 INSERT INTO personagens (id_classe, moedas, id_mapa) VALUES
 (1, 40, 1);
@@ -129,19 +129,5 @@ INSERT INTO conquistas (nome, tipo_conquista, descricao) VALUES
 ('Cabra macho.', 'combate', 'Mate um chupa cabra.'),
 ('Matador de dragões.', 'combate', 'Mate um dragão branco.'),
 ('Pombo frito!', 'combate', 'Mate um piwi.');
-
-INSERT INTO armadura(id_item, vida) VALUES
-(1, 200),
-(2, 41),
-(3, 120),
-(4, 63),
-(5, 160);
-
-INSERT INTO arma(id_item, dano) VALUES
-(6, 202),
-(7, 350),
-(8, 228),
-(9, 250),
-(10,149);
 
 COMMIT;

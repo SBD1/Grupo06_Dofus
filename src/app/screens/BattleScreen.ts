@@ -43,9 +43,9 @@ export default class BattleScreen {
     const battleStats: BattleInfoType["battleStats"] = (
       await dbInstance`
       SELECT A.dano, I.nome AS nome_arma, P.sorte_total, P.vida_maxima FROM personagens P 
-        JOIN instancia_item J ON P.id_arma = J.id
-        JOIN item I ON I.id = J.id_item
-        JOIN arma A ON A.id_item = I.id
+        LEFT JOIN instancia_item J ON P.id_arma = J.id
+        LEFT JOIN item I ON I.id = J.id_item
+        LEFT JOIN arma A ON A.id_item = I.id
         WHERE P.id = ${this.idPersonagem};`
     )[0] as any;
 

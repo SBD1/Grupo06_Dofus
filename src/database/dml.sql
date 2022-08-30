@@ -78,7 +78,7 @@ INSERT INTO instancia_item(id_item) VALUES
 (14);
 
 INSERT INTO personagens (id_classe, moedas, id_mapa, vida_maxima, sorte_total, id_arma) VALUES
-(1, 40, 1, 200 , 200, 2);
+(1, 40, 1, 200 , 200, 6);
 
 INSERT INTO mochila (id_personagem, id_instancia_item) VALUES
 (1, 4),

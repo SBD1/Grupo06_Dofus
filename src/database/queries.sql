@@ -137,7 +137,7 @@ END;
 $equipar_armadura$ LANGUAGE plpgsql;
 
 
-
+-- equipa armadura
 START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
   DO
   $$
@@ -149,11 +149,6 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 		SELECT id_armadura INTO id_instancia_armadura_antiga
 			FROM personagens WHERE id = 1;
 
-		--- SE JA POSSUIR ARMADURA, RETIRA A ARMADURA ANTIGA E COLOCA NA MOCHILA
-		IF (id_instancia_armadura_antiga <> NULL) THEN
-			UPDATE personagens SET id_armadura = NULL  WHERE id = 1;
-			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_armadura_antiga);
-		END IF;
 
         --- SELECIONA O ID DA INSTANCIA DA ARMADURA
         SELECT I.id, J.descricao INTO id_instancia_armadura
@@ -170,6 +165,13 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 
       --- EQUIPA A INSTANCIA DA ARMADURA NO PERSONAGEM
         UPDATE personagens SET id_armadura = id_instancia_armadura  WHERE id = 1;
+
+		--- SE JA POSSUIR ARMADURA, RETIRA A ARMADURA ANTIGA E COLOCA NA MOCHILA
+		IF (id_instancia_armadura_antiga IS NOT NULL) THEN
+			UPDATE personagens SET id_armadura = NULL  WHERE id = 1;
+			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_armadura_antiga);
+		END IF;
+
     END;  
   $$;
 COMMIT;
@@ -185,13 +187,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 		SELECT id_amuleto INTO id_instancia_amuleto_antiga
 			FROM personagens WHERE id = 1;
 
-		--- SE JA POSSUIR AMULETO, RETIRA O AMULETO ANTIGO E COLOCA NA MOCHILA
-		IF (id_instancia_amuleto_antiga <> NULL) THEN
-			UPDATE personagens SET id_amuleto = NULL  WHERE id = 1;
-			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_amuleto_antiga);
-		END IF;
-
-        --- SELECIONA O ID DA INSTANCIA DO AMULETO
+    --- SELECIONA O ID DA INSTANCIA DO AMULETO
         SELECT I.id, J.descricao INTO id_instancia_amuleto
           FROM instancia_item I 
           JOIN mochila M on I.id = M.id_instancia_item 
@@ -206,6 +202,14 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 
       --- EQUIPA A INSTANCIA DA AMULETO NO PERSONAGEM
         UPDATE personagens SET id_amuleto = id_instancia_amuleto  WHERE id = 1;
+
+		--- SE JA POSSUIR AMULETO, RETIRA O AMULETO ANTIGO E COLOCA NA MOCHILA
+		IF (id_instancia_amuleto_antiga <> NULL) THEN
+			UPDATE personagens SET id_amuleto = NULL  WHERE id = 1;
+			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_amuleto_antiga);
+		END IF;
+
+    
     END;  
   $$;
 COMMIT;
@@ -221,11 +225,6 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 		SELECT id_arma INTO id_instancia_arma_antiga
 			FROM personagens WHERE id = 1;
 
-		--- SE JA POSSUIR ARMA, RETIRA A ARMA ANTIGA E COLOCA NA MOCHILA
-		IF (id_instancia_arma_antiga <> NULL) THEN
-			UPDATE personagens SET id_arma = NULL  WHERE id = 1;
-			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_arma_antiga);
-		END IF;
 
         --- SELECIONA O ID DA INSTANCIA DO ARMA
         SELECT I.id, J.descricao INTO id_instancia_arma
@@ -242,12 +241,19 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 
       --- EQUIPA A INSTANCIA DA ARMA NO PERSONAGEM
         UPDATE personagens SET id_arma = id_instancia_arma  WHERE id = 1;
+
+		--- SE JA POSSUIR ARMA, RETIRA A ARMA ANTIGA E COLOCA NA MOCHILA
+		IF (id_instancia_arma_antiga <> NULL) THEN
+			UPDATE personagens SET id_arma = NULL  WHERE id = 1;
+			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_arma_antiga);
+		END IF;
+
     END;  
   $$;
 COMMIT;
 
 
---- transaction se o personagem morre em combate
+--- transaction se o personagem morre em combate (TODO)
 START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 	DELETE FROM mochila WHERE id_personagem = 1;
 

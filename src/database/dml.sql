@@ -1,5 +1,6 @@
 BEGIN;
 
+-- Insere mapas
 INSERT INTO mapa (coord_x, coord_y, descricao, nome) VALUES
 (0, 0, 'Seja bem vinda jovem alma, você acaba de incarnar no mundo dos Doze. Você se encontra em um templo de pedras claras, com detalhes em branco, e dourado. Algumas pedras flutuam a sua volta.', 'Templo das Almas'),
 (1, 0, 'Você se encontra na saída do templo de pedras, em suas costas há uma grande porta de madeira, e em sua frente um vasto campo de trigos, um tapete dourado. Entre eles uma estrada, o chamado caminho das almas.', 'Caminho das Almas'),
@@ -15,6 +16,7 @@ UPDATE mapa SET mapa_sul = 3 WHERE id=4;
 UPDATE mapa SET mapa_norte = 3 WHERE id=5;
 UPDATE mapa SET mapa_oeste = 3 WHERE id=6;
 
+-- Insere classes
 INSERT INTO classe (nome, descricao, vida_inicial, sorte) VALUES
 ('Eniripsa', 'Os Eniripsas são curandeiros capazes de curar com uma simples palavra. Eles usam o poder das palavras para aliviar o sofrimento dos seus aliados, mas também para ferir seus inimigos.', 3000, 50),
 ('Iop', 'Os Iops são guerreiros intrépidos e temerários! Uma coisa é certa: os Iops sabem usar suas armas como ninguém. Para eles, entrar em uma briga ao menos uma vez por dia é sinal de boa saúde.', 3000, 10),
@@ -22,6 +24,7 @@ INSERT INTO classe (nome, descricao, vida_inicial, sorte) VALUES
 ('Ecaflip', 'Os Ecaflips são guerreiros apostadores que vivem enfiados em lugares onde é possível ganhar uma grana preta e perder tudo... Um bom Ecaflip joga sem parar e sempre aposta no tudo ou nada.', 1500, 95),
 ('Feca', 'Os Fecas são protetores leais e ficam sempre na defensiva. Eles são muito apreciados pelos grupos de aventureiros graças às suas armaduras elementares capazes de suportar até mesmo os golpes mais fortes.', 8000, 40);
 
+-- Insere magias
 INSERT INTO magias (classe_id, nome, descricao, dano, cura) VALUES
 (1, 'Palavra que fere', 'Uma magia que causa danos em seus inimigos através da palavra.', 200, 0),
 (1, 'Palavra de regeneração', 'Uma magia que cura até os ferimentos mais profundos.', 0, 500),
@@ -68,7 +71,7 @@ CALL cria_novo_amuleto('Amuleto de Conchinha', 'Amuleto de conchas de seres aces
 CALL cria_novo_amuleto('Corujamuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 400, 420);
 CALL cria_novo_amuleto('Amuleto de Safira', 'Dizem que este um dos mais belo amuletos já vistos no mundo dos dose, e sua beleza é proporcional a sorte', 600, 700);
 
-
+-- Insere instancia de itens
 INSERT INTO instancia_item(id_item) VALUES
 (1),
 (6),

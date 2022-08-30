@@ -110,9 +110,9 @@ INSERT INTO npc_mercador_itens(id_npc_mercador, id_instancia_item) VALUES
 
 CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 1, 50, 600, 60, 1);
 CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 1, 50, 700, 70, 1);
-CALL cria_novo_monstro('Piwi', 'monstro', 'Pequenina ave colorida, porem poderosa', 1, 50, 700, 70, 1);
-CALL cria_novo_monstro('Lobo', 'monstro', 'Criatura uivante maluca e assassina', 1, 44, 500, 55, 1),
-CALL cria_novo_monstro('Prespic', 'monstro', 'Espinhoso monstro venenoso', 1, 65, 800, 70, 1);
+CALL cria_novo_monstro('Piwi', 'Pequenina ave colorida, porem poderosa', 1, 50, 700, 70, 1);
+CALL cria_novo_monstro('Lobo', 'Criatura uivante maluca e assassina', 1, 44, 500, 55, 1);
+CALL cria_novo_monstro('Prespic', 'Espinhoso monstro venenoso', 1, 65, 800, 70, 1);
 
 INSERT INTO conquistas (nome, tipo_conquista, descricao) VALUES  
 ('Encarnação!', 'geral', 'Escolha uma classe para seu personagem.'),

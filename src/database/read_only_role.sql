@@ -1,4 +1,4 @@
--- Create a read only user
+-- Create a read only role
 CREATE ROLE dofus_read_only_user LOGIN PASSWORD 'readonly_secret';
 
 GRANT CONNECT ON DATABASE dofus TO dofus_read_only_user;

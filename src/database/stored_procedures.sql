@@ -75,7 +75,7 @@ BEGIN
     END IF;
 
 		IF NEW.tipo_item = 'armadura' THEN
- 				PERFORM * FROM amuleto WHERE id_item = NEW.id;
+ 				PERFORM * FROM armadura WHERE id_item = NEW.id;
     		IF NOT FOUND THEN 
 					RAISE EXCEPTION 'Não pode ser criado um item do tipo armadura sem adicionar na tabela armadura';
     		END IF;

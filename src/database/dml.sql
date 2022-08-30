@@ -87,7 +87,7 @@ INSERT INTO mochila (id_personagem, id_instancia_item) VALUES
 
 INSERT INTO npc (nome, tipo_npc, descricao, id_mapa) VALUES
 ('Maurí Sioserrano', 'npc_missao', 'Maurí é um guerreiro experiente, que possui várias cicatrizes de batalha, você sente que ele pode te ensinar sobre magia.', 6),
-('Afonso', 'mercador', 'O maior varegista de Astrub', 2),
+('Afonso', 'mercador', 'O maior varegista de Astrub', 2);
 
 INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_recompensa) VALUES
 (1, 'Encontre uma semente de gergelim para completar essa missão, geralmente os Piwis gostam muito dessas sementes.', 40, 11, NULL),

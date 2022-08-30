@@ -192,3 +192,40 @@ $calcula_vida_maxima$ LANGUAGE plpgsql;
 CREATE TRIGGER calcula_vida
 BEFORE UPDATE OF id_armadura ON personagens
 FOR EACH ROW EXECUTE PROCEDURE calcula_vida_maxima();
+
+-- calcula sorte
+CREATE OR REPLACE FUNCTION calcula_sorte_maxima() RETURNS TRIGGER AS $calcula_sorte_maxima$
+DECLARE 
+    _sorte_novo_amuleto INTEGER;
+    _sorte_antigo_amuleto INTEGER;
+BEGIN
+		IF OLD.id_amuleto IS NOT NULL THEN
+      SELECT A.sorte INTO _sorte_novo_amuleto FROM amuleto A
+      LEFT JOIN instancia_item I ON I.id = NEW.id_amuleto
+      WHERE A.id_item = I.id_item;
+
+      SELECT A.sorte INTO _sorte_antigo_amuleto FROM amuleto A
+      LEFT JOIN instancia_item I ON I.id = OLD.id_amuleto
+      WHERE A.id_item = I.id_item;
+
+      NEW.sorte_maxima := _sorte_novo_amuleto - _sorte_antigo_amuleto + OLD.sorte_maxima;
+
+    END IF;
+    
+    IF OLD.id_amuleto IS NULL THEN
+      SELECT A.sorte INTO _sorte_novo_amuleto FROM amuleto A
+      LEFT JOIN instancia_item I ON I.id = NEW.id_amuleto
+      WHERE A.id_item = I.id_item;
+      
+      NEW.sorte_maxima := _sorte_novo_amuleto + OLD.sorte_maxima;
+
+    END IF;
+      	RETURN NEW;
+
+END;
+$calcula_sorte_maxima$ LANGUAGE plpgsql;
+
+--DROP TRIGGER calcula_sorte ON personagens;
+CREATE TRIGGER calcula_sorte
+BEFORE UPDATE OF id_amuleto ON personagens
+FOR EACH ROW EXECUTE PROCEDURE calcula_sorte_maxima();

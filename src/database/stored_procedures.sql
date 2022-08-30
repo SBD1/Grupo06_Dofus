@@ -229,3 +229,19 @@ $calcula_sorte_maxima$ LANGUAGE plpgsql;
 CREATE TRIGGER calcula_sorte
 BEFORE UPDATE OF id_amuleto ON personagens
 FOR EACH ROW EXECUTE PROCEDURE calcula_sorte_maxima();
+
+-- procedure para escolha de classe
+CREATE OR REPLACE PROCEDURE seleciona_classe (_id_personagem INTEGER, _id_classe INTEGER)
+AS $seleciona_classe$
+  DECLARE
+    _sorte INTEGER;
+    _vida INTEGER;
+  BEGIN
+    
+    SELECT vida_inicial, sorte INTO _vida, _sorte FROM classe WHERE id = _id_classe;
+
+		UPDATE personagens SET id_classe = _id_classe, sorte_total = sorte_total + _sorte, vida_maxima = vida_maxima + _vida
+    WHERE id = _id_personagem;
+
+  END;
+$seleciona_classe$ LANGUAGE plpgsql;

@@ -192,7 +192,7 @@ AS $cria_nova_armadura$
 $cria_nova_armadura$ LANGUAGE plpgsql;
 
 -- Procedure de criação de novo amuleto
-CREATE OR REPLACE PROCEDURE cria_nova_amuleto (_nome_amuleto VARCHAR, _descricao_amuleto VARCHAR, _valor_amuleto INTEGER, _amuleto_sorte INTEGER)
+CREATE OR REPLACE PROCEDURE cria_novo_amuleto (_nome_amuleto VARCHAR, _descricao_amuleto VARCHAR, _valor_amuleto INTEGER, _amuleto_sorte INTEGER)
 AS $cria_nova_amuleto$
   DECLARE
     _id_item INTEGER;

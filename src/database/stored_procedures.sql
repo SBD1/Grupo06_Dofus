@@ -205,6 +205,20 @@ AS $cria_nova_amuleto$
   END;
 $cria_nova_amuleto$ LANGUAGE plpgsql;
 
+-- Procedure de criação de novo monstro
+CREATE OR REPLACE PROCEDURE cria_novo_monstro (_nome_monstro VARCHAR, _descricao_monstro VARCHAR, _id_mapa_monstro INTEGER, _moedas_monstro INTEGER, _vida_maxima_monstro, _dano_monstro INTEGER, id_item_recompensa_monstro INTEGER)
+AS $cria_novo_monstro$
+  DECLARE
+    _id_npc INTEGER;
+  BEGIN
+    INSERT INTO npc (nome, tipo_npc, descricao, id_mapa) 
+    VALUES (_nome_monstro, 'monstro', _descricao_monstro, _id_mapa_monstro) RETURNING id INTO _id_npc;
+
+    INSERT INTO monstro(id_npc_monstro, moedas, vida_maxima, dano, id_item_recompensa) 
+    VALUES (_id_npc, _moedas_monstro, _vida_maxima_monstro, _dano_monstro, id_item_recompensa_monstro);
+  END;
+$cria_novo_monstro$ LANGUAGE plpgsql;
+
 -- procedure que calcula a vida maxima
 CREATE OR REPLACE FUNCTION calcula_vida_maxima() RETURNS TRIGGER AS $calcula_vida_maxima$
 DECLARE 

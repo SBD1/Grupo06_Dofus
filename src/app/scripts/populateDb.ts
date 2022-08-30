@@ -24,11 +24,22 @@ await (async () => {
         "..",
         "src",
         "database",
+        "stored_procedures.sql"
+      )}`
+    );
+
+    await dbInstance.file(
+      `${path.resolve(
+        path.dirname(__filename),
+        "..",
+        "..",
+        "src",
+        "database",
         "dml.sql"
       )}`
     );
-    
-    console.log('OK')
+
+    console.log("OK");
   } catch (err) {
     console.log(err);
   }

@@ -146,7 +146,7 @@ FOR EACH ROW EXECUTE PROCEDURE check_item();
 CREATE OR REPLACE FUNCTION check_npc() RETURNS TRIGGER AS $check_npc$
 BEGIN
 		IF NEW.tipo_npc = 'monstro' THEN
- 				PERFORM * FROM monstro WHERE id_item = NEW.id;
+ 				PERFORM * FROM monstro WHERE id_npc_monstro = NEW.id;
     		IF NOT FOUND THEN 
 					RAISE EXCEPTION 'Não pode ser criado um npc do tipo monstro sem adicionar na tabela monstro';
     		END IF;

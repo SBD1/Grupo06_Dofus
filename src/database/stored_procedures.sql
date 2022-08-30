@@ -155,3 +155,40 @@ AS $cria_nova_amuleto$
     (_id_item, _amuleto_sorte);
   END;
 $cria_nova_amuleto$ LANGUAGE plpgsql;
+
+-- procedure que calcula a vida maxima
+CREATE OR REPLACE FUNCTION calcula_vida_maxima() RETURNS TRIGGER AS $calcula_vida_maxima$
+DECLARE 
+    _vida_nova_armadura INTEGER;
+    _vida_antiga_armadura INTEGER;
+BEGIN
+		IF OLD.id_armadura IS NOT NULL THEN
+      SELECT A.vida INTO _vida_nova_armadura FROM armadura A
+      LEFT JOIN instancia_item I ON I.id = NEW.id_armadura
+      WHERE A.id_item = I.id_item;
+
+      SELECT A.vida INTO _vida_antiga_armadura FROM armadura A
+      LEFT JOIN instancia_item I ON I.id = OLD.id_armadura
+      WHERE A.id_item = I.id_item;
+
+      NEW.vida_maxima := _vida_nova_armadura - _vida_antiga_armadura + OLD.vida_maxima;
+
+    END IF;
+    
+    IF OLD.id_armadura IS NULL THEN
+      SELECT A.vida INTO _vida_nova_armadura FROM armadura A
+      LEFT JOIN instancia_item I ON I.id = NEW.id_armadura
+      WHERE A.id_item = I.id_item;
+      
+      NEW.vida_maxima := _vida_nova_armadura + OLD.vida_maxima;
+
+    END IF;
+      	RETURN NEW;
+
+END;
+$calcula_vida_maxima$ LANGUAGE plpgsql;
+
+--DROP TRIGGER calcula_vida ON personagens;
+CREATE TRIGGER calcula_vida
+BEFORE UPDATE OF id_armadura ON personagens
+FOR EACH ROW EXECUTE PROCEDURE calcula_vida_maxima();

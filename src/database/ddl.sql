@@ -80,7 +80,7 @@ CREATE TABLE armadura (
   id_item INT NOT NULL,
   vida INT NOT NULL,
 
-  CONSTRAINT armadura_pk PRIMARY KEY(id, id_item),
+  CONSTRAINT armadura_pk PRIMARY KEY(id),
   CONSTRAINT armadura_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE arma (
   id_item INT NOT NULL,
   dano INT NOT NULL,
 
-  CONSTRAINT arma_pk PRIMARY KEY(id, id_item),
+  CONSTRAINT arma_pk PRIMARY KEY(id),
   CONSTRAINT arma_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
@@ -98,7 +98,7 @@ CREATE TABLE amuleto (
   id_item INT NOT NULL,
   sorte INT NOT NULL,
 
-  CONSTRAINT amuleto_pk PRIMARY KEY(id, id_item),
+  CONSTRAINT amuleto_pk PRIMARY KEY(id),
   CONSTRAINT amuleto_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
@@ -180,7 +180,7 @@ CREATE TABLE monstro (
     dano INT NOT NULL,
     id_item_recompensa INT,
 
-    CONSTRAINT monstro_pk PRIMARY KEY(id, id_npc_monstro),
+    CONSTRAINT monstro_pk PRIMARY KEY(id),
     CONSTRAINT npc_monstro_fk FOREIGN KEY(id_npc_monstro) REFERENCES npc(id),
     CONSTRAINT item_recompensa_monstro_fk FOREIGN KEY(id_item_recompensa) REFERENCES item(id)
 );

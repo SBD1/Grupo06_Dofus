@@ -224,7 +224,16 @@ CREATE OR REPLACE FUNCTION calcula_vida_maxima() RETURNS TRIGGER AS $calcula_vid
 DECLARE 
     _vida_nova_armadura INTEGER;
     _vida_antiga_armadura INTEGER;
+    _tipo_item TIPO_ITEM;
 BEGIN
+    SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
+     LEFT JOIN item J ON J.id = I.id_item
+    WHERE I.id_item = NEW.id_armadura;
+
+    IF _tipo_item <> 'armadura' THEN
+    			RAISE EXCEPTION 'Apenas itens do tipo armadura podem ser equipados como armadura.';
+    END IF;
+
 		IF OLD.id_armadura IS NOT NULL THEN
       SELECT A.vida INTO _vida_nova_armadura FROM armadura A
       LEFT JOIN instancia_item I ON I.id = NEW.id_armadura
@@ -261,7 +270,18 @@ CREATE OR REPLACE FUNCTION calcula_sorte_maxima() RETURNS TRIGGER AS $calcula_so
 DECLARE 
     _sorte_novo_amuleto INTEGER;
     _sorte_antigo_amuleto INTEGER;
+    _tipo_item TIPO_ITEM;
 BEGIN
+
+    SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
+     LEFT JOIN item J ON J.id = I.id_item
+    WHERE I.id_item = NEW.id_armadura;
+
+    IF _tipo_item <> 'amuleto' THEN
+    			RAISE EXCEPTION 'Apenas itens do tipo amuleto podem ser equipados como amuleto.';
+    END IF;
+
+
 		IF OLD.id_amuleto IS NOT NULL THEN
       SELECT A.sorte INTO _sorte_novo_amuleto FROM amuleto A
       LEFT JOIN instancia_item I ON I.id = NEW.id_amuleto
@@ -308,3 +328,33 @@ AS $seleciona_classe$
 
   END;
 $seleciona_classe$ LANGUAGE plpgsql;
+
+
+
+
+-- nao deixa equipar arma se nao for do tipo arma
+CREATE OR REPLACE FUNCTION check_arma() RETURNS TRIGGER AS $check_arma$
+DECLARE 
+    _sorte_novo_amuleto INTEGER;
+    _sorte_antigo_amuleto INTEGER;
+    _tipo_item INTEGER;
+BEGIN
+
+ 
+    SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
+     LEFT JOIN item J ON J.id = I.id_item
+    WHERE I.id_item = NEW.id_armadura;
+
+    IF _tipo_item <> 'arma' THEN
+    			RAISE EXCEPTION 'Apenas itens do tipo arma podem ser equipados como arma.';
+    END IF;
+
+ 
+      	RETURN NEW;
+
+END;
+$check_arma$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_equip_arma
+BEFORE UPDATE OF id_arma ON personagens
+FOR EACH ROW EXECUTE PROCEDURE check_arma();

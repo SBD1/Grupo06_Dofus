@@ -121,7 +121,7 @@ AS $cria_nova_arma$
     _id_item INTEGER;
   BEGIN
     INSERT INTO item (nome, tipo_item, descricao, valor_moedas) 
-    VALUES (_nome_arma, 'arma', _descricao_arma, _valor_arma) RETURNING id INTO [_id_item];
+    VALUES (_nome_arma, 'arma', _descricao_arma, _valor_arma) RETURNING id INTO _id_item;
 
     INSERT INTO arma(id_item, dano) VALUES
     (_id_item, _arma_dano);
@@ -135,7 +135,7 @@ AS $cria_nova_armadura$
     _id_item INTEGER;
   BEGIN
     INSERT INTO item (nome, tipo_item, descricao, valor_moedas) 
-    VALUES (_nome_armadura, 'armadura', _descricao_armadura, _valor_armadura) RETURNING id INTO [_id_item];
+    VALUES (_nome_armadura, 'armadura', _descricao_armadura, _valor_armadura) RETURNING id INTO _id_item;
 
     INSERT INTO armadura(id_item, vida) VALUES
     (_id_item, _armadura_vida);
@@ -149,7 +149,7 @@ AS $cria_nova_amuleto$
     _id_item INTEGER;
   BEGIN
     INSERT INTO item (nome, tipo_item, descricao, valor_moedas) 
-    VALUES (_nome_amuleto, 'amuleto', _descricao_amuleto, _valor_amuleto) RETURNING id INTO [_id_item];
+    VALUES (_nome_amuleto, 'amuleto', _descricao_amuleto, _valor_amuleto) RETURNING id INTO _id_item;
 
     INSERT INTO amuleto(id_item, sorte) VALUES
     (_id_item, _amuleto_sorte);

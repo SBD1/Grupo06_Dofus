@@ -15,7 +15,7 @@ UPDATE mapa SET mapa_sul = 3 WHERE id=4;
 UPDATE mapa SET mapa_norte = 3 WHERE id=5;
 UPDATE mapa SET mapa_oeste = 3 WHERE id=6;
 
-INSERT INTO classe (id, nome, descricao, vida_inicial, sorte) VALUES
+INSERT INTO classe (nome, descricao, vida_inicial, sorte) VALUES
 ('Eniripsa', 'Os Eniripsas são curandeiros capazes de curar com uma simples palavra. Eles usam o poder das palavras para aliviar o sofrimento dos seus aliados, mas também para ferir seus inimigos.', 3000, 50),
 ('Iop', 'Os Iops são guerreiros intrépidos e temerários! Uma coisa é certa: os Iops sabem usar suas armas como ninguém. Para eles, entrar em uma briga ao menos uma vez por dia é sinal de boa saúde.', 3000, 10),
 ('Sacrier', 'Os Sacriers são berserkers capazes de multiplicar sua força cada vez que são atacados! Como não têm medo de receber golpes nem de se expor ao perigo, eles costumam ficar na linha de frente, prontos para derramar o sangue dos inimigos!', 5000, 25),
@@ -40,7 +40,7 @@ INSERT INTO magias (classe_id, nome, descricao, dano, cura) VALUES
 (5, 'Ataque tempestuoso', 'Um ataque das forças das núvens.',250, 0);
 
 -- Cria itens não equipaveis
-INSERT INTO item (, nome, tipo_item, descricao, valor_moedas) VALUES  
+INSERT INTO item (nome, tipo_item, descricao, valor_moedas) VALUES  
 ( 'Semente de Gergelim', 'nao_equipavel', 'Esta semente extremamente rica em proteína é um ingrediente seleto para a fabricação de pão saboroso, mas o cultivo de gergelim é especialmente delicado em nosso clima dofusiano. Como resultado, uma semente muito rara e cara.', 9),
 ( 'Pelo de Rato', 'nao_equipavel', 'Restos de pelo coletados dos esgotos de Astrub, cuidado com o odor.', 14),
 ( 'Testiculo de Lobo', 'nao_equipavel', 'Esferas de carne removidas de grandes lobos selvagens das planices de Incarnan', 40),
@@ -48,25 +48,25 @@ INSERT INTO item (, nome, tipo_item, descricao, valor_moedas) VALUES
 ( 'Pedregulho de Rochedo', 'nao_equipavel', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 25),
 
 -- Cria armaduras
-CALL cria_nova_armadura('Armadura de Papatudo Real', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 25, 50)
-CALL cria_nova_armadura('Armadura do Aventureiro', 'Todo grande guerreiro tem um ponto de partida, essa armadura é o que você precisa para iniciar suas expedições', 90, 140)
-CALL cria_nova_armadura('Armadura de Piwi', 'A nobreza de um guerreiro está no coração, está armadura de penas não muito elegante carrega o poder da aura pura dos Piwis de Astrub', 90, 120),
-CALL cria_nova_armadura('Armadura de Prespic', 'Armadura feita com os espinhos, unhas, e pelos de Prespics selvagens, conferindo imensa resistência ao barbaro guerreiro que a usa', 25, 65),
-CALL cria_nova_armadura('Armadura de Girassol', 'armadura', 'Está armadura é leve, feita para guerreiros de porte pequeno, com brancinhos de girassol, apesar de singela ela carrega o poder das magias solares.', 145, 150),
+CALL cria_nova_armadura('Armadura de Papatudo Real', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 25, 50);
+CALL cria_nova_armadura('Armadura do Aventureiro', 'Todo grande guerreiro tem um ponto de partida, essa armadura é o que você precisa para iniciar suas expedições', 90, 140);
+CALL cria_nova_armadura('Armadura de Piwi', 'A nobreza de um guerreiro está no coração, está armadura de penas não muito elegante carrega o poder da aura pura dos Piwis de Astrub', 90, 120);
+CALL cria_nova_armadura('Armadura de Prespic', 'Armadura feita com os espinhos, unhas, e pelos de Prespics selvagens, conferindo imensa resistência ao barbaro guerreiro que a usa', 25, 65);
+CALL cria_nova_armadura('Armadura de Girassol', 'armadura', 'Está armadura é leve, feita para guerreiros de porte pequeno, com brancinhos de girassol, apesar de singela ela carrega o poder das magias solares.', 145, 150);
 
 -- Cria armas
-CALL cria_nova_arma('Arco de Bwork', 'Alcance alidado à força bruta, arco dos selvagens Bworks das grutas de Astrub.', 200, 202),
-CALL cria_nova_arma('Espada de Iop', 'Essa espada foi roubada de um lendário Iop que pereceu nas grandes batalhas do calabouço de Incarnan', 340, 350),
-CALL cria_nova_arma('Lança de Chefer', 'Lança retirada em espedições no calabouço de Incarnan, confeccionada com restos de ossos de Chefers malucos', 228, 400),
-CALL cria_nova_arma('Pá de Cortes Sombrios ', 'Esta pá serve para enterrar objetos, mortos ou vivos.', 100, 120),
-CALL cria_nova_arma('Espatula Corta Guloso', 'Esta espátula gigante é uma ferramenta de trabalho muito completa. Com ela, é possível preparar quantidades enormes de doces de chocolate deliciosos e, depois, fatiar sem dó nem piedade os gulosos que tentarem comer o seu bolo sem a sua permissão.', 333, 444),
+CALL cria_nova_arma('Arco de Bwork', 'Alcance alidado à força bruta, arco dos selvagens Bworks das grutas de Astrub.', 200, 202);
+CALL cria_nova_arma('Espada de Iop', 'Essa espada foi roubada de um lendário Iop que pereceu nas grandes batalhas do calabouço de Incarnan', 340, 350);
+CALL cria_nova_arma('Lança de Chefer', 'Lança retirada em espedições no calabouço de Incarnan, confeccionada com restos de ossos de Chefers malucos', 228, 400);
+CALL cria_nova_arma('Pá de Cortes Sombrios ', 'Esta pá serve para enterrar objetos, mortos ou vivos.', 100, 120);
+CALL cria_nova_arma('Espatula Corta Guloso', 'Esta espátula gigante é uma ferramenta de trabalho muito completa. Com ela, é possível preparar quantidades enormes de doces de chocolate deliciosos e, depois, fatiar sem dó nem piedade os gulosos que tentarem comer o seu bolo sem a sua permissão.', 333, 444);
 
 -- Cria amuletos
-CALL cria_novo_amuleto('Amuleto do Pow Uatisson', 'O capitão do Chafer Marítimo sempre carrega este amuleto, símbolo da sua embarcação', 90, 130),
-CALL cria_novo_amuleto('Amuleto de Cristal', 'Amuleto feito de cristais de quartzo rosa.', 140, 190),
-CALL cria_novo_amuleto('Amuleto de Conchinha', 'Amuleto de conchas de seres acestrais.', 350, 360),
+CALL cria_novo_amuleto('Amuleto do Pow Uatisson', 'O capitão do Chafer Marítimo sempre carrega este amuleto, símbolo da sua embarcação', 90, 130);
+CALL cria_novo_amuleto('Amuleto de Cristal', 'Amuleto feito de cristais de quartzo rosa.', 140, 190);
+CALL cria_novo_amuleto('Amuleto de Conchinha', 'Amuleto de conchas de seres acestrais.', 350, 360);
 CALL cria_novo_amuleto('Corujamuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 400, 420);
-CALL cria_novo_amuleto('Amuleto de Safira', 'Dizem que este um dos mais belo amuletos já vistos no mundo dos dose, e sua beleza é proporcional a sorte', 600, 700)
+CALL cria_novo_amuleto('Amuleto de Safira', 'Dizem que este um dos mais belo amuletos já vistos no mundo dos dose, e sua beleza é proporcional a sorte', 600, 700);
 
 
 INSERT INTO instancia_item(id_item) VALUES

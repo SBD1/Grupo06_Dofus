@@ -76,26 +76,29 @@ CREATE TABLE instancia_item (
 );
 
 CREATE TABLE armadura (
-  id SERIAL PRIMARY KEY,
+  id SERIAL,
   id_item INT NOT NULL,
   vida INT NOT NULL,
 
+  CONSTRAINT armadura_pk PRIMARY KEY(id, id_item),
   CONSTRAINT armadura_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
 CREATE TABLE arma (
-  id SERIAL PRIMARY KEY,
+  id SERIAL,
   id_item INT NOT NULL,
   dano INT NOT NULL,
 
+  CONSTRAINT arma_pk PRIMARY KEY(id, id_item),
   CONSTRAINT arma_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
 CREATE TABLE amuleto (
-  id SERIAL PRIMARY KEY,
+  id SERIAL,
   id_item INT NOT NULL,
   sorte INT NOT NULL,
 
+  CONSTRAINT amuleto_pk PRIMARY KEY(id, id_item),
   CONSTRAINT amuleto_item_fk FOREIGN KEY(id_item) REFERENCES item(id)
 );
 
@@ -170,13 +173,14 @@ CREATE TABLE npc_mercador_itens (
 );
 
 CREATE TABLE monstro (
-    id SERIAL PRIMARY KEY,
+    id SERIAL,
     id_npc_monstro INT NOT NULL,
     moedas INT NOT NULL DEFAULT 0,
     vida_maxima INT NOT NULL,
     dano INT NOT NULL,
     id_item_recompensa INT,
 
+    CONSTRAINT monstro_pk PRIMARY KEY(id, id_npc_monstro),
     CONSTRAINT npc_monstro_fk FOREIGN KEY(id_npc_monstro) REFERENCES npc(id),
     CONSTRAINT item_recompensa_monstro_fk FOREIGN KEY(id_item_recompensa) REFERENCES item(id)
 );

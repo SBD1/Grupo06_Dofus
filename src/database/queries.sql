@@ -243,7 +243,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
         UPDATE personagens SET id_arma = id_instancia_arma  WHERE id = 1;
 
 		--- SE JA POSSUIR ARMA, RETIRA A ARMA ANTIGA E COLOCA NA MOCHILA
-		IF (id_instancia_arma_antiga <> NULL) THEN
+		IF (id_instancia_arma_antiga IS NOT NULL) THEN
 			UPDATE personagens SET id_arma = NULL  WHERE id = 1;
 			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (1, id_instancia_arma_antiga);
 		END IF;

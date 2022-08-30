@@ -1,5 +1,6 @@
 BEGIN;
 
+-- Insere mapas
 INSERT INTO mapa (coord_x, coord_y, descricao, nome) VALUES
 (0, 0, 'Seja bem vinda jovem alma, você acaba de incarnar no mundo dos Doze. Você se encontra em um templo de pedras claras, com detalhes em branco, e dourado. Algumas pedras flutuam a sua volta.', 'Templo das Almas'),
 (1, 0, 'Você se encontra na saída do templo de pedras, em suas costas há uma grande porta de madeira, e em sua frente um vasto campo de trigos, um tapete dourado. Entre eles uma estrada, o chamado caminho das almas.', 'Caminho das Almas'),

@@ -8,7 +8,7 @@ import { Mapa } from "../interfaces/mapa.js";
 import { Choices, INFINTE } from "../util/constants.js";
 import { NPC, TipoNPC } from "../interfaces/npc.js";
 import BattleScreen from "./BattleScreen.js";
-import MarketScreen from "./MarketScreen.js";
+import MarketScreen from "./Market/MarketScreen.js";
 import InventoryScreen from "./InventoryScreen.js";
 
 type AvailableChoicesType = {

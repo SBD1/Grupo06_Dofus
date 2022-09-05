@@ -36,8 +36,12 @@ export default class ClassScreen {
         name: "pickClass",
         type: "list",
         message: "Por favor, selecione uma classe para mais informações.\n",
-        choices: [...Object.keys(availableClasses)],
+        choices: [...Object.keys(availableClasses), Choices.QUIT],
       });
+
+      if (answer.pickClass === Choices.QUIT) {
+        process.exit(0);
+      }
 
       didPickClass = await this.classDescription(
         availableClasses[answer.pickClass]

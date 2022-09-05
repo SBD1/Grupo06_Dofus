@@ -4,6 +4,8 @@ import gradient from "gradient-string";
 import chalkAnimation from "chalk-animation";
 import figlet from "figlet";
 import dbInstance from "../connection/database.js";
+import { Classe } from "../interfaces/classes.js";
+import { Choices } from "../util/constants.js";
 
 export default class ClassScreen {
   private readonly idPersonagem: number;
@@ -17,32 +19,78 @@ export default class ClassScreen {
     console.log();
     console.log("Você ainda não tem uma classe");
 
-    const availableClasses = await dbInstance`
-        SELECT * FROM classe
-        `;
+    let availableClasses: any = {};
 
-    console.log(availableClasses);
+    const classes: Classe[] = (await dbInstance`
+        SELECT * FROM classe
+        `) as any;
+
+    classes.forEach((c) => {
+      let key = c.nome;
+      availableClasses[key] = c;
+    });
+
+    let didPickClass = false;
+    while (!didPickClass) {
+      const answer = await inquirer.prompt({
+        name: "pickClass",
+        type: "list",
+        message: "Por favor, selecione uma classe para mais informações.\n",
+        choices: [...Object.keys(availableClasses)],
+      });
+
+      didPickClass = await this.classDescription(
+        availableClasses[answer.pickClass]
+      );
+    }
+  }
+
+  private async classDescription(classe: Classe): Promise<boolean> {
+    console.clear();
+    console.log();
+    console.log();
+    console.log(chalk.yellowBright(classe.nome));
+    console.log();
+    console.log(classe.descricao);
+    console.log();
+    console.log(
+      chalk.greenBright(
+        `Atributos básicos:     Vida incial: ${classe.vida_inicial}        Sorte inicial: ${classe.sorte}`
+      )
+    );
+    console.log();
+    console.log();
 
     const answer = await inquirer.prompt({
-      name: "pickClass",
+      name: "confirmClass",
       type: "list",
-      message: "Por favor, selecione uma classe.\n",
-      choices: [],
+      message:
+        "Deseja mesmo escolher essa classe? Essa ação não pode ser desfeita\n",
+      choices: [Choices.YES, Choices.RETURN],
     });
+
+    if (answer.confirmClass === Choices.YES) {
+      await dbInstance`UPDATE personagens SET id_classe = ${classe.id}, vida_maxima = ${classe.vida_inicial} + vida_maxima, sorte_total = ${classe.sorte} + sorte_total WHERE id = ${this.idPersonagem}`;
+      return true;
+    }
+
+    console.clear();
+
+    return false;
   }
 
   async handleClass() {
     console.clear();
     console.log();
 
-    const hasClass = await dbInstance`
+    const hasClass = (
+      await dbInstance`
         SELECT id_classe FROM personagens WHERE id = ${this.idPersonagem}
-        `;
+        `
+    )[0].id_classe;
 
-    console.log(hasClass[0]);
-
-    if (!hasClass[0]) {
-      this.pickClass();
+    if (!hasClass) {
+      await this.pickClass();
     }
   }
 }

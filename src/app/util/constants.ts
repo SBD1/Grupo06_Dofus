@@ -4,6 +4,11 @@ export enum Choices {
   INVENTORY = "Inventário",
   QUIT = "Sair",
   RETURN = "Voltar",
+  LIST_WEAPONS = "Ver armas",
+  LIST_AMULETS = "Ver amuletos",
+  LIST_ARMOR = "Ver armaduras",
+  LIST_ITEMS = "Ver itens não equipáveis",
+  EQUIP = "Equipar",
   YES = "Sim",
 }
 

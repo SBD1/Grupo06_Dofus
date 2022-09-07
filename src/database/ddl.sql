@@ -108,7 +108,7 @@ CREATE TABLE missao (
     descricao VARCHAR(255),
     moedas INT NOT NULL DEFAULT 0,
     id_item_missao INT NOT NULL,
-    id_item_recompensa INT,
+    id_item_recompensa INT NOT NULL,
     id_missao_desbloqueada INT,
 
     CONSTRAINT npc_missao_fk FOREIGN KEY(id_npc_missao) REFERENCES npc(id),

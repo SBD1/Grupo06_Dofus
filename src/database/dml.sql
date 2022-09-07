@@ -97,11 +97,11 @@ INSERT INTO npc (nome, tipo_npc, descricao, id_mapa) VALUES
 ('Afonso', 'mercador', 'O maior varegista de Astrub', 2);
 
 INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_recompensa) VALUES
-(1, 'Encontre uma semente de gergelim para completar essa missão, geralmente os Piwis gostam muito dessas sementes.', 40, 11, NULL),
+(1, 'Encontre uma semente de gergelim para completar essa missão, geralmente os Piwis gostam muito dessas sementes.', 40, 11, 3),
 (1, 'Encontre um pelo de rato, esse animais gostam de lugares escuros.', 200, 12, 3),
-(1, 'Encontre o testículo de um lobo raivoso.', 500, 13, NULL),
-(1, 'Encontre um pouco de lã de papatudo, geralmente eles gostam de ficar nos campos.', 200, 14, NULL),
-(1, 'Encontre pedregulho do rochedo.', 5000, 15, NULL);
+(1, 'Encontre o testículo de um lobo raivoso.', 500, 13, 3),
+(1, 'Encontre um pouco de lã de papatudo, geralmente eles gostam de ficar nos campos.', 200, 14, 3),
+(1, 'Encontre pedregulho do rochedo.', 5000, 15, 3);
 
 UPDATE missao SET id_missao_desbloqueada = 2 WHERE id=1;
 UPDATE missao SET id_missao_desbloqueada = 3 WHERE id=2;

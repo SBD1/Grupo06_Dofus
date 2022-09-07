@@ -7,9 +7,9 @@ INSERT INTO mapa (coord_x, coord_y, descricao, nome) VALUES
 (2, 0, 'Você se encontra em um uma espécie de feira, há várias pessoas comprando os mais diversos produtos. há algumas estradas que vão para todas as direções. No sul, uma floresta escura, no norte, um campo dourado.', 'Feira de Incarnam'),
 (2, 1, 'Você se encontra em um grande pasto dourado, há algumas plantações distantes, e alguns papatudos com a lâ branca, quase prateada, a sua volta.', 'Pastos de Incarnam'),
 (2, -1, 'Você se encontra nos limítes da floresta sombria, mas não exatamente dentro dela. Ainda há bastante luz entre as árvores de folhas escuras, mas você já consegue ouvir lobos uivando.', 'Limite da Floresta Sombria'),
-(3, 0, 'Você se encontra em um lago bem azul, cercado pela grama dourada. Você vê alguns peixes nadando, e algumas pessoas pescando.', 'Lago de Incarnam');
+(3, 0, 'Você se encontra em um lago bem azul, cercado pela grama dourada. Você vê alguns peixes nadando, e algumas pessoas pescando.', 'Lago de Incarnam'),
 (2, -2, 'Você se encontra dentro da floresta sombria. A única luz visível é a da sua tocha, e de dois olhos amarelos numa caverna gigante.', 'Floresta sombria'),
-(2, -3, 'Você se encontra dentro de uma caverna enorme, a luz da sua tocha nem chega no teto. Há um cheiro de enxofre e queimado.', 'Toca do dragão'),
+(2, -3, 'Você se encontra dentro de uma caverna enorme, a luz da sua tocha nem chega no teto. Há um cheiro de enxofre e queimado.', 'Toca do dragão');
 
 UPDATE mapa SET mapa_leste = 2 WHERE id=1;
 UPDATE mapa SET mapa_leste = 3 WHERE id=2;

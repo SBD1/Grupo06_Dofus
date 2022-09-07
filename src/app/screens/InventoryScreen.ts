@@ -102,10 +102,10 @@ export default class InventoryScreen {
     console.log(chalk.cyanBright(item.nome));
     console.log(`Quantidade : ${item.qnt}`);
     console.log();
-    console.log();
     console.log(item.descricao);
     console.log();
     console.log(itemAttributes[item.tipo_item]);
+    console.log();
 
     const equip: string[] = [];
     if (item.tipo_item !== TipoItem.NAO_EQUIPAVEL) equip.push(Choices.EQUIP);
@@ -118,5 +118,131 @@ export default class InventoryScreen {
       message: "Selecione uma opção.\n",
       choices: [...equip, Choices.RETURN],
     });
+
+    if (answer.itemDetailsScreen === Choices.RETURN) return;
+
+    await this.equipItem(item);
+  }
+
+  private async equipItem(item: Item) {
+    const equipItem: any = {};
+    equipItem[
+      TipoItem.ARMADURA
+    ] = `START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+    DO
+    $$
+      DECLARE
+      id_instancia_armadura_nova INTEGER;
+      id_instancia_armadura_antiga INTEGER;
+      BEGIN
+  
+      SELECT id_armadura INTO id_instancia_armadura_antiga
+        FROM personagens WHERE id = ${this.idPersonagem};
+  
+          --- SELECIONA O ID DA INSTANCIA DA ARMADURA
+          SELECT I.id, J.descricao INTO id_instancia_armadura_nova
+            FROM instancia_item I 
+            JOIN mochila M on I.id = M.id_instancia_item 
+            JOIN 	item J on I.id_item = J.id
+            WHERE I.id_item = ${item.id} 
+            AND M.id_personagem = ${this.idPersonagem}
+            AND J.tipo_item = 'armadura'
+          LIMIT 1;
+  
+        --- DELETA A INSTANCIA DE ARMADURA DA MOCHILA
+          DELETE FROM mochila WHERE id_instancia_item = id_instancia_armadura_nova AND id_personagem = ${this.idPersonagem};
+  
+        --- EQUIPA A INSTANCIA DA ARMADURA NO PERSONAGEM
+          UPDATE personagens SET id_armadura = id_instancia_armadura_nova  WHERE id = ${this.idPersonagem};
+  
+      --- SE JA POSSUIR ARMADURA, RETIRA A ARMADURA ANTIGA E COLOCA NA MOCHILA
+      IF (id_instancia_armadura_antiga IS NOT NULL) THEN
+        UPDATE personagens SET id_armadura = NULL  WHERE id = 1;
+        INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (${this.idPersonagem}, id_instancia_armadura_antiga);
+      END IF;
+  
+      END;  
+    $$;
+  COMMIT;`;
+    equipItem[TipoItem.AMULETO] = `
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+  DO
+  $$
+    DECLARE
+      id_instancia_amuleto_nova INTEGER;
+	    id_instancia_amuleto_antiga INTEGER;
+    BEGIN
+
+		SELECT id_amuleto INTO id_instancia_amuleto_antiga
+			FROM personagens WHERE id = ${this.idPersonagem};
+
+    --- SELECIONA O ID DA INSTANCIA DO AMULETO
+        SELECT I.id, J.descricao INTO id_instancia_amuleto_nova
+          FROM instancia_item I 
+          JOIN mochila M on I.id = M.id_instancia_item 
+          JOIN 	item J on I.id_item = J.id
+          WHERE I.id_item = ${item.id}
+          AND M.id_personagem = ${this.idPersonagem}
+          AND J.tipo_item = 'amuleto'
+        LIMIT 1;
+
+      --- DELETA A INSTANCIA DE AMULETO DA MOCHILA
+        DELETE FROM mochila WHERE id_instancia_item = id_instancia_amuleto_nova AND id_personagem = 1;
+
+      --- EQUIPA A INSTANCIA DA AMULETO NO PERSONAGEM
+        UPDATE personagens SET id_amuleto = id_instancia_amuleto_nova  WHERE id = ${this.idPersonagem};
+
+		--- SE JA POSSUIR AMULETO, RETIRA O AMULETO ANTIGO E COLOCA NA MOCHILA
+		IF (id_instancia_amuleto_antiga IS NOT NULL) THEN
+			UPDATE personagens SET id_amuleto = NULL  WHERE id = ${this.idPersonagem};
+			INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (${this.idPersonagem}, id_instancia_amuleto_antiga);
+		END IF;
+
+    
+    END;  
+  $$;
+COMMIT;
+
+`;
+    equipItem[TipoItem.ARMA] = `
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+DO
+$$
+  DECLARE
+    id_instancia_arma_nova INTEGER;
+    id_instancia_arma_antiga INTEGER;
+  BEGIN
+
+  SELECT id_arma INTO id_instancia_arma_antiga
+    FROM personagens WHERE id = ${this.idPersonagem};
+
+      --- SELECIONA O ID DA INSTANCIA DO ARMA
+      SELECT I.id, J.descricao INTO id_instancia_arma_nova
+        FROM instancia_item I 
+        JOIN mochila M on I.id = M.id_instancia_item 
+        JOIN 	item J on I.id_item = J.id
+        WHERE I.id_item = ${item.id}
+        AND M.id_personagem = ${this.idPersonagem}
+        AND J.tipo_item = 'arma'
+      LIMIT 1;
+
+    --- DELETA A INSTANCIA DE ARMA DA MOCHILA
+      DELETE FROM mochila WHERE id_instancia_item = id_instancia_arma_nova AND id_personagem = 1;
+
+    --- EQUIPA A INSTANCIA DA ARMA NO PERSONAGEM
+      UPDATE personagens SET id_arma = id_instancia_arma_nova  WHERE id = ${this.idPersonagem};
+
+  --- SE JA POSSUIR ARMA, RETIRA A ARMA ANTIGA E COLOCA NA MOCHILA
+  IF (id_instancia_arma_antiga IS NOT NULL) THEN
+    UPDATE personagens SET id_arma = NULL  WHERE id = ${this.idPersonagem};
+    INSERT INTO mochila (id_personagem, id_instancia_item) VALUES (${this.idPersonagem}, id_instancia_arma_antiga);
+  END IF;
+
+  END;  
+$$;
+COMMIT;
+`;
+
+    await dbInstance.unsafe(equipItem[item.tipo_item]);
   }
 }

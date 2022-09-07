@@ -8,6 +8,8 @@ INSERT INTO mapa (coord_x, coord_y, descricao, nome) VALUES
 (2, 1, 'Você se encontra em um grande pasto dourado, há algumas plantações distantes, e alguns papatudos com a lâ branca, quase prateada, a sua volta.', 'Pastos de Incarnam'),
 (2, -1, 'Você se encontra nos limítes da floresta sombria, mas não exatamente dentro dela. Ainda há bastante luz entre as árvores de folhas escuras, mas você já consegue ouvir lobos uivando.', 'Limite da Floresta Sombria'),
 (3, 0, 'Você se encontra em um lago bem azul, cercado pela grama dourada. Você vê alguns peixes nadando, e algumas pessoas pescando.', 'Lago de Incarnam');
+(2, -2, 'Você se encontra dentro da floresta sombria. A única luz visível é a da sua tocha, e de dois olhos amarelos numa caverna gigante.', 'Floresta sombria'),
+(2, -3, 'Você se encontra dentro de uma caverna enorme, a luz da sua tocha nem chega no teto. Há um cheiro de enxofre e queimado.', 'Toca do dragão'),
 
 UPDATE mapa SET mapa_leste = 2 WHERE id=1;
 UPDATE mapa SET mapa_leste = 3 WHERE id=2;
@@ -15,6 +17,8 @@ UPDATE mapa SET mapa_norte = 4, mapa_sul = 5, mapa_oeste = 2,mapa_leste = 6 WHER
 UPDATE mapa SET mapa_sul = 3 WHERE id=4;
 UPDATE mapa SET mapa_norte = 3 WHERE id=5;
 UPDATE mapa SET mapa_oeste = 3 WHERE id=6;
+UPDATE mapa SET mapa_sul = 7 WHERE id = 5;
+UPDATE mapa SET mapa_sul = 8 WHERE id = 7;
 
 -- Insere classes
 INSERT INTO classe (nome, descricao, vida_inicial, sorte) VALUES
@@ -68,8 +72,8 @@ CALL cria_nova_arma('Espatula Corta Guloso', 'Esta espátula gigante é uma ferr
 CALL cria_novo_amuleto('Amuleto do Pow Uatisson', 'O capitão do Chafer Marítimo sempre carrega este amuleto, símbolo da sua embarcação', 90, 130);
 CALL cria_novo_amuleto('Amuleto de Cristal', 'Amuleto feito de cristais de quartzo rosa.', 140, 190);
 CALL cria_novo_amuleto('Amuleto de Conchinha', 'Amuleto de conchas de seres acestrais.', 350, 360);
-CALL cria_novo_amuleto('Corujamuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 400, 420);
-CALL cria_novo_amuleto('Amuleto de Safira', 'Dizem que este um dos mais belo amuletos já vistos no mundo dos dose, e sua beleza é proporcional a sorte', 600, 700);
+CALL cria_novo_amuleto('Corujamuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 1000, 1000);
+CALL cria_novo_amuleto('Amuleto de Safira', 'Dizem que este um dos mais belo amuletos já vistos no mundo dos dose, e sua beleza é proporcional a sorte', 6000, 7000);
 
 -- Insere instancia de itens
 INSERT INTO instancia_item(id_item) VALUES
@@ -111,11 +115,13 @@ INSERT INTO npc_mercador_itens(id_npc_mercador, id_instancia_item) VALUES
 (2, 4), 
 (2, 5);
 
-CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 1, 50, 600, 60, 1);
-CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 1, 50, 700, 70, 1);
+CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 1, 50, 600, 60, 13);
+CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 1, 50, 700, 70, 4);
 CALL cria_novo_monstro('Piwi', 'Pequenina ave colorida, porem poderosa', 1, 50, 700, 70, 1);
-CALL cria_novo_monstro('Lobo', 'Criatura uivante maluca e assassina', 1, 44, 500, 55, 1);
-CALL cria_novo_monstro('Prespic', 'Espinhoso monstro venenoso', 1, 65, 800, 70, 1);
+CALL cria_novo_monstro('Lobo', 'Criatura uivante maluca e assassina', 1, 44, 500, 55, 3);
+CALL cria_novo_monstro('Prespic', 'Espinhoso monstro venenoso', 1, 65, 800, 70, 9);
+CALL cria_novo_monstro('Dragão Esmeralda', 'Dragão Primordial da magia branca, filho de Helioboros, um dos dragões de Osamodas.', 1, 2000, 8000, 700, 20);
+
 
 INSERT INTO conquistas (nome, tipo_conquista, descricao) VALUES  
 ('Encarnação!', 'geral', 'Escolha uma classe para seu personagem.'),

@@ -38,15 +38,11 @@ export class QuestScreen {
     );`
     )[0] as any;
 
-    const rewardItem: Item = (
-      await dbInstance`SELECT nome FROM item WHERE id = ${currentQuest.id_item_recompensa}`
-    )[0] as any;
-
     console.log(npc.nome);
     console.log();
     console.log(npc.descricao);
     console.log();
-    if (!currentQuest.id) {
+    if (!currentQuest?.id) {
       const firstQuest = (
         await dbInstance`SELECT id_ultima_missao FROM personagens WHERE id = ${this.idPersonagem}`
       )[0] as any;
@@ -70,6 +66,14 @@ export class QuestScreen {
         return;
       }
     }
+
+    const rewardItem: Item = (
+      await dbInstance`SELECT nome FROM item WHERE id = ${currentQuest.id_item_recompensa}`
+    )[0] as any;
+
+    console.clear();
+    console.log();
+    console.log();
     console.log("Descrição da missão:");
     console.log(currentQuest.descricao);
     console.log(

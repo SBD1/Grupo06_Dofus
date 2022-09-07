@@ -39,7 +39,7 @@ export default class BattleScreen {
     this.idPersonagem = idPersonagem;
   }
 
-  async handleBattleScreen(idNPC: number): Promise<void> {
+  public async handleBattleScreen(idNPC: number): Promise<void> {
     const battleStats: BattleInfoType["battleStats"] = (
       await dbInstance`
       SELECT A.dano, I.nome AS nome_arma, P.sorte_total, P.vida_maxima FROM personagens P 

@@ -83,7 +83,7 @@ export default class ClassScreen {
     return false;
   }
 
-  async handleClass() {
+  public async handleClass() {
     console.clear();
     console.log();
 

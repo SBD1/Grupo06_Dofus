@@ -14,7 +14,7 @@ export default class InventoryScreen {
     this.idPersonagem = idPersonagem;
   }
 
-  async handleInventoryScreen(): Promise<void> {
+  public async handleInventoryScreen(): Promise<void> {
     console.clear();
     console.log();
     console.log();

@@ -43,7 +43,7 @@ export default class GameScreen {
     this.InventoryScreen = new InventoryScreen(idPersonagem);
   }
 
-  async handleGameScreen() {
+  public async handleGameScreen() {
     console.clear();
     console.log();
 
@@ -106,7 +106,7 @@ export default class GameScreen {
   ): Promise<void> {
     if (answer === Choices.QUIT) process.exit(0);
     if (answer === Choices.INVENTORY) {
-      await this.InventoryScreen.handleInventoryScreen()
+      await this.InventoryScreen.handleInventoryScreen();
     }
 
     if (availableChoices.mapChoices[answer]) {

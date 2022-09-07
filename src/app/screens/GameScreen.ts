@@ -10,6 +10,7 @@ import { NPC, TipoNPC } from "../interfaces/npc.js";
 import BattleScreen from "./BattleScreen.js";
 import MarketScreen from "./Market/MarketScreen.js";
 import InventoryScreen from "./InventoryScreen.js";
+import { QuestScreen } from "./QuestScreen.js";
 
 type AvailableChoicesType = {
   npcChoices: {
@@ -34,12 +35,13 @@ export default class GameScreen {
   private readonly WALK_NORTH: string = "Andar Para o Norte";
   private readonly BattleScreen: BattleScreen;
   private readonly MarketScreen: MarketScreen;
+  private readonly QuestScreen: QuestScreen;
   private readonly InventoryScreen: InventoryScreen;
   constructor(idPersonagem: number) {
     this.idPersonagem = idPersonagem;
     this.BattleScreen = new BattleScreen(idPersonagem);
     this.MarketScreen = new MarketScreen(idPersonagem);
-    this.MarketScreen = new MarketScreen(idPersonagem);
+    this.QuestScreen = new QuestScreen(idPersonagem);
     this.InventoryScreen = new InventoryScreen(idPersonagem);
   }
 
@@ -117,6 +119,12 @@ export default class GameScreen {
 
     if (availableChoices.npcChoices[answer]?.tipo_npc === TipoNPC.MONSTRO) {
       await this.BattleScreen.handleBattleScreen(
+        availableChoices.npcChoices[answer].npc_id
+      );
+    }
+
+    if (availableChoices.npcChoices[answer]?.tipo_npc === TipoNPC.NPC_MISSAO) {
+      await this.QuestScreen.handleQuestScreen(
         availableChoices.npcChoices[answer].npc_id
       );
     }

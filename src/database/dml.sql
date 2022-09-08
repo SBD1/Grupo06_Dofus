@@ -12,7 +12,7 @@ INSERT INTO mapa (coord_x, coord_y, descricao, nome) VALUES
 (2, -3, 'Você se encontra dentro de uma caverna enorme, a luz da sua tocha nem chega no teto. Há um cheiro de enxofre e queimado.', 'Toca do dragão');
 
 UPDATE mapa SET mapa_leste = 2 WHERE id=1;
-UPDATE mapa SET mapa_leste = 3 WHERE id=2;
+UPDATE mapa SET mapa_leste = 3, mapa_oeste = 1 WHERE id=2;
 UPDATE mapa SET mapa_norte = 4, mapa_sul = 5, mapa_oeste = 2,mapa_leste = 6 WHERE id=3;
 UPDATE mapa SET mapa_sul = 3 WHERE id=4;
 UPDATE mapa SET mapa_norte = 3 WHERE id=5;
@@ -115,12 +115,12 @@ INSERT INTO npc_mercador_itens(id_npc_mercador, id_instancia_item) VALUES
 (2, 4), 
 (2, 5);
 
-CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 1, 50, 600, 60, 13);
-CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 1, 50, 700, 70, 4);
-CALL cria_novo_monstro('Piwi', 'Pequenina ave colorida, porem poderosa', 1, 50, 700, 70, 1);
-CALL cria_novo_monstro('Lobo', 'Criatura uivante maluca e assassina', 1, 44, 500, 55, 3);
+CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 5, 50, 600, 60, 13);
+CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 4, 50, 700, 70, 4);
+CALL cria_novo_monstro('Piwi', 'Pequenina ave colorida, porem poderosa', 6, 50, 700, 70, 1);
+CALL cria_novo_monstro('Lobo', 'Criatura uivante maluca e assassina', 7, 44, 500, 55, 3);
 CALL cria_novo_monstro('Prespic', 'Espinhoso monstro venenoso', 1, 65, 800, 70, 9);
-CALL cria_novo_monstro('Dragão Esmeralda', 'Dragão Primordial da magia branca, filho de Helioboros, um dos dragões de Osamodas.', 1, 2000, 8000, 700, 20);
+CALL cria_novo_monstro('Dragão Esmeralda', 'Dragão Primordial da magia branca, filho de Helioboros, um dos dragões de Osamodas.', 8, 2000, 8000, 700, 20);
 
 
 INSERT INTO conquistas (nome, tipo_conquista, descricao) VALUES  

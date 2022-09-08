@@ -97,7 +97,7 @@ export class QuestScreen {
       await dbInstance`
       SELECT I.id FROM instancia_item I
         LEFT JOIN mochila M ON M.id_instancia_item = I.id 
-      WHERE I.id_item = ${currentQuest.id_item_missao} AND M.id_personagem = ${this.idPersonagem};`
+      WHERE I.id_item = ${currentQuest.id_item_missao} AND M.id_personagem = ${this.idPersonagem} LIMIT 1;`
     )[0] as any;
 
     if (!hasItem?.id) {
@@ -124,7 +124,6 @@ export class QuestScreen {
     $$
       DECLARE
         _id_instancia_item INTEGER;
-        _id_instancia_item_deletar INTEGER;
       BEGIN
         INSERT INTO instancia_item (id_item) VALUES (${currentQuest.id_item_recompensa});
         SELECT currval(pg_get_serial_sequence('instancia_item','id')) INTO _id_instancia_item;
@@ -133,10 +132,8 @@ export class QuestScreen {
         UPDATE personagens SET moedas = moedas + ${currentQuest.moedas};
         UPDATE personagens SET id_ultima_missao = ${currentQuest.id};
 
-        SELECT id_instancia_item INTO _id_instancia_item_deletar FROM mochila WHERE id_instancia_item = ${hasItem.id} LIMIT 1;
-
-        DELETE FROM mochila WHERE id_instancia_item = _id_instancia_item_deletar;
-        DELETE FROM instancia_item WHERE id = _id_instancia_item_deletar;
+        DELETE FROM mochila WHERE id_instancia_item = ${hasItem.id} AND id_personagem = ${this.idPersonagem};
+        DELETE FROM instancia_item WHERE id = ${hasItem.id};
       END;  
     $$;
     COMMIT;

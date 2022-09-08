@@ -10,6 +10,8 @@ export enum Choices {
   LIST_ITEMS = "Ver itens não equipáveis",
   EQUIP = "Equipar",
   YES = "Sim",
+  BUY = "Comprar",
+  SELL = "Vender",
 }
 
 export const INFINTE = 99999999;

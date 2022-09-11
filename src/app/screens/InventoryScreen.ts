@@ -134,13 +134,14 @@ export default class InventoryScreen {
       DECLARE
       id_instancia_armadura_nova INTEGER;
       id_instancia_armadura_antiga INTEGER;
+      id_item_mochila INTEGER;
       BEGIN
   
       SELECT id_armadura INTO id_instancia_armadura_antiga
         FROM personagens WHERE id = ${this.idPersonagem};
   
           --- SELECIONA O ID DA INSTANCIA DA ARMADURA
-          SELECT I.id, J.descricao INTO id_instancia_armadura_nova
+          SELECT I.id, M.id INTO id_instancia_armadura_nova, id_item_mochila
             FROM instancia_item I 
             JOIN mochila M on I.id = M.id_instancia_item 
             JOIN 	item J on I.id_item = J.id
@@ -150,7 +151,7 @@ export default class InventoryScreen {
           LIMIT 1;
   
         --- DELETA A INSTANCIA DE ARMADURA DA MOCHILA
-          DELETE FROM mochila WHERE id_instancia_item = id_instancia_armadura_nova AND id_personagem = ${this.idPersonagem};
+          DELETE FROM mochila WHERE id = id_item_mochila;
   
         --- EQUIPA A INSTANCIA DA ARMADURA NO PERSONAGEM
           UPDATE personagens SET id_armadura = id_instancia_armadura_nova  WHERE id = ${this.idPersonagem};
@@ -171,13 +172,14 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
     DECLARE
       id_instancia_amuleto_nova INTEGER;
 	    id_instancia_amuleto_antiga INTEGER;
+      id_item_mochila INTEGER;
     BEGIN
 
 		SELECT id_amuleto INTO id_instancia_amuleto_antiga
 			FROM personagens WHERE id = ${this.idPersonagem};
 
     --- SELECIONA O ID DA INSTANCIA DO AMULETO
-        SELECT I.id, J.descricao INTO id_instancia_amuleto_nova
+        SELECT I.id INTO id_instancia_amuleto_nova
           FROM instancia_item I 
           JOIN mochila M on I.id = M.id_instancia_item 
           JOIN 	item J on I.id_item = J.id
@@ -187,7 +189,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
         LIMIT 1;
 
       --- DELETA A INSTANCIA DE AMULETO DA MOCHILA
-        DELETE FROM mochila WHERE id_instancia_item = id_instancia_amuleto_nova AND id_personagem = 1;
+      DELETE FROM mochila WHERE id = id_item_mochila;
 
       --- EQUIPA A INSTANCIA DA AMULETO NO PERSONAGEM
         UPDATE personagens SET id_amuleto = id_instancia_amuleto_nova  WHERE id = ${this.idPersonagem};
@@ -211,13 +213,14 @@ $$
   DECLARE
     id_instancia_arma_nova INTEGER;
     id_instancia_arma_antiga INTEGER;
+    id_item_mochila INTEGER;
   BEGIN
 
   SELECT id_arma INTO id_instancia_arma_antiga
     FROM personagens WHERE id = ${this.idPersonagem};
 
       --- SELECIONA O ID DA INSTANCIA DO ARMA
-      SELECT I.id, J.descricao INTO id_instancia_arma_nova
+      SELECT I.id INTO id_instancia_arma_nova
         FROM instancia_item I 
         JOIN mochila M on I.id = M.id_instancia_item 
         JOIN 	item J on I.id_item = J.id
@@ -227,7 +230,7 @@ $$
       LIMIT 1;
 
     --- DELETA A INSTANCIA DE ARMA DA MOCHILA
-      DELETE FROM mochila WHERE id_instancia_item = id_instancia_arma_nova AND id_personagem = 1;
+    DELETE FROM mochila WHERE id = id_item_mochila;
 
     --- EQUIPA A INSTANCIA DA ARMA NO PERSONAGEM
       UPDATE personagens SET id_arma = id_instancia_arma_nova  WHERE id = ${this.idPersonagem};

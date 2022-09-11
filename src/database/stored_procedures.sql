@@ -335,9 +335,8 @@ $seleciona_classe$ LANGUAGE plpgsql;
 -- nao deixa equipar arma se nao for do tipo arma
 CREATE OR REPLACE FUNCTION check_arma() RETURNS TRIGGER AS $check_arma$
 DECLARE 
-    _tipo_item INTEGER;
+    _tipo_item TIPO_ITEM;
 BEGIN
-
  
     SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
      LEFT JOIN item J ON J.id = I.id_item

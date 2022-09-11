@@ -186,7 +186,7 @@ export default class BattleScreen {
       console.clear();
       console.log();
       console.log();
-      console.log("Você morreu! Você perde todas suas moedas.");
+      console.log("Você morreu! Você perde todas suas moedas e itens.");
     }
 
     console.log();

@@ -116,9 +116,9 @@ INSERT INTO npc_mercador_itens(id_npc_mercador, id_instancia_item) VALUES
 (2, 2),
 (2, 3),
 (2, 4), 
-(2, 5);
-(2, 7);
-(2, 8);
+(2, 5),
+(2, 7),
+(2, 8),
 (2, 9);
 
 CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 5, 50, 600, 60, 13);

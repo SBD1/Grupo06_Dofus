@@ -335,15 +335,13 @@ $seleciona_classe$ LANGUAGE plpgsql;
 -- nao deixa equipar arma se nao for do tipo arma
 CREATE OR REPLACE FUNCTION check_arma() RETURNS TRIGGER AS $check_arma$
 DECLARE 
-    _sorte_novo_amuleto INTEGER;
-    _sorte_antigo_amuleto INTEGER;
     _tipo_item INTEGER;
 BEGIN
 
  
     SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
      LEFT JOIN item J ON J.id = I.id_item
-    WHERE I.id = NEW.id_armadura;
+    WHERE I.id = NEW.id_arma;
 
     IF _tipo_item <> 'arma' THEN
     			RAISE EXCEPTION 'Apenas itens do tipo arma podem ser equipados como arma.';

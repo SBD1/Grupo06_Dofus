@@ -82,7 +82,10 @@ INSERT INTO instancia_item(id_item) VALUES
 (11),
 (12),
 (13),
-(14);
+(14),
+(1),
+(1),
+(1);
 
 INSERT INTO personagens (id_mapa) VALUES
 (1);
@@ -114,6 +117,9 @@ INSERT INTO npc_mercador_itens(id_npc_mercador, id_instancia_item) VALUES
 (2, 3),
 (2, 4), 
 (2, 5);
+(2, 7);
+(2, 8);
+(2, 9);
 
 CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 5, 50, 600, 60, 13);
 CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 4, 50, 700, 70, 4);

@@ -1,8 +1,5 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
-import gradient from "gradient-string";
-import chalkAnimation from "chalk-animation";
-import figlet from "figlet";
 import dbInstance from "../connection/database.js";
 import { NPC } from "../interfaces/npc.js";
 import { Quest } from "../interfaces/quest.js";

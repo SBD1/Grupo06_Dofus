@@ -1,11 +1,7 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
-import gradient from "gradient-string";
-import chalkAnimation from "chalk-animation";
-import figlet from "figlet";
 import dbInstance from "../connection/database.js";
 import { Magias } from "../interfaces/magias.js";
-import { INFINTE } from "../util/constants.js";
 import PressToContinuePrompt, {
   KeyDescriptor,
 } from "inquirer-press-to-continue";

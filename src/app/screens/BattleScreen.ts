@@ -173,11 +173,20 @@ export default class BattleScreen {
 
       battleInfo.battleOver = true;
     } else if (battleInfo.currentHp <= 0) {
-      console.clear;
-      console.log("Você morreu! Você perde todos seus itens e moedas.");
-
-      // TODO
       battleInfo.battleOver = true;
+
+      await dbInstance.unsafe(`
+        START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+          DELETE FROM mochila WHERE id_personagem = ${this.idPersonagem};
+          UPDATE personagens SET id_mapa = 1 WHERE id = ${this.idPersonagem};
+          UPDATE personagens SET moedas = 0  WHERE id = ${this.idPersonagem};
+        COMMIT;
+        `);
+
+      console.clear();
+      console.log();
+      console.log();
+      console.log("Você morreu! Você perde todas suas moedas.");
     }
 
     console.log();

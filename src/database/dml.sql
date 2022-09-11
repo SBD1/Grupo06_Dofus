@@ -122,15 +122,4 @@ CALL cria_novo_monstro('Lobo', 'Criatura uivante maluca e assassina', 7, 44, 500
 CALL cria_novo_monstro('Prespic', 'Espinhoso monstro venenoso', 1, 65, 800, 70, 9);
 CALL cria_novo_monstro('Dragão Esmeralda', 'Dragão Primordial da magia branca, filho de Helioboros, um dos dragões de Osamodas.', 8, 2000, 8000, 700, 20);
 
-
-INSERT INTO conquistas (nome, tipo_conquista, descricao) VALUES  
-('Encarnação!', 'geral', 'Escolha uma classe para seu personagem.'),
-('Faliceu.', 'geral', 'Morra em combate.'),
-('Consumista.', 'exploração', 'Descubra o mapa da feira.'),
-('Mundo sombrio.', 'exploração', 'Entre na floresta sombria.'),
-('Invasão domiciliar.', 'exploração', 'Descubra o mapa toca do dragão.'),
-('Cabra macho.', 'combate', 'Mate um chupa cabra.'),
-('Matador de dragões.', 'combate', 'Mate um dragão branco.'),
-('Pombo frito!', 'combate', 'Mate um piwi.');
-
 COMMIT;

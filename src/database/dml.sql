@@ -55,18 +55,18 @@ INSERT INTO item (nome, tipo_item, descricao, valor_moedas) VALUES
 ( 'Moeda de pedra', 'nao_equipavel', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 200);
 
 -- Cria armaduras
-CALL cria_nova_armadura('Armadura de Papatudo Real', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 25, 50);
-CALL cria_nova_armadura('Armadura do Aventureiro', 'Todo grande guerreiro tem um ponto de partida, essa armadura é o que você precisa para iniciar suas expedições', 90, 140);
-CALL cria_nova_armadura('Armadura de Piwi', 'A nobreza de um guerreiro está no coração, está armadura de penas não muito elegante carrega o poder da aura pura dos Piwis de Astrub', 90, 120);
-CALL cria_nova_armadura('Armadura de Prespic', 'Armadura feita com os espinhos, unhas, e pelos de Prespics selvagens, conferindo imensa resistência ao barbaro guerreiro que a usa', 25, 65);
-CALL cria_nova_armadura('Armadura de Girassol', 'Está armadura é leve, feita para guerreiros de porte pequeno, com brancinhos de girassol, apesar de singela ela carrega o poder das magias solares.', 145, 150);
+CALL cria_nova_armadura('Armadura de Papatudo Real', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 25, 500);
+CALL cria_nova_armadura('Armadura do Aventureiro', 'Todo grande guerreiro tem um ponto de partida, essa armadura é o que você precisa para iniciar suas expedições', 90, 1400);
+CALL cria_nova_armadura('Armadura de Piwi', 'A nobreza de um guerreiro está no coração, está armadura de penas não muito elegante carrega o poder da aura pura dos Piwis de Astrub', 90, 1200);
+CALL cria_nova_armadura('Armadura de Prespic', 'Armadura feita com os espinhos, unhas, e pelos de Prespics selvagens, conferindo imensa resistência ao barbaro guerreiro que a usa', 25, 650);
+CALL cria_nova_armadura('Armadura de Girassol', 'Está armadura é leve, feita para guerreiros de porte pequeno, com brancinhos de girassol, apesar de singela ela carrega o poder das magias solares.', 145, 1500);
 
 -- Cria armas
-CALL cria_nova_arma('Arco de Bwork', 'Alcance alidado à força bruta, arco dos selvagens Bworks das grutas de Astrub.', 200, 202);
-CALL cria_nova_arma('Espada de Iop', 'Essa espada foi roubada de um lendário Iop que pereceu nas grandes batalhas do calabouço de Incarnan', 340, 350);
-CALL cria_nova_arma('Lança de Chefer', 'Lança retirada em espedições no calabouço de Incarnan, confeccionada com restos de ossos de Chefers malucos', 228, 400);
-CALL cria_nova_arma('Pá de Cortes Sombrios ', 'Esta pá serve para enterrar objetos, mortos ou vivos.', 100, 120);
-CALL cria_nova_arma('Espatula Corta Guloso', 'Esta espátula gigante é uma ferramenta de trabalho muito completa. Com ela, é possível preparar quantidades enormes de doces de chocolate deliciosos e, depois, fatiar sem dó nem piedade os gulosos que tentarem comer o seu bolo sem a sua permissão.', 333, 444);
+CALL cria_nova_arma('Arco de Bwork', 'Alcance alidado à força bruta, arco dos selvagens Bworks das grutas de Astrub.', 200, 2020);
+CALL cria_nova_arma('Espada de Iop', 'Essa espada foi roubada de um lendário Iop que pereceu nas grandes batalhas do calabouço de Incarnan', 340, 3500);
+CALL cria_nova_arma('Lança de Chefer', 'Lança retirada em espedições no calabouço de Incarnan, confeccionada com restos de ossos de Chefers malucos', 228, 4000);
+CALL cria_nova_arma('Pá de Cortes Sombrios ', 'Esta pá serve para enterrar objetos, mortos ou vivos.', 100, 1200);
+CALL cria_nova_arma('Espatula Corta Guloso', 'Esta espátula gigante é uma ferramenta de trabalho muito completa. Com ela, é possível preparar quantidades enormes de doces de chocolate deliciosos e, depois, fatiar sem dó nem piedade os gulosos que tentarem comer o seu bolo sem a sua permissão.', 333, 4440);
 
 -- Cria amuletos
 CALL cria_novo_amuleto('Amuleto do Pow Uatisson', 'O capitão do Chafer Marítimo sempre carrega este amuleto, símbolo da sua embarcação', 90, 130);
@@ -117,11 +117,11 @@ INSERT INTO npc_mercador_itens(id_npc_mercador, id_instancia_item) VALUES
 (2, 7),
 (2, 8);
 
-CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 5, 50, 600, 60, 2);
-CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 4, 50, 700, 70, 4);
-CALL cria_novo_monstro('Piwi', 'Pequenina ave colorida, porem poderosa', 6, 50, 700, 70, 1);
-CALL cria_novo_monstro('Lobo', 'Criatura uivante maluca e assassina', 7, 44, 500, 55, 3);
-CALL cria_novo_monstro('Prespic', 'Espinhoso monstro venenoso', 1, 65, 800, 70, 9);
-CALL cria_novo_monstro('Dragão Esmeralda', 'Dragão Primordial da magia branca, filho de Helioboros, um dos dragões de Osamodas.', 8, 2000, 8000, 700, 17);
+CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 5, 50, 600, 1600, 2);
+CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 4, 90, 5000, 550, 4);
+CALL cria_novo_monstro('Piwi', 'Pequenina ave colorida, porem poderosa', 6, 50, 700, 650, 1);
+CALL cria_novo_monstro('Lobo', 'Criatura uivante maluca e assassina', 7, 44, 2000, 550, 3);
+CALL cria_novo_monstro('Prespic', 'Espinhoso monstro venenoso', 1, 65, 800, 700, 9);
+CALL cria_novo_monstro('Dragão Esmeralda', 'Dragão Primordial da magia branca, filho de Helioboros, um dos dragões de Osamodas.', 8, 2000, 10000, 1500, 17);
 
 COMMIT;

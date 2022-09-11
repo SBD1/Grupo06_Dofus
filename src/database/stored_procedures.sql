@@ -228,7 +228,7 @@ DECLARE
 BEGIN
     SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
      LEFT JOIN item J ON J.id = I.id_item
-    WHERE I.id_item = NEW.id_armadura;
+    WHERE I.id = NEW.id_armadura;
 
     IF _tipo_item <> 'armadura' THEN
     			RAISE EXCEPTION 'Apenas itens do tipo armadura podem ser equipados como armadura.';
@@ -275,7 +275,7 @@ BEGIN
 
     SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
      LEFT JOIN item J ON J.id = I.id_item
-    WHERE I.id_item = NEW.id_armadura;
+    WHERE I.id = NEW.id_armadura;
 
     IF _tipo_item <> 'amuleto' THEN
     			RAISE EXCEPTION 'Apenas itens do tipo amuleto podem ser equipados como amuleto.';
@@ -343,7 +343,7 @@ BEGIN
  
     SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
      LEFT JOIN item J ON J.id = I.id_item
-    WHERE I.id_item = NEW.id_armadura;
+    WHERE I.id = NEW.id_armadura;
 
     IF _tipo_item <> 'arma' THEN
     			RAISE EXCEPTION 'Apenas itens do tipo arma podem ser equipados como arma.';

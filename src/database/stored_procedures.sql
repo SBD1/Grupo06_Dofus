@@ -226,6 +226,10 @@ DECLARE
     _vida_antiga_armadura INTEGER;
     _tipo_item TIPO_ITEM;
 BEGIN
+    IF NEW.id_armadura IS NULL THEN
+      RETURN NEW;
+    END IF;
+
     SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
      LEFT JOIN item J ON J.id = I.id_item
     WHERE I.id = NEW.id_armadura;
@@ -272,6 +276,9 @@ DECLARE
     _sorte_antigo_amuleto INTEGER;
     _tipo_item TIPO_ITEM;
 BEGIN
+    IF NEW.id_amuleto IS NULL THEN
+      RETURN NEW;
+    END IF;
 
     SELECT J.tipo_item INTO _tipo_item FROM instancia_item I
      LEFT JOIN item J ON J.id = I.id_item

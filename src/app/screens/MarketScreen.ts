@@ -218,7 +218,7 @@ export default class MarketScreen {
     itemAttributes[TipoItem.AMULETO] = `Sorte:   ${item?.sorte}`;
     itemAttributes[TipoItem.ARMA] = `Dano   ${item?.dano}`;
     itemAttributes[TipoItem.ARMADURA] = `Vida   ${item?.vida}`;
-    itemAttributes[TipoItem.NAO_EQUIPAVEL] = null;
+    itemAttributes[TipoItem.NAO_EQUIPAVEL] = "";
 
     console.clear();
     console.log();

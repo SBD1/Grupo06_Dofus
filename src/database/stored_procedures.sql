@@ -298,7 +298,7 @@ BEGIN
       LEFT JOIN instancia_item I ON I.id = OLD.id_amuleto
       WHERE A.id_item = I.id_item;
 
-      NEW.sorte_maxima := _sorte_novo_amuleto - _sorte_antigo_amuleto + OLD.sorte_maxima;
+      NEW.sorte_total := _sorte_novo_amuleto - _sorte_antigo_amuleto + OLD.sorte_total;
 
     END IF;
     
@@ -307,7 +307,7 @@ BEGIN
       LEFT JOIN instancia_item I ON I.id = NEW.id_amuleto
       WHERE A.id_item = I.id_item;
       
-      NEW.sorte_maxima := _sorte_novo_amuleto + OLD.sorte_maxima;
+      NEW.sorte_total := _sorte_novo_amuleto + OLD.sorte_total;
 
     END IF;
       	RETURN NEW;

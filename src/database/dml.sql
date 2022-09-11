@@ -73,7 +73,7 @@ CALL cria_novo_amuleto('Amuleto do Pow Uatisson', 'O capitão do Chafer Marítim
 CALL cria_novo_amuleto('Amuleto de Cristal', 'Amuleto feito de cristais de quartzo rosa.', 140, 190);
 CALL cria_novo_amuleto('Amuleto de Conchinha', 'Amuleto de conchas de seres acestrais.', 350, 360);
 CALL cria_novo_amuleto('Corujamuleto', 'Dizem que este amuleto permite que seu portador gire a cabeça 360º, com um pouco de treinamento.', 1000, 1000);
-CALL cria_novo_amuleto('Amuleto de Safira', 'Dizem que este um dos mais belo amuletos já vistos no mundo dos dose, e sua beleza é proporcional a sorte', 6000, 7000);
+CALL cria_novo_amuleto('Amuleto de Safira', 'Dizem que este um dos mais belo amuletos já vistos no mundo dos doze, e sua beleza é proporcional a sorte', 6000, 7000);
 
 -- Insere instancia de itens
 INSERT INTO instancia_item(id_item) VALUES

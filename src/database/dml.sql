@@ -90,9 +90,7 @@ INSERT INTO personagens (id_mapa) VALUES
 (1);
 
 INSERT INTO mochila (id_personagem, id_instancia_item) VALUES
-(1, 4),
-(1, 5),
-(1, 6);
+(1, 4);
 
 INSERT INTO npc (nome, tipo_npc, descricao, id_mapa) VALUES
 ('Maurí Sioserrano', 'npc_missao', 'Maurí é um guerreiro experiente, que possui várias cicatrizes de batalha, você sente que ele pode te ensinar sobre magia.', 6),

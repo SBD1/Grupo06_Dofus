@@ -52,7 +52,7 @@ INSERT INTO item (nome, tipo_item, descricao, valor_moedas) VALUES
 ( 'Pelo de Rato', 'nao_equipavel', 'Restos de pelo coletados dos esgotos de Astrub, cuidado com o odor.', 14),
 ( 'Testiculo de Lobo', 'nao_equipavel', 'Esferas de carne removidas de grandes lobos selvagens das planices de Incarnan', 40),
 ( 'Lã de papatudo', 'nao_equipavel', 'Papatudo são criaturas que tem uma lã platinada fofinha.', 80),
-( 'Pedregulho de Rochedo', 'nao_equipavel', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 25);
+( 'Moeda de pedra', 'nao_equipavel', 'Pedregulho retirado das chamines dos anões mineradores dos arredores de Astrub', 200);
 
 -- Cria armaduras
 CALL cria_nova_armadura('Armadura de Papatudo Real', 'Armadura forjada com pelos de Papatudo Real, está armadura aveludada não é muito cheirosa, mas carrega a gloria dos campos de Astrub', 25, 50);
@@ -99,11 +99,11 @@ INSERT INTO npc (nome, tipo_npc, descricao, id_mapa) VALUES
 ('Afonso', 'mercador', 'O maior varegista de Astrub', 2);
 
 INSERT INTO missao (id_npc_missao, descricao, moedas, id_item_missao, id_item_recompensa) VALUES
-(1, 'Encontre uma semente de gergelim para completar essa missão, geralmente os Piwis gostam muito dessas sementes.', 40, 11, 3),
-(1, 'Encontre um pelo de rato, esse animais gostam de lugares escuros.', 200, 12, 3),
-(1, 'Encontre o testículo de um lobo raivoso.', 500, 13, 3),
-(1, 'Encontre um pouco de lã de papatudo, geralmente eles gostam de ficar nos campos.', 200, 14, 3),
-(1, 'Encontre pedregulho do rochedo.', 5000, 15, 3);
+(1, 'Encontre uma semente de gergelim para completar essa missão, geralmente os Piwis gostam muito dessas sementes.', 40, 1, 5),
+(1, 'Encontre um pelo de rato. (Ratos são o prato preferido do Chupa Cabra)', 200, 2, 11),
+(1, 'Encontre o testículo de um lobo raivoso.', 500, 3, 12),
+(1, 'Encontre um pouco de lã de papatudo, geralmente eles gostam de ficar nos campos.', 200, 4, 5),
+(1, 'Encontre um amuleto de cristal, dizem que dragões gostam de comer coisas brilhantes...', 5000, 17, 20);
 
 UPDATE missao SET id_missao_desbloqueada = 2 WHERE id=1;
 UPDATE missao SET id_missao_desbloqueada = 3 WHERE id=2;
@@ -117,11 +117,11 @@ INSERT INTO npc_mercador_itens(id_npc_mercador, id_instancia_item) VALUES
 (2, 7),
 (2, 8);
 
-CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 5, 50, 600, 60, 13);
+CALL cria_novo_monstro('Chupa Cabra', 'Criatura sanguinaria destruidora de vilas', 5, 50, 600, 60, 2);
 CALL cria_novo_monstro('Papatudo', 'Essa criatura é reponsável por proteger os campos de Astrub e Incarnan', 4, 50, 700, 70, 4);
 CALL cria_novo_monstro('Piwi', 'Pequenina ave colorida, porem poderosa', 6, 50, 700, 70, 1);
 CALL cria_novo_monstro('Lobo', 'Criatura uivante maluca e assassina', 7, 44, 500, 55, 3);
 CALL cria_novo_monstro('Prespic', 'Espinhoso monstro venenoso', 1, 65, 800, 70, 9);
-CALL cria_novo_monstro('Dragão Esmeralda', 'Dragão Primordial da magia branca, filho de Helioboros, um dos dragões de Osamodas.', 8, 2000, 8000, 700, 20);
+CALL cria_novo_monstro('Dragão Esmeralda', 'Dragão Primordial da magia branca, filho de Helioboros, um dos dragões de Osamodas.', 8, 2000, 8000, 700, 17);
 
 COMMIT;

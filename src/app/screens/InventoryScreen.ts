@@ -176,7 +176,7 @@ START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 			FROM personagens WHERE id = ${this.idPersonagem};
 
     --- SELECIONA O ID DA INSTANCIA DO AMULETO
-        SELECT I.id INTO id_instancia_amuleto_nova
+        SELECT I.id, M.id INTO id_instancia_amuleto_nova, id_item_mochila
           FROM instancia_item I 
           JOIN mochila M on I.id = M.id_instancia_item 
           JOIN 	item J on I.id_item = J.id
@@ -217,7 +217,7 @@ $$
     FROM personagens WHERE id = ${this.idPersonagem};
 
       --- SELECIONA O ID DA INSTANCIA DO ARMA
-      SELECT I.id INTO id_instancia_arma_nova
+      SELECT I.id, M.id INTO id_instancia_arma_nova, id_item_mochila
         FROM instancia_item I 
         JOIN mochila M on I.id = M.id_instancia_item 
         JOIN 	item J on I.id_item = J.id

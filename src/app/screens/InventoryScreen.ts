@@ -1,8 +1,5 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
-import gradient from "gradient-string";
-import chalkAnimation from "chalk-animation";
-import figlet from "figlet";
 import dbInstance from "../connection/database.js";
 import { Choices } from "../util/constants.js";
 import { Item, TipoItem } from "../interfaces/item.js";

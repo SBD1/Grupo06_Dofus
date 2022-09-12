@@ -46,15 +46,13 @@ export default class Game {
         name: "playOrListAchievements",
         type: "list",
         message: "Selecione uma opção.\n",
-        choices: [Choices.PLAY_NOW, Choices.LIST_ACHIEVEMENTS, Choices.QUIT],
+        choices: [Choices.PLAY_NOW, Choices.QUIT],
       });
 
       if (answer.playOrListAchievements === Choices.PLAY_NOW)
         await this.classScreen.handleClass();
 
       if (answer.playOrListAchievements === Choices.QUIT) return;
-
-      if (answer.playOrListAchievements === Choices.LIST_ACHIEVEMENTS) return; // TODO
 
       while (true) {
         await this.gameScreen.handleGameScreen();

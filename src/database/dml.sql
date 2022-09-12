@@ -62,7 +62,7 @@ CALL cria_nova_armadura('Armadura de Prespic', 'Armadura feita com os espinhos, 
 CALL cria_nova_armadura('Armadura de Girassol', 'Está armadura é leve, feita para guerreiros de porte pequeno, com brancinhos de girassol, apesar de singela ela carrega o poder das magias solares.', 145, 1500);
 
 -- Cria armas
-CALL cria_nova_arma('Arco de Bwork', 'Alcance alidado à força bruta, arco dos selvagens Bworks das grutas de Astrub.', 200, 2020);
+CALL cria_nova_arma('Arco de Bwork', 'Alcance alidado à força bruta, arco dos selvagens Bworks das grutas de Astrub.', 200, 500);
 CALL cria_nova_arma('Espada de Iop', 'Essa espada foi roubada de um lendário Iop que pereceu nas grandes batalhas do calabouço de Incarnan', 340, 3500);
 CALL cria_nova_arma('Lança de Chefer', 'Lança retirada em espedições no calabouço de Incarnan, confeccionada com restos de ossos de Chefers malucos', 228, 4000);
 CALL cria_nova_arma('Pá de Cortes Sombrios ', 'Esta pá serve para enterrar objetos, mortos ou vivos.', 100, 1200);
